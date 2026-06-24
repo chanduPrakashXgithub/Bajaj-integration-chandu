@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "mobile-app",
+    "slug": "mobile-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.bajajoperations"
+    },
+    "android": {
+      "package": "com.yourcompany.bajajoperations",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "versionCode": 3
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "newArchEnabled": true,
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/4312ff20-b97f-4e3c-b249-40929ba808e2"
+    },
+    "plugins": [
+      "expo-splash-screen",
+      "expo-secure-store",
+      "expo-image"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "4312ff20-b97f-4e3c-b249-40929ba808e2"
+      }
+    },
+    "owner": "yaswanth_kancharla"
+  }
+}

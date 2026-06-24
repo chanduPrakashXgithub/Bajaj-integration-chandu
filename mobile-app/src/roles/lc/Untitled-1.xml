@@ -1,0 +1,1083 @@
+<svg width="1000" height="6750" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Arial', sans-serif; font-size: 12px; fill: #7f8c8d; }
+      .folder-text { font-family: 'Consolas', 'Courier New', monospace; font-size: 14px; fill: #27ae60; font-weight: bold; }
+      .file-text { font-family: 'Consolas', 'Courier New', monospace; font-size: 14px; fill: #3498db; }
+      .icon { font-family: 'Arial', sans-serif; font-size: 16px; }
+      .line { stroke: #bdc3c7; stroke-width: 1.5; }
+      .background { fill: #f8f9fa; }
+      .header-bg { fill: #ecf0f1; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="6750" class="background"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1000" height="60" class="header-bg"/>
+  <text x="20" y="25" class="title">📁 File Tree: bajaj-Integration-main</text>
+  <text x="20" y="45" class="subtitle">Generated: 6/23/2026, 2:09:39 PM | FileTree Pro Extension</text>
+
+  <!-- Tree Structure -->
+    <line x1="15" y1="80" x2="25" y2="80" class="line"/>
+    <text x="30" y="85" class="icon">📁</text>
+    <text x="55" y="85" class="folder-text">.agents/</text>
+    <line x1="45" y1="100" x2="45" y2="110" class="line"/>
+    <line x1="45" y1="110" x2="55" y2="110" class="line"/>
+    <text x="60" y="115" class="icon">📁</text>
+    <text x="85" y="115" class="folder-text">skills/</text>
+    <line x1="75" y1="130" x2="75" y2="140" class="line"/>
+    <line x1="75" y1="140" x2="85" y2="140" class="line"/>
+    <text x="90" y="145" class="icon">📁</text>
+    <text x="115" y="145" class="folder-text">ai-sdk/</text>
+    <line x1="105" y1="160" x2="105" y2="170" class="line"/>
+    <line x1="105" y1="170" x2="115" y2="170" class="line"/>
+    <text x="120" y="175" class="icon">📁</text>
+    <text x="145" y="175" class="folder-text">references/</text>
+    <line x1="135" y1="190" x2="135" y2="200" class="line"/>
+    <line x1="135" y1="200" x2="145" y2="200" class="line"/>
+    <text x="150" y="205" class="icon">📝</text>
+    <text x="175" y="205" class="file-text">ai-gateway.md</text>
+    <line x1="135" y1="225" x2="135" y2="235" class="line"/>
+    <line x1="135" y1="235" x2="145" y2="235" class="line"/>
+    <text x="150" y="240" class="icon">📝</text>
+    <text x="175" y="240" class="file-text">common-errors.md</text>
+    <line x1="135" y1="260" x2="135" y2="270" class="line"/>
+    <line x1="135" y1="270" x2="145" y2="270" class="line"/>
+    <text x="150" y="275" class="icon">📝</text>
+    <text x="175" y="275" class="file-text">devtools.md</text>
+    <line x1="135" y1="295" x2="135" y2="305" class="line"/>
+    <line x1="135" y1="305" x2="145" y2="305" class="line"/>
+    <text x="150" y="310" class="icon">📝</text>
+    <text x="175" y="310" class="file-text">type-safe-agents.md</text>
+    <line x1="105" y1="365" x2="105" y2="375" class="line"/>
+    <line x1="105" y1="375" x2="115" y2="375" class="line"/>
+    <text x="120" y="380" class="icon">📝</text>
+    <text x="145" y="380" class="file-text">SKILL.md</text>
+    <line x1="75" y1="435" x2="75" y2="445" class="line"/>
+    <line x1="75" y1="445" x2="85" y2="445" class="line"/>
+    <text x="90" y="450" class="icon">📁</text>
+    <text x="115" y="450" class="folder-text">frontend-design/</text>
+    <line x1="105" y1="465" x2="105" y2="475" class="line"/>
+    <line x1="105" y1="475" x2="115" y2="475" class="line"/>
+    <text x="120" y="480" class="icon">📄</text>
+    <text x="145" y="480" class="file-text">LICENSE.txt</text>
+    <line x1="105" y1="500" x2="105" y2="510" class="line"/>
+    <line x1="105" y1="510" x2="115" y2="510" class="line"/>
+    <text x="120" y="515" class="icon">📝</text>
+    <text x="145" y="515" class="file-text">SKILL.md</text>
+    <line x1="15" y1="650" x2="25" y2="650" class="line"/>
+    <text x="30" y="655" class="icon">📁</text>
+    <text x="55" y="655" class="folder-text">backend/</text>
+    <line x1="45" y1="670" x2="45" y2="680" class="line"/>
+    <line x1="45" y1="680" x2="55" y2="680" class="line"/>
+    <text x="60" y="685" class="icon">📁</text>
+    <text x="85" y="685" class="folder-text">docs/</text>
+    <line x1="75" y1="700" x2="75" y2="710" class="line"/>
+    <line x1="75" y1="710" x2="85" y2="710" class="line"/>
+    <text x="90" y="715" class="icon">📝</text>
+    <text x="115" y="715" class="file-text">API.md</text>
+    <line x1="75" y1="735" x2="75" y2="745" class="line"/>
+    <line x1="75" y1="745" x2="85" y2="745" class="line"/>
+    <text x="90" y="750" class="icon">📝</text>
+    <text x="115" y="750" class="file-text">ARCHITECTURE.md</text>
+    <line x1="75" y1="770" x2="75" y2="780" class="line"/>
+    <line x1="75" y1="780" x2="85" y2="780" class="line"/>
+    <text x="90" y="785" class="icon">📝</text>
+    <text x="115" y="785" class="file-text">CODE_REVIEW.md</text>
+    <line x1="75" y1="805" x2="75" y2="815" class="line"/>
+    <line x1="75" y1="815" x2="85" y2="815" class="line"/>
+    <text x="90" y="820" class="icon">📝</text>
+    <text x="115" y="820" class="file-text">DATABASE.md</text>
+    <line x1="75" y1="840" x2="75" y2="850" class="line"/>
+    <line x1="75" y1="850" x2="85" y2="850" class="line"/>
+    <text x="90" y="855" class="icon">📝</text>
+    <text x="115" y="855" class="file-text">DATA_FILES_REVIEW.md</text>
+    <line x1="75" y1="875" x2="75" y2="885" class="line"/>
+    <line x1="75" y1="885" x2="85" y2="885" class="line"/>
+    <text x="90" y="890" class="icon">📝</text>
+    <text x="115" y="890" class="file-text">DEPLOYMENT.md</text>
+    <line x1="75" y1="910" x2="75" y2="920" class="line"/>
+    <line x1="75" y1="920" x2="85" y2="920" class="line"/>
+    <text x="90" y="925" class="icon">📝</text>
+    <text x="115" y="925" class="file-text">README.md</text>
+    <line x1="45" y1="980" x2="45" y2="990" class="line"/>
+    <line x1="45" y1="990" x2="55" y2="990" class="line"/>
+    <text x="60" y="995" class="icon">📁</text>
+    <text x="85" y="995" class="folder-text">docs2/</text>
+    <line x1="75" y1="1010" x2="75" y2="1020" class="line"/>
+    <line x1="75" y1="1020" x2="85" y2="1020" class="line"/>
+    <text x="90" y="1025" class="icon">📝</text>
+    <text x="115" y="1025" class="file-text">API_ROLE_BASED.md</text>
+    <line x1="75" y1="1045" x2="75" y2="1055" class="line"/>
+    <line x1="75" y1="1055" x2="85" y2="1055" class="line"/>
+    <text x="90" y="1060" class="icon">📝</text>
+    <text x="115" y="1060" class="file-text">DATAMODELS_AND_ROLES.md</text>
+    <line x1="75" y1="1080" x2="75" y2="1090" class="line"/>
+    <line x1="75" y1="1090" x2="85" y2="1090" class="line"/>
+    <text x="90" y="1095" class="icon">📝</text>
+    <text x="115" y="1095" class="file-text">FRONTEND_INTEGRATION.md</text>
+    <line x1="75" y1="1115" x2="75" y2="1125" class="line"/>
+    <line x1="75" y1="1125" x2="85" y2="1125" class="line"/>
+    <text x="90" y="1130" class="icon">📝</text>
+    <text x="115" y="1130" class="file-text">README.md</text>
+    <line x1="75" y1="1150" x2="75" y2="1160" class="line"/>
+    <line x1="75" y1="1160" x2="85" y2="1160" class="line"/>
+    <text x="90" y="1165" class="icon">📝</text>
+    <text x="115" y="1165" class="file-text">SCREENS_AND_COMPONENTS_APIS.md</text>
+    <line x1="45" y1="1220" x2="45" y2="1230" class="line"/>
+    <line x1="45" y1="1230" x2="55" y2="1230" class="line"/>
+    <text x="60" y="1235" class="icon">📁</text>
+    <text x="85" y="1235" class="folder-text">prisma/</text>
+    <line x1="75" y1="1250" x2="75" y2="1260" class="line"/>
+    <line x1="75" y1="1260" x2="85" y2="1260" class="line"/>
+    <text x="90" y="1265" class="icon">📁</text>
+    <text x="115" y="1265" class="folder-text">migrations/</text>
+    <line x1="105" y1="1280" x2="105" y2="1290" class="line"/>
+    <line x1="105" y1="1290" x2="115" y2="1290" class="line"/>
+    <text x="120" y="1295" class="icon">📁</text>
+    <text x="145" y="1295" class="folder-text">20260603115641_init/</text>
+    <line x1="135" y1="1310" x2="135" y2="1320" class="line"/>
+    <line x1="135" y1="1320" x2="145" y2="1320" class="line"/>
+    <text x="150" y="1325" class="icon">📄</text>
+    <text x="175" y="1325" class="file-text">migration.sql</text>
+    <line x1="105" y1="1380" x2="105" y2="1390" class="line"/>
+    <line x1="105" y1="1390" x2="115" y2="1390" class="line"/>
+    <text x="120" y="1395" class="icon">📁</text>
+    <text x="145" y="1395" class="folder-text">20260603154146_add_push_token/</text>
+    <line x1="135" y1="1410" x2="135" y2="1420" class="line"/>
+    <line x1="135" y1="1420" x2="145" y2="1420" class="line"/>
+    <text x="150" y="1425" class="icon">📄</text>
+    <text x="175" y="1425" class="file-text">migration.sql</text>
+    <line x1="105" y1="1480" x2="105" y2="1490" class="line"/>
+    <line x1="105" y1="1490" x2="115" y2="1490" class="line"/>
+    <text x="120" y="1495" class="icon">📁</text>
+    <text x="145" y="1495" class="folder-text">20260610060539_add_enum_values/</text>
+    <line x1="135" y1="1510" x2="135" y2="1520" class="line"/>
+    <line x1="135" y1="1520" x2="145" y2="1520" class="line"/>
+    <text x="150" y="1525" class="icon">📄</text>
+    <text x="175" y="1525" class="file-text">migration.sql</text>
+    <line x1="105" y1="1580" x2="105" y2="1590" class="line"/>
+    <line x1="105" y1="1590" x2="115" y2="1590" class="line"/>
+    <text x="120" y="1595" class="icon">⚙️</text>
+    <text x="145" y="1595" class="file-text">migration_lock.toml</text>
+    <line x1="75" y1="1650" x2="75" y2="1660" class="line"/>
+    <line x1="75" y1="1660" x2="85" y2="1660" class="line"/>
+    <text x="90" y="1665" class="icon">📄</text>
+    <text x="115" y="1665" class="file-text">schema.prisma</text>
+    <line x1="45" y1="1720" x2="45" y2="1730" class="line"/>
+    <line x1="45" y1="1730" x2="55" y2="1730" class="line"/>
+    <text x="60" y="1735" class="icon">📁</text>
+    <text x="85" y="1735" class="folder-text">scripts/</text>
+    <line x1="75" y1="1750" x2="75" y2="1760" class="line"/>
+    <line x1="75" y1="1760" x2="85" y2="1760" class="line"/>
+    <text x="90" y="1765" class="icon">⚙️</text>
+    <text x="115" y="1765" class="file-text">ap-data.json</text>
+    <line x1="75" y1="1785" x2="75" y2="1795" class="line"/>
+    <line x1="75" y1="1795" x2="85" y2="1795" class="line"/>
+    <text x="90" y="1800" class="icon">⚙️</text>
+    <text x="115" y="1800" class="file-text">ap-seed-data.json</text>
+    <line x1="75" y1="1820" x2="75" y2="1830" class="line"/>
+    <line x1="75" y1="1830" x2="85" y2="1830" class="line"/>
+    <text x="90" y="1835" class="icon">📄</text>
+    <text x="115" y="1835" class="file-text">diagnose_seed.ts</text>
+    <line x1="75" y1="1855" x2="75" y2="1865" class="line"/>
+    <line x1="75" y1="1865" x2="85" y2="1865" class="line"/>
+    <text x="90" y="1870" class="icon">📄</text>
+    <text x="115" y="1870" class="file-text">flow-test.mjs</text>
+    <line x1="75" y1="1890" x2="75" y2="1900" class="line"/>
+    <line x1="75" y1="1900" x2="85" y2="1900" class="line"/>
+    <text x="90" y="1905" class="icon">📄</text>
+    <text x="115" y="1905" class="file-text">query_bm_tasks.ts</text>
+    <line x1="75" y1="1925" x2="75" y2="1935" class="line"/>
+    <line x1="75" y1="1935" x2="85" y2="1935" class="line"/>
+    <text x="90" y="1940" class="icon">📄</text>
+    <text x="115" y="1940" class="file-text">query_completed_proofs.ts</text>
+    <line x1="75" y1="1960" x2="75" y2="1970" class="line"/>
+    <line x1="75" y1="1970" x2="85" y2="1970" class="line"/>
+    <text x="90" y="1975" class="icon">📄</text>
+    <text x="115" y="1975" class="file-text">query_db.ts</text>
+    <line x1="75" y1="1995" x2="75" y2="2005" class="line"/>
+    <line x1="75" y1="2005" x2="85" y2="2005" class="line"/>
+    <text x="90" y="2010" class="icon">📄</text>
+    <text x="115" y="2010" class="file-text">query_lcs.ts</text>
+    <line x1="75" y1="2030" x2="75" y2="2040" class="line"/>
+    <line x1="75" y1="2040" x2="85" y2="2040" class="line"/>
+    <text x="90" y="2045" class="icon">📄</text>
+    <text x="115" y="2045" class="file-text">query_regions.ts</text>
+    <line x1="75" y1="2065" x2="75" y2="2075" class="line"/>
+    <line x1="75" y1="2075" x2="85" y2="2075" class="line"/>
+    <text x="90" y="2080" class="icon">📄</text>
+    <text x="115" y="2080" class="file-text">query_specific.ts</text>
+    <line x1="75" y1="2100" x2="75" y2="2110" class="line"/>
+    <line x1="75" y1="2110" x2="85" y2="2110" class="line"/>
+    <text x="90" y="2115" class="icon">📄</text>
+    <text x="115" y="2115" class="file-text">test_http.js</text>
+    <line x1="75" y1="2135" x2="75" y2="2145" class="line"/>
+    <line x1="75" y1="2145" x2="85" y2="2145" class="line"/>
+    <text x="90" y="2150" class="icon">📄</text>
+    <text x="115" y="2150" class="file-text">verify_missing_fk.ts</text>
+    <line x1="45" y1="2205" x2="45" y2="2215" class="line"/>
+    <line x1="45" y1="2215" x2="55" y2="2215" class="line"/>
+    <text x="60" y="2220" class="icon">📁</text>
+    <text x="85" y="2220" class="folder-text">src/</text>
+    <line x1="75" y1="2235" x2="75" y2="2245" class="line"/>
+    <line x1="75" y1="2245" x2="85" y2="2245" class="line"/>
+    <text x="90" y="2250" class="icon">📁</text>
+    <text x="115" y="2250" class="folder-text">controllers/</text>
+    <line x1="105" y1="2265" x2="105" y2="2275" class="line"/>
+    <line x1="105" y1="2275" x2="115" y2="2275" class="line"/>
+    <text x="120" y="2280" class="icon">📁</text>
+    <text x="145" y="2280" class="folder-text">role/</text>
+    <line x1="135" y1="2295" x2="135" y2="2305" class="line"/>
+    <line x1="135" y1="2305" x2="145" y2="2305" class="line"/>
+    <text x="150" y="2310" class="icon">📄</text>
+    <text x="175" y="2310" class="file-text">appliance.controller.ts</text>
+    <line x1="135" y1="2330" x2="135" y2="2340" class="line"/>
+    <line x1="135" y1="2340" x2="145" y2="2340" class="line"/>
+    <text x="150" y="2345" class="icon">📄</text>
+    <text x="175" y="2345" class="file-text">bm.controller.ts</text>
+    <line x1="135" y1="2365" x2="135" y2="2375" class="line"/>
+    <line x1="135" y1="2375" x2="145" y2="2375" class="line"/>
+    <text x="150" y="2380" class="icon">📄</text>
+    <text x="175" y="2380" class="file-text">lc.controller.ts</text>
+    <line x1="135" y1="2400" x2="135" y2="2410" class="line"/>
+    <line x1="135" y1="2410" x2="145" y2="2410" class="line"/>
+    <text x="150" y="2415" class="icon">📄</text>
+    <text x="175" y="2415" class="file-text">rm.controller.ts</text>
+    <line x1="105" y1="2470" x2="105" y2="2480" class="line"/>
+    <line x1="105" y1="2480" x2="115" y2="2480" class="line"/>
+    <text x="120" y="2485" class="icon">📄</text>
+    <text x="145" y="2485" class="file-text">appliance.controller.ts</text>
+    <line x1="105" y1="2505" x2="105" y2="2515" class="line"/>
+    <line x1="105" y1="2515" x2="115" y2="2515" class="line"/>
+    <text x="120" y="2520" class="icon">📄</text>
+    <text x="145" y="2520" class="file-text">approval.controller.ts</text>
+    <line x1="105" y1="2540" x2="105" y2="2550" class="line"/>
+    <line x1="105" y1="2550" x2="115" y2="2550" class="line"/>
+    <text x="120" y="2555" class="icon">📄</text>
+    <text x="145" y="2555" class="file-text">attendance.controller.ts</text>
+    <line x1="105" y1="2575" x2="105" y2="2585" class="line"/>
+    <line x1="105" y1="2585" x2="115" y2="2585" class="line"/>
+    <text x="120" y="2590" class="icon">📄</text>
+    <text x="145" y="2590" class="file-text">auth.controller.ts</text>
+    <line x1="105" y1="2610" x2="105" y2="2620" class="line"/>
+    <line x1="105" y1="2620" x2="115" y2="2620" class="line"/>
+    <text x="120" y="2625" class="icon">📄</text>
+    <text x="145" y="2625" class="file-text">branch.controller.ts</text>
+    <line x1="105" y1="2645" x2="105" y2="2655" class="line"/>
+    <line x1="105" y1="2655" x2="115" y2="2655" class="line"/>
+    <text x="120" y="2660" class="icon">📄</text>
+    <text x="145" y="2660" class="file-text">complaint.controller.ts</text>
+    <line x1="105" y1="2680" x2="105" y2="2690" class="line"/>
+    <line x1="105" y1="2690" x2="115" y2="2690" class="line"/>
+    <text x="120" y="2695" class="icon">📄</text>
+    <text x="145" y="2695" class="file-text">cron.controller.ts</text>
+    <line x1="105" y1="2715" x2="105" y2="2725" class="line"/>
+    <line x1="105" y1="2725" x2="115" y2="2725" class="line"/>
+    <text x="120" y="2730" class="icon">📄</text>
+    <text x="145" y="2730" class="file-text">dashboard.controller.ts</text>
+    <line x1="105" y1="2750" x2="105" y2="2760" class="line"/>
+    <line x1="105" y1="2760" x2="115" y2="2760" class="line"/>
+    <text x="120" y="2765" class="icon">📄</text>
+    <text x="145" y="2765" class="file-text">notification.controller.ts</text>
+    <line x1="105" y1="2785" x2="105" y2="2795" class="line"/>
+    <line x1="105" y1="2795" x2="115" y2="2795" class="line"/>
+    <text x="120" y="2800" class="icon">📄</text>
+    <text x="145" y="2800" class="file-text">task.controller.ts</text>
+    <line x1="105" y1="2820" x2="105" y2="2830" class="line"/>
+    <line x1="105" y1="2830" x2="115" y2="2830" class="line"/>
+    <text x="120" y="2835" class="icon">📄</text>
+    <text x="145" y="2835" class="file-text">user.controller.ts</text>
+    <line x1="105" y1="2855" x2="105" y2="2865" class="line"/>
+    <line x1="105" y1="2865" x2="115" y2="2865" class="line"/>
+    <text x="120" y="2870" class="icon">📄</text>
+    <text x="145" y="2870" class="file-text">visit.controller.ts</text>
+    <line x1="75" y1="2925" x2="75" y2="2935" class="line"/>
+    <line x1="75" y1="2935" x2="85" y2="2935" class="line"/>
+    <text x="90" y="2940" class="icon">📁</text>
+    <text x="115" y="2940" class="folder-text">lib/</text>
+    <line x1="105" y1="2955" x2="105" y2="2965" class="line"/>
+    <line x1="105" y1="2965" x2="115" y2="2965" class="line"/>
+    <text x="120" y="2970" class="icon">📄</text>
+    <text x="145" y="2970" class="file-text">generateWeeklyTasks.ts</text>
+    <line x1="105" y1="2990" x2="105" y2="3000" class="line"/>
+    <line x1="105" y1="3000" x2="115" y2="3000" class="line"/>
+    <text x="120" y="3005" class="icon">📄</text>
+    <text x="145" y="3005" class="file-text">prisma.ts</text>
+    <line x1="105" y1="3025" x2="105" y2="3035" class="line"/>
+    <line x1="105" y1="3035" x2="115" y2="3035" class="line"/>
+    <text x="120" y="3040" class="icon">📄</text>
+    <text x="145" y="3040" class="file-text">stats.ts</text>
+    <line x1="75" y1="3095" x2="75" y2="3105" class="line"/>
+    <line x1="75" y1="3105" x2="85" y2="3105" class="line"/>
+    <text x="90" y="3110" class="icon">📁</text>
+    <text x="115" y="3110" class="folder-text">middlewares/</text>
+    <line x1="105" y1="3125" x2="105" y2="3135" class="line"/>
+    <line x1="105" y1="3135" x2="115" y2="3135" class="line"/>
+    <text x="120" y="3140" class="icon">📄</text>
+    <text x="145" y="3140" class="file-text">auth.middleware.ts</text>
+    <line x1="105" y1="3160" x2="105" y2="3170" class="line"/>
+    <line x1="105" y1="3170" x2="115" y2="3170" class="line"/>
+    <text x="120" y="3175" class="icon">📄</text>
+    <text x="145" y="3175" class="file-text">cron.middleware.ts</text>
+    <line x1="105" y1="3195" x2="105" y2="3205" class="line"/>
+    <line x1="105" y1="3205" x2="115" y2="3205" class="line"/>
+    <text x="120" y="3210" class="icon">📄</text>
+    <text x="145" y="3210" class="file-text">security.middleware.ts</text>
+    <line x1="75" y1="3265" x2="75" y2="3275" class="line"/>
+    <line x1="75" y1="3275" x2="85" y2="3275" class="line"/>
+    <text x="90" y="3280" class="icon">📁</text>
+    <text x="115" y="3280" class="folder-text">routes/</text>
+    <line x1="105" y1="3295" x2="105" y2="3305" class="line"/>
+    <line x1="105" y1="3305" x2="115" y2="3305" class="line"/>
+    <text x="120" y="3310" class="icon">📁</text>
+    <text x="145" y="3310" class="folder-text">role/</text>
+    <line x1="135" y1="3325" x2="135" y2="3335" class="line"/>
+    <line x1="135" y1="3335" x2="145" y2="3335" class="line"/>
+    <text x="150" y="3340" class="icon">📄</text>
+    <text x="175" y="3340" class="file-text">bm.routes.ts</text>
+    <line x1="135" y1="3360" x2="135" y2="3370" class="line"/>
+    <line x1="135" y1="3370" x2="145" y2="3370" class="line"/>
+    <text x="150" y="3375" class="icon">📄</text>
+    <text x="175" y="3375" class="file-text">lc.routes.ts</text>
+    <line x1="135" y1="3395" x2="135" y2="3405" class="line"/>
+    <line x1="135" y1="3405" x2="145" y2="3405" class="line"/>
+    <text x="150" y="3410" class="icon">📄</text>
+    <text x="175" y="3410" class="file-text">rm.routes.ts</text>
+    <line x1="105" y1="3465" x2="105" y2="3475" class="line"/>
+    <line x1="105" y1="3475" x2="115" y2="3475" class="line"/>
+    <text x="120" y="3480" class="icon">📄</text>
+    <text x="145" y="3480" class="file-text">appliance.routes.ts</text>
+    <line x1="105" y1="3500" x2="105" y2="3510" class="line"/>
+    <line x1="105" y1="3510" x2="115" y2="3510" class="line"/>
+    <text x="120" y="3515" class="icon">📄</text>
+    <text x="145" y="3515" class="file-text">approval.routes.ts</text>
+    <line x1="105" y1="3535" x2="105" y2="3545" class="line"/>
+    <line x1="105" y1="3545" x2="115" y2="3545" class="line"/>
+    <text x="120" y="3550" class="icon">📄</text>
+    <text x="145" y="3550" class="file-text">attendance.routes.ts</text>
+    <line x1="105" y1="3570" x2="105" y2="3580" class="line"/>
+    <line x1="105" y1="3580" x2="115" y2="3580" class="line"/>
+    <text x="120" y="3585" class="icon">📄</text>
+    <text x="145" y="3585" class="file-text">auth.routes.ts</text>
+    <line x1="105" y1="3605" x2="105" y2="3615" class="line"/>
+    <line x1="105" y1="3615" x2="115" y2="3615" class="line"/>
+    <text x="120" y="3620" class="icon">📄</text>
+    <text x="145" y="3620" class="file-text">branch.routes.ts</text>
+    <line x1="105" y1="3640" x2="105" y2="3650" class="line"/>
+    <line x1="105" y1="3650" x2="115" y2="3650" class="line"/>
+    <text x="120" y="3655" class="icon">📄</text>
+    <text x="145" y="3655" class="file-text">complaint.routes.ts</text>
+    <line x1="105" y1="3675" x2="105" y2="3685" class="line"/>
+    <line x1="105" y1="3685" x2="115" y2="3685" class="line"/>
+    <text x="120" y="3690" class="icon">📄</text>
+    <text x="145" y="3690" class="file-text">cron.routes.ts</text>
+    <line x1="105" y1="3710" x2="105" y2="3720" class="line"/>
+    <line x1="105" y1="3720" x2="115" y2="3720" class="line"/>
+    <text x="120" y="3725" class="icon">📄</text>
+    <text x="145" y="3725" class="file-text">dashboard.routes.ts</text>
+    <line x1="105" y1="3745" x2="105" y2="3755" class="line"/>
+    <line x1="105" y1="3755" x2="115" y2="3755" class="line"/>
+    <text x="120" y="3760" class="icon">📄</text>
+    <text x="145" y="3760" class="file-text">index.ts</text>
+    <line x1="105" y1="3780" x2="105" y2="3790" class="line"/>
+    <line x1="105" y1="3790" x2="115" y2="3790" class="line"/>
+    <text x="120" y="3795" class="icon">📄</text>
+    <text x="145" y="3795" class="file-text">notification.routes.ts</text>
+    <line x1="105" y1="3815" x2="105" y2="3825" class="line"/>
+    <line x1="105" y1="3825" x2="115" y2="3825" class="line"/>
+    <text x="120" y="3830" class="icon">📄</text>
+    <text x="145" y="3830" class="file-text">task.routes.ts</text>
+    <line x1="105" y1="3850" x2="105" y2="3860" class="line"/>
+    <line x1="105" y1="3860" x2="115" y2="3860" class="line"/>
+    <text x="120" y="3865" class="icon">📄</text>
+    <text x="145" y="3865" class="file-text">user.routes.ts</text>
+    <line x1="105" y1="3885" x2="105" y2="3895" class="line"/>
+    <line x1="105" y1="3895" x2="115" y2="3895" class="line"/>
+    <text x="120" y="3900" class="icon">📄</text>
+    <text x="145" y="3900" class="file-text">visit.routes.ts</text>
+    <line x1="75" y1="3955" x2="75" y2="3965" class="line"/>
+    <line x1="75" y1="3965" x2="85" y2="3965" class="line"/>
+    <text x="90" y="3970" class="icon">📁</text>
+    <text x="115" y="3970" class="folder-text">services/</text>
+    <line x1="105" y1="3985" x2="105" y2="3995" class="line"/>
+    <line x1="105" y1="3995" x2="115" y2="3995" class="line"/>
+    <text x="120" y="4000" class="icon">📄</text>
+    <text x="145" y="4000" class="file-text">cloudinary.service.ts</text>
+    <line x1="105" y1="4020" x2="105" y2="4030" class="line"/>
+    <line x1="105" y1="4030" x2="115" y2="4030" class="line"/>
+    <text x="120" y="4035" class="icon">📄</text>
+    <text x="145" y="4035" class="file-text">notification.service.ts</text>
+    <line x1="75" y1="4090" x2="75" y2="4100" class="line"/>
+    <line x1="75" y1="4100" x2="85" y2="4100" class="line"/>
+    <text x="90" y="4105" class="icon">📄</text>
+    <text x="115" y="4105" class="file-text">index.ts</text>
+    <line x1="75" y1="4125" x2="75" y2="4135" class="line"/>
+    <line x1="75" y1="4135" x2="85" y2="4135" class="line"/>
+    <text x="90" y="4140" class="icon">📄</text>
+    <text x="115" y="4140" class="file-text">seed.ts</text>
+    <line x1="45" y1="4195" x2="45" y2="4205" class="line"/>
+    <line x1="45" y1="4205" x2="55" y2="4205" class="line"/>
+    <text x="60" y="4210" class="icon">📁</text>
+    <text x="85" y="4210" class="folder-text">tests/</text>
+    <line x1="75" y1="4225" x2="75" y2="4235" class="line"/>
+    <line x1="75" y1="4235" x2="85" y2="4235" class="line"/>
+    <text x="90" y="4240" class="icon">📁</text>
+    <text x="115" y="4240" class="folder-text">api/</text>
+    <line x1="105" y1="4255" x2="105" y2="4265" class="line"/>
+    <line x1="105" y1="4265" x2="115" y2="4265" class="line"/>
+    <text x="120" y="4270" class="icon">📄</text>
+    <text x="145" y="4270" class="file-text">01-rm.test.js</text>
+    <line x1="105" y1="4290" x2="105" y2="4300" class="line"/>
+    <line x1="105" y1="4300" x2="115" y2="4300" class="line"/>
+    <text x="120" y="4305" class="icon">📄</text>
+    <text x="145" y="4305" class="file-text">02-am.test.js</text>
+    <line x1="105" y1="4325" x2="105" y2="4335" class="line"/>
+    <line x1="105" y1="4335" x2="115" y2="4335" class="line"/>
+    <text x="120" y="4340" class="icon">📄</text>
+    <text x="145" y="4340" class="file-text">03-aa.test.js</text>
+    <line x1="105" y1="4360" x2="105" y2="4370" class="line"/>
+    <line x1="105" y1="4370" x2="115" y2="4370" class="line"/>
+    <text x="120" y="4375" class="icon">📄</text>
+    <text x="145" y="4375" class="file-text">04-lc.test.js</text>
+    <line x1="105" y1="4395" x2="105" y2="4405" class="line"/>
+    <line x1="105" y1="4405" x2="115" y2="4405" class="line"/>
+    <text x="120" y="4410" class="icon">📄</text>
+    <text x="145" y="4410" class="file-text">helpers.js</text>
+    <line x1="105" y1="4430" x2="105" y2="4440" class="line"/>
+    <line x1="105" y1="4440" x2="115" y2="4440" class="line"/>
+    <text x="120" y="4445" class="icon">📄</text>
+    <text x="145" y="4445" class="file-text">run-all.js</text>
+    <line x1="75" y1="4500" x2="75" y2="4510" class="line"/>
+    <line x1="75" y1="4510" x2="85" y2="4510" class="line"/>
+    <text x="90" y="4515" class="icon">📁</text>
+    <text x="115" y="4515" class="folder-text">integration/</text>
+    <line x1="105" y1="4530" x2="105" y2="4540" class="line"/>
+    <line x1="105" y1="4540" x2="115" y2="4540" class="line"/>
+    <text x="120" y="4545" class="icon">📄</text>
+    <text x="145" y="4545" class="file-text">flow.test.js</text>
+    <line x1="45" y1="4635" x2="45" y2="4645" class="line"/>
+    <line x1="45" y1="4645" x2="55" y2="4645" class="line"/>
+    <text x="60" y="4650" class="icon">⚙️</text>
+    <text x="85" y="4650" class="file-text">.gitignore</text>
+    <line x1="45" y1="4670" x2="45" y2="4680" class="line"/>
+    <line x1="45" y1="4680" x2="55" y2="4680" class="line"/>
+    <text x="60" y="4685" class="icon">📄</text>
+    <text x="85" y="4685" class="file-text">Branch Master May 2026 SW3.xlsx</text>
+    <line x1="45" y1="4705" x2="45" y2="4715" class="line"/>
+    <line x1="45" y1="4715" x2="55" y2="4715" class="line"/>
+    <text x="60" y="4720" class="icon">⚙️</text>
+    <text x="85" y="4720" class="file-text">package-lock.json</text>
+    <line x1="45" y1="4740" x2="45" y2="4750" class="line"/>
+    <line x1="45" y1="4750" x2="55" y2="4750" class="line"/>
+    <text x="60" y="4755" class="icon">⚙️</text>
+    <text x="85" y="4755" class="file-text">package.json</text>
+    <line x1="45" y1="4775" x2="45" y2="4785" class="line"/>
+    <line x1="45" y1="4785" x2="55" y2="4785" class="line"/>
+    <text x="60" y="4790" class="icon">⚙️</text>
+    <text x="85" y="4790" class="file-text">tsconfig.json</text>
+    <line x1="15" y1="4855" x2="25" y2="4855" class="line"/>
+    <text x="30" y="4860" class="icon">📁</text>
+    <text x="55" y="4860" class="folder-text">mobile-app/</text>
+    <line x1="45" y1="4875" x2="45" y2="4885" class="line"/>
+    <line x1="45" y1="4885" x2="55" y2="4885" class="line"/>
+    <text x="60" y="4890" class="icon">📁</text>
+    <text x="85" y="4890" class="folder-text">.agents/</text>
+    <line x1="75" y1="4905" x2="75" y2="4915" class="line"/>
+    <line x1="75" y1="4915" x2="85" y2="4915" class="line"/>
+    <text x="90" y="4920" class="icon">📁</text>
+    <text x="115" y="4920" class="folder-text">tasks/</text>
+    <line x1="105" y1="4935" x2="105" y2="4945" class="line"/>
+    <line x1="105" y1="4945" x2="115" y2="4945" class="line"/>
+    <text x="120" y="4950" class="icon">📝</text>
+    <text x="145" y="4950" class="file-text">gap-analysis.md</text>
+    <line x1="105" y1="4970" x2="105" y2="4980" class="line"/>
+    <line x1="105" y1="4980" x2="115" y2="4980" class="line"/>
+    <text x="120" y="4985" class="icon">📝</text>
+    <text x="145" y="4985" class="file-text">plan.md</text>
+    <line x1="105" y1="5005" x2="105" y2="5015" class="line"/>
+    <line x1="105" y1="5015" x2="115" y2="5015" class="line"/>
+    <text x="120" y="5020" class="icon">📝</text>
+    <text x="145" y="5020" class="file-text">review.md</text>
+    <line x1="45" y1="5110" x2="45" y2="5120" class="line"/>
+    <line x1="45" y1="5120" x2="55" y2="5120" class="line"/>
+    <text x="60" y="5125" class="icon">📁</text>
+    <text x="85" y="5125" class="folder-text">.claude/</text>
+    <line x1="75" y1="5140" x2="75" y2="5150" class="line"/>
+    <line x1="75" y1="5150" x2="85" y2="5150" class="line"/>
+    <text x="90" y="5155" class="icon">⚙️</text>
+    <text x="115" y="5155" class="file-text">settings.json</text>
+    <line x1="45" y1="5210" x2="45" y2="5220" class="line"/>
+    <line x1="45" y1="5220" x2="55" y2="5220" class="line"/>
+    <text x="60" y="5225" class="icon">📁</text>
+    <text x="85" y="5225" class="folder-text">.commandcode/</text>
+    <line x1="75" y1="5240" x2="75" y2="5250" class="line"/>
+    <line x1="75" y1="5250" x2="85" y2="5250" class="line"/>
+    <text x="90" y="5255" class="icon">📁</text>
+    <text x="115" y="5255" class="folder-text">taste/</text>
+    <line x1="105" y1="5270" x2="105" y2="5280" class="line"/>
+    <line x1="105" y1="5280" x2="115" y2="5280" class="line"/>
+    <text x="120" y="5285" class="icon">📝</text>
+    <text x="145" y="5285" class="file-text">taste.md</text>
+    <line x1="45" y1="5375" x2="45" y2="5385" class="line"/>
+    <line x1="45" y1="5385" x2="55" y2="5385" class="line"/>
+    <text x="60" y="5390" class="icon">📁</text>
+    <text x="85" y="5390" class="folder-text">Lcscrrenshots/</text>
+    <line x1="75" y1="5405" x2="75" y2="5415" class="line"/>
+    <line x1="75" y1="5415" x2="85" y2="5415" class="line"/>
+    <text x="90" y="5420" class="icon">🖼️</text>
+    <text x="115" y="5420" class="file-text">home.png</text>
+    <line x1="75" y1="5440" x2="75" y2="5450" class="line"/>
+    <line x1="75" y1="5450" x2="85" y2="5450" class="line"/>
+    <text x="90" y="5455" class="icon">🖼️</text>
+    <text x="115" y="5455" class="file-text">image.png</text>
+    <line x1="45" y1="5510" x2="45" y2="5520" class="line"/>
+    <line x1="45" y1="5520" x2="55" y2="5520" class="line"/>
+    <text x="60" y="5525" class="icon">📁</text>
+    <text x="85" y="5525" class="folder-text">assets/</text>
+    <line x1="75" y1="5540" x2="75" y2="5550" class="line"/>
+    <line x1="75" y1="5550" x2="85" y2="5550" class="line"/>
+    <text x="90" y="5555" class="icon">🖼️</text>
+    <text x="115" y="5555" class="file-text">android-icon-background.png</text>
+    <line x1="75" y1="5575" x2="75" y2="5585" class="line"/>
+    <line x1="75" y1="5585" x2="85" y2="5585" class="line"/>
+    <text x="90" y="5590" class="icon">🖼️</text>
+    <text x="115" y="5590" class="file-text">android-icon-foreground.png</text>
+    <line x1="75" y1="5610" x2="75" y2="5620" class="line"/>
+    <line x1="75" y1="5620" x2="85" y2="5620" class="line"/>
+    <text x="90" y="5625" class="icon">🖼️</text>
+    <text x="115" y="5625" class="file-text">android-icon-monochrome.png</text>
+    <line x1="75" y1="5645" x2="75" y2="5655" class="line"/>
+    <line x1="75" y1="5655" x2="85" y2="5655" class="line"/>
+    <text x="90" y="5660" class="icon">🖼️</text>
+    <text x="115" y="5660" class="file-text">favicon.png</text>
+    <line x1="75" y1="5680" x2="75" y2="5690" class="line"/>
+    <line x1="75" y1="5690" x2="85" y2="5690" class="line"/>
+    <text x="90" y="5695" class="icon">🖼️</text>
+    <text x="115" y="5695" class="file-text">icon.png</text>
+    <line x1="75" y1="5715" x2="75" y2="5725" class="line"/>
+    <line x1="75" y1="5725" x2="85" y2="5725" class="line"/>
+    <text x="90" y="5730" class="icon">🖼️</text>
+    <text x="115" y="5730" class="file-text">splash-icon.png</text>
+    <line x1="45" y1="5785" x2="45" y2="5795" class="line"/>
+    <line x1="45" y1="5795" x2="55" y2="5795" class="line"/>
+    <text x="60" y="5800" class="icon">📁</text>
+    <text x="85" y="5800" class="folder-text">docs/</text>
+    <line x1="75" y1="5815" x2="75" y2="5825" class="line"/>
+    <line x1="75" y1="5825" x2="85" y2="5825" class="line"/>
+    <text x="90" y="5830" class="icon">📝</text>
+    <text x="115" y="5830" class="file-text">ARCHITECTURE.md</text>
+    <line x1="75" y1="5850" x2="75" y2="5860" class="line"/>
+    <line x1="75" y1="5860" x2="85" y2="5860" class="line"/>
+    <text x="90" y="5865" class="icon">📝</text>
+    <text x="115" y="5865" class="file-text">LC-RESTRUCTURE-PLAN.md</text>
+    <line x1="75" y1="5885" x2="75" y2="5895" class="line"/>
+    <line x1="75" y1="5895" x2="85" y2="5895" class="line"/>
+    <text x="90" y="5900" class="icon">🖼️</text>
+    <text x="115" y="5900" class="file-text">image.png</text>
+    <line x1="45" y1="5955" x2="45" y2="5965" class="line"/>
+    <line x1="45" y1="5965" x2="55" y2="5965" class="line"/>
+    <text x="60" y="5970" class="icon">📁</text>
+    <text x="85" y="5970" class="folder-text">src/</text>
+    <line x1="75" y1="5985" x2="75" y2="5995" class="line"/>
+    <line x1="75" y1="5995" x2="85" y2="5995" class="line"/>
+    <text x="90" y="6000" class="icon">📁</text>
+    <text x="115" y="6000" class="folder-text">app/</text>
+    <line x1="105" y1="6015" x2="105" y2="6025" class="line"/>
+    <line x1="105" y1="6025" x2="115" y2="6025" class="line"/>
+    <text x="120" y="6030" class="icon">📄</text>
+    <text x="145" y="6030" class="file-text">RootApp.tsx</text>
+    <line x1="75" y1="6085" x2="75" y2="6095" class="line"/>
+    <line x1="75" y1="6095" x2="85" y2="6095" class="line"/>
+    <text x="90" y="6100" class="icon">📁</text>
+    <text x="115" y="6100" class="folder-text">context/</text>
+    <line x1="105" y1="6115" x2="105" y2="6125" class="line"/>
+    <line x1="105" y1="6125" x2="115" y2="6125" class="line"/>
+    <text x="120" y="6130" class="icon">📄</text>
+    <text x="145" y="6130" class="file-text">AppContext.tsx</text>
+    <line x1="75" y1="6185" x2="75" y2="6195" class="line"/>
+    <line x1="75" y1="6195" x2="85" y2="6195" class="line"/>
+    <text x="90" y="6200" class="icon">📁</text>
+    <text x="115" y="6200" class="folder-text">data/</text>
+    <line x1="105" y1="6215" x2="105" y2="6225" class="line"/>
+    <line x1="105" y1="6225" x2="115" y2="6225" class="line"/>
+    <text x="120" y="6230" class="icon">📄</text>
+    <text x="145" y="6230" class="file-text">mockData.ts</text>
+    <line x1="75" y1="6285" x2="75" y2="6295" class="line"/>
+    <line x1="75" y1="6295" x2="85" y2="6295" class="line"/>
+    <text x="90" y="6300" class="icon">📁</text>
+    <text x="115" y="6300" class="folder-text">modals/</text>
+    <line x1="105" y1="6315" x2="105" y2="6325" class="line"/>
+    <line x1="105" y1="6325" x2="115" y2="6325" class="line"/>
+    <text x="120" y="6330" class="icon">📁</text>
+    <text x="145" y="6330" class="folder-text">detail/</text>
+    <line x1="135" y1="6345" x2="135" y2="6355" class="line"/>
+    <line x1="135" y1="6355" x2="145" y2="6355" class="line"/>
+    <text x="150" y="6360" class="icon">📄</text>
+    <text x="175" y="6360" class="file-text">DetailModal.tsx</text>
+    <line x1="105" y1="6415" x2="105" y2="6425" class="line"/>
+    <line x1="105" y1="6425" x2="115" y2="6425" class="line"/>
+    <text x="120" y="6430" class="icon">📁</text>
+    <text x="145" y="6430" class="folder-text">forms/</text>
+    <line x1="135" y1="6445" x2="135" y2="6455" class="line"/>
+    <line x1="135" y1="6455" x2="145" y2="6455" class="line"/>
+    <text x="150" y="6460" class="icon">📄</text>
+    <text x="175" y="6460" class="file-text">AuditTrailModal.tsx</text>
+    <line x1="135" y1="6480" x2="135" y2="6490" class="line"/>
+    <line x1="135" y1="6490" x2="145" y2="6490" class="line"/>
+    <text x="150" y="6495" class="icon">📄</text>
+    <text x="175" y="6495" class="file-text">EditProfileModal.tsx</text>
+    <line x1="135" y1="6515" x2="135" y2="6525" class="line"/>
+    <line x1="135" y1="6525" x2="145" y2="6525" class="line"/>
+    <text x="150" y="6530" class="icon">📄</text>
+    <text x="175" y="6530" class="file-text">FormModal.tsx</text>
+    <line x1="135" y1="6550" x2="135" y2="6560" class="line"/>
+    <line x1="135" y1="6560" x2="145" y2="6560" class="line"/>
+    <text x="150" y="6565" class="icon">📄</text>
+    <text x="175" y="6565" class="file-text">RoleSwitcherModal.tsx</text>
+    <line x1="135" y1="6585" x2="135" y2="6595" class="line"/>
+    <line x1="135" y1="6595" x2="145" y2="6595" class="line"/>
+    <text x="150" y="6600" class="icon">📄</text>
+    <text x="175" y="6600" class="file-text">SearchModal.tsx</text>
+    <line x1="75" y1="6690" x2="75" y2="6700" class="line"/>
+    <line x1="75" y1="6700" x2="85" y2="6700" class="line"/>
+    <text x="90" y="6705" class="icon">📁</text>
+    <text x="115" y="6705" class="folder-text">navigation/</text>
+    <line x1="105" y1="6720" x2="105" y2="6730" class="line"/>
+    <line x1="105" y1="6730" x2="115" y2="6730" class="line"/>
+    <text x="120" y="6735" class="icon">📄</text>
+    <text x="145" y="6735" class="file-text">LoginScreen.tsx</text>
+    <line x1="105" y1="6755" x2="105" y2="6765" class="line"/>
+    <line x1="105" y1="6765" x2="115" y2="6765" class="line"/>
+    <text x="120" y="6770" class="icon">📄</text>
+    <text x="145" y="6770" class="file-text">PlaceholderScreen.tsx</text>
+    <line x1="105" y1="6790" x2="105" y2="6800" class="line"/>
+    <line x1="105" y1="6800" x2="115" y2="6800" class="line"/>
+    <text x="120" y="6805" class="icon">📄</text>
+    <text x="145" y="6805" class="file-text">RootNavigator.tsx</text>
+    <line x1="75" y1="6860" x2="75" y2="6870" class="line"/>
+    <line x1="75" y1="6870" x2="85" y2="6870" class="line"/>
+    <text x="90" y="6875" class="icon">📁</text>
+    <text x="115" y="6875" class="folder-text">roles/</text>
+    <line x1="105" y1="6890" x2="105" y2="6900" class="line"/>
+    <line x1="105" y1="6900" x2="115" y2="6900" class="line"/>
+    <text x="120" y="6905" class="icon">📁</text>
+    <text x="145" y="6905" class="folder-text">branchManager/</text>
+    <line x1="135" y1="6920" x2="135" y2="6930" class="line"/>
+    <line x1="135" y1="6930" x2="145" y2="6930" class="line"/>
+    <text x="150" y="6935" class="icon">📄</text>
+    <text x="175" y="6935" class="file-text">BranchManagerApprovalsScreen.tsx</text>
+    <line x1="135" y1="6955" x2="135" y2="6965" class="line"/>
+    <line x1="135" y1="6965" x2="145" y2="6965" class="line"/>
+    <text x="150" y="6970" class="icon">📄</text>
+    <text x="175" y="6970" class="file-text">BranchManagerAttendanceScreen.tsx</text>
+    <line x1="135" y1="6990" x2="135" y2="7000" class="line"/>
+    <line x1="135" y1="7000" x2="145" y2="7000" class="line"/>
+    <text x="150" y="7005" class="icon">📄</text>
+    <text x="175" y="7005" class="file-text">BranchManagerBranchesScreen.tsx</text>
+    <line x1="135" y1="7025" x2="135" y2="7035" class="line"/>
+    <line x1="135" y1="7035" x2="145" y2="7035" class="line"/>
+    <text x="150" y="7040" class="icon">📄</text>
+    <text x="175" y="7040" class="file-text">BranchManagerHomeScreen.tsx</text>
+    <line x1="135" y1="7060" x2="135" y2="7070" class="line"/>
+    <line x1="135" y1="7070" x2="145" y2="7070" class="line"/>
+    <text x="150" y="7075" class="icon">📄</text>
+    <text x="175" y="7075" class="file-text">BranchManagerIssuesScreen.tsx</text>
+    <line x1="135" y1="7095" x2="135" y2="7105" class="line"/>
+    <line x1="135" y1="7105" x2="145" y2="7105" class="line"/>
+    <text x="150" y="7110" class="icon">📄</text>
+    <text x="175" y="7110" class="file-text">BranchManagerMonitoringScreen.tsx</text>
+    <line x1="135" y1="7130" x2="135" y2="7140" class="line"/>
+    <line x1="135" y1="7140" x2="145" y2="7140" class="line"/>
+    <text x="150" y="7145" class="icon">📄</text>
+    <text x="175" y="7145" class="file-text">BranchManagerNotificationsScreen.tsx</text>
+    <line x1="135" y1="7165" x2="135" y2="7175" class="line"/>
+    <line x1="135" y1="7175" x2="145" y2="7175" class="line"/>
+    <text x="150" y="7180" class="icon">📄</text>
+    <text x="175" y="7180" class="file-text">BranchManagerProfileScreen.tsx</text>
+    <line x1="135" y1="7200" x2="135" y2="7210" class="line"/>
+    <line x1="135" y1="7210" x2="145" y2="7210" class="line"/>
+    <text x="150" y="7215" class="icon">📄</text>
+    <text x="175" y="7215" class="file-text">BranchManagerVisitsScreen.tsx</text>
+    <line x1="105" y1="7270" x2="105" y2="7280" class="line"/>
+    <line x1="105" y1="7280" x2="115" y2="7280" class="line"/>
+    <text x="120" y="7285" class="icon">📁</text>
+    <text x="145" y="7285" class="folder-text">lc/</text>
+    <line x1="135" y1="7300" x2="135" y2="7310" class="line"/>
+    <line x1="135" y1="7310" x2="145" y2="7310" class="line"/>
+    <text x="150" y="7315" class="icon">📄</text>
+    <text x="175" y="7315" class="file-text">LcAttendanceScreen.tsx</text>
+    <line x1="135" y1="7335" x2="135" y2="7345" class="line"/>
+    <line x1="135" y1="7345" x2="145" y2="7345" class="line"/>
+    <text x="150" y="7350" class="icon">📄</text>
+    <text x="175" y="7350" class="file-text">LcBranchScreen.tsx</text>
+    <line x1="135" y1="7370" x2="135" y2="7380" class="line"/>
+    <line x1="135" y1="7380" x2="145" y2="7380" class="line"/>
+    <text x="150" y="7385" class="icon">📄</text>
+    <text x="175" y="7385" class="file-text">LcComplaintsScreen.tsx</text>
+    <line x1="135" y1="7405" x2="135" y2="7415" class="line"/>
+    <line x1="135" y1="7415" x2="145" y2="7415" class="line"/>
+    <text x="150" y="7420" class="icon">📄</text>
+    <text x="175" y="7420" class="file-text">LcHomeScreen.tsx</text>
+    <line x1="135" y1="7440" x2="135" y2="7450" class="line"/>
+    <line x1="135" y1="7450" x2="145" y2="7450" class="line"/>
+    <text x="150" y="7455" class="icon">📄</text>
+    <text x="175" y="7455" class="file-text">LcNotificationsScreen.tsx</text>
+    <line x1="135" y1="7475" x2="135" y2="7485" class="line"/>
+    <line x1="135" y1="7485" x2="145" y2="7485" class="line"/>
+    <text x="150" y="7490" class="icon">📄</text>
+    <text x="175" y="7490" class="file-text">LcProfileScreen.tsx</text>
+    <line x1="135" y1="7510" x2="135" y2="7520" class="line"/>
+    <line x1="135" y1="7520" x2="145" y2="7520" class="line"/>
+    <text x="150" y="7525" class="icon">📄</text>
+    <text x="175" y="7525" class="file-text">LcTasksScreen.tsx</text>
+    <line x1="105" y1="7580" x2="105" y2="7590" class="line"/>
+    <line x1="105" y1="7590" x2="115" y2="7590" class="line"/>
+    <text x="120" y="7595" class="icon">📁</text>
+    <text x="145" y="7595" class="folder-text">rm/</text>
+    <line x1="135" y1="7610" x2="135" y2="7620" class="line"/>
+    <line x1="135" y1="7620" x2="145" y2="7620" class="line"/>
+    <text x="150" y="7625" class="icon">📄</text>
+    <text x="175" y="7625" class="file-text">RmAlertsScreen.tsx</text>
+    <line x1="135" y1="7645" x2="135" y2="7655" class="line"/>
+    <line x1="135" y1="7655" x2="145" y2="7655" class="line"/>
+    <text x="150" y="7660" class="icon">📄</text>
+    <text x="175" y="7660" class="file-text">RmAnalyticsScreen.tsx</text>
+    <line x1="135" y1="7680" x2="135" y2="7690" class="line"/>
+    <line x1="135" y1="7690" x2="145" y2="7690" class="line"/>
+    <text x="150" y="7695" class="icon">📄</text>
+    <text x="175" y="7695" class="file-text">RmApprovalsScreen.tsx</text>
+    <line x1="135" y1="7715" x2="135" y2="7725" class="line"/>
+    <line x1="135" y1="7725" x2="145" y2="7725" class="line"/>
+    <text x="150" y="7730" class="icon">📄</text>
+    <text x="175" y="7730" class="file-text">RmAttendanceScreen.tsx</text>
+    <line x1="135" y1="7750" x2="135" y2="7760" class="line"/>
+    <line x1="135" y1="7760" x2="145" y2="7760" class="line"/>
+    <text x="150" y="7765" class="icon">📄</text>
+    <text x="175" y="7765" class="file-text">RmDashboardScreen.tsx</text>
+    <line x1="135" y1="7785" x2="135" y2="7795" class="line"/>
+    <line x1="135" y1="7795" x2="145" y2="7795" class="line"/>
+    <text x="150" y="7800" class="icon">📄</text>
+    <text x="175" y="7800" class="file-text">RmFinanceScreen.tsx</text>
+    <line x1="135" y1="7820" x2="135" y2="7830" class="line"/>
+    <line x1="135" y1="7830" x2="145" y2="7830" class="line"/>
+    <text x="150" y="7835" class="icon">📄</text>
+    <text x="175" y="7835" class="file-text">RmIntelligenceScreen.tsx</text>
+    <line x1="135" y1="7855" x2="135" y2="7865" class="line"/>
+    <line x1="135" y1="7865" x2="145" y2="7865" class="line"/>
+    <text x="150" y="7870" class="icon">📄</text>
+    <text x="175" y="7870" class="file-text">RmMonitoringScreen.tsx</text>
+    <line x1="135" y1="7890" x2="135" y2="7900" class="line"/>
+    <line x1="135" y1="7900" x2="145" y2="7900" class="line"/>
+    <text x="150" y="7905" class="icon">📄</text>
+    <text x="175" y="7905" class="file-text">RmNotificationsScreen.tsx</text>
+    <line x1="135" y1="7925" x2="135" y2="7935" class="line"/>
+    <line x1="135" y1="7935" x2="145" y2="7935" class="line"/>
+    <text x="150" y="7940" class="icon">📄</text>
+    <text x="175" y="7940" class="file-text">RmProfileScreen.tsx</text>
+    <line x1="135" y1="7960" x2="135" y2="7970" class="line"/>
+    <line x1="135" y1="7970" x2="145" y2="7970" class="line"/>
+    <text x="150" y="7975" class="icon">📄</text>
+    <text x="175" y="7975" class="file-text">RmSettingsScreen.tsx</text>
+    <line x1="135" y1="7995" x2="135" y2="8005" class="line"/>
+    <line x1="135" y1="8005" x2="145" y2="8005" class="line"/>
+    <text x="150" y="8010" class="icon">📄</text>
+    <text x="175" y="8010" class="file-text">RmUsersScreen.tsx</text>
+    <line x1="135" y1="8030" x2="135" y2="8040" class="line"/>
+    <line x1="135" y1="8040" x2="145" y2="8040" class="line"/>
+    <text x="150" y="8045" class="icon">📄</text>
+    <text x="175" y="8045" class="file-text">UserManagementScreen.tsx</text>
+    <line x1="75" y1="8135" x2="75" y2="8145" class="line"/>
+    <line x1="75" y1="8145" x2="85" y2="8145" class="line"/>
+    <text x="90" y="8150" class="icon">📁</text>
+    <text x="115" y="8150" class="folder-text">services/</text>
+    <line x1="105" y1="8165" x2="105" y2="8175" class="line"/>
+    <line x1="105" y1="8175" x2="115" y2="8175" class="line"/>
+    <text x="120" y="8180" class="icon">📁</text>
+    <text x="145" y="8180" class="folder-text">api/</text>
+    <line x1="135" y1="8195" x2="135" y2="8205" class="line"/>
+    <line x1="135" y1="8205" x2="145" y2="8205" class="line"/>
+    <text x="150" y="8210" class="icon">📄</text>
+    <text x="175" y="8210" class="file-text">client.ts</text>
+    <line x1="75" y1="8300" x2="75" y2="8310" class="line"/>
+    <line x1="75" y1="8310" x2="85" y2="8310" class="line"/>
+    <text x="90" y="8315" class="icon">📁</text>
+    <text x="115" y="8315" class="folder-text">shared/</text>
+    <line x1="105" y1="8330" x2="105" y2="8340" class="line"/>
+    <line x1="105" y1="8340" x2="115" y2="8340" class="line"/>
+    <text x="120" y="8345" class="icon">📁</text>
+    <text x="145" y="8345" class="folder-text">components/</text>
+    <line x1="135" y1="8360" x2="135" y2="8370" class="line"/>
+    <line x1="135" y1="8370" x2="145" y2="8370" class="line"/>
+    <text x="150" y="8375" class="icon">📁</text>
+    <text x="175" y="8375" class="folder-text">detail/</text>
+    <line x1="165" y1="8390" x2="165" y2="8400" class="line"/>
+    <line x1="165" y1="8400" x2="175" y2="8400" class="line"/>
+    <text x="180" y="8405" class="icon">📄</text>
+    <text x="205" y="8405" class="file-text">ApplianceDetailScreen.tsx</text>
+    <line x1="165" y1="8425" x2="165" y2="8435" class="line"/>
+    <line x1="165" y1="8435" x2="175" y2="8435" class="line"/>
+    <text x="180" y="8440" class="icon">📄</text>
+    <text x="205" y="8440" class="file-text">ApprovalDetailScreen.tsx</text>
+    <line x1="165" y1="8460" x2="165" y2="8470" class="line"/>
+    <line x1="165" y1="8470" x2="175" y2="8470" class="line"/>
+    <text x="180" y="8475" class="icon">📄</text>
+    <text x="205" y="8475" class="file-text">BranchDeepDiveScreen.tsx</text>
+    <line x1="165" y1="8495" x2="165" y2="8505" class="line"/>
+    <line x1="165" y1="8505" x2="175" y2="8505" class="line"/>
+    <text x="180" y="8510" class="icon">📄</text>
+    <text x="205" y="8510" class="file-text">BranchDetailScreen.tsx</text>
+    <line x1="165" y1="8530" x2="165" y2="8540" class="line"/>
+    <line x1="165" y1="8540" x2="175" y2="8540" class="line"/>
+    <text x="180" y="8545" class="icon">📄</text>
+    <text x="205" y="8545" class="file-text">ComplaintDetailScreen.tsx</text>
+    <line x1="165" y1="8565" x2="165" y2="8575" class="line"/>
+    <line x1="165" y1="8575" x2="175" y2="8575" class="line"/>
+    <text x="180" y="8580" class="icon">📄</text>
+    <text x="205" y="8580" class="file-text">StaffDetailScreen.tsx</text>
+    <line x1="165" y1="8600" x2="165" y2="8610" class="line"/>
+    <line x1="165" y1="8610" x2="175" y2="8610" class="line"/>
+    <text x="180" y="8615" class="icon">📄</text>
+    <text x="205" y="8615" class="file-text">TaskDetailScreen.tsx</text>
+    <line x1="165" y1="8635" x2="165" y2="8645" class="line"/>
+    <line x1="165" y1="8645" x2="175" y2="8645" class="line"/>
+    <text x="180" y="8650" class="icon">📄</text>
+    <text x="205" y="8650" class="file-text">VisitDetailScreen.tsx</text>
+    <line x1="165" y1="8670" x2="165" y2="8680" class="line"/>
+    <line x1="165" y1="8680" x2="175" y2="8680" class="line"/>
+    <text x="180" y="8685" class="icon">📄</text>
+    <text x="205" y="8685" class="file-text">index.ts</text>
+    <line x1="135" y1="8740" x2="135" y2="8750" class="line"/>
+    <line x1="135" y1="8750" x2="145" y2="8750" class="line"/>
+    <text x="150" y="8755" class="icon">📄</text>
+    <text x="175" y="8755" class="file-text">AlertStrip.tsx</text>
+    <line x1="135" y1="8775" x2="135" y2="8785" class="line"/>
+    <line x1="135" y1="8785" x2="145" y2="8785" class="line"/>
+    <text x="150" y="8790" class="icon">📄</text>
+    <text x="175" y="8790" class="file-text">Badge.tsx</text>
+    <line x1="135" y1="8810" x2="135" y2="8820" class="line"/>
+    <line x1="135" y1="8820" x2="145" y2="8820" class="line"/>
+    <text x="150" y="8825" class="icon">📄</text>
+    <text x="175" y="8825" class="file-text">BranchCard.tsx</text>
+    <line x1="135" y1="8845" x2="135" y2="8855" class="line"/>
+    <line x1="135" y1="8855" x2="145" y2="8855" class="line"/>
+    <text x="150" y="8860" class="icon">📄</text>
+    <text x="175" y="8860" class="file-text">BranchesScreen.tsx</text>
+    <line x1="135" y1="8880" x2="135" y2="8890" class="line"/>
+    <line x1="135" y1="8890" x2="145" y2="8890" class="line"/>
+    <text x="150" y="8895" class="icon">📄</text>
+    <text x="175" y="8895" class="file-text">Card.tsx</text>
+    <line x1="135" y1="8915" x2="135" y2="8925" class="line"/>
+    <line x1="135" y1="8925" x2="145" y2="8925" class="line"/>
+    <text x="150" y="8930" class="icon">📄</text>
+    <text x="175" y="8930" class="file-text">ComplaintCard.tsx</text>
+    <line x1="135" y1="8950" x2="135" y2="8960" class="line"/>
+    <line x1="135" y1="8960" x2="145" y2="8960" class="line"/>
+    <text x="150" y="8965" class="icon">📄</text>
+    <text x="175" y="8965" class="file-text">DatePickerDropdown.tsx</text>
+    <line x1="135" y1="8985" x2="135" y2="8995" class="line"/>
+    <line x1="135" y1="8995" x2="145" y2="8995" class="line"/>
+    <text x="150" y="9000" class="icon">📄</text>
+    <text x="175" y="9000" class="file-text">FilterDropdown.tsx</text>
+    <line x1="135" y1="9020" x2="135" y2="9030" class="line"/>
+    <line x1="135" y1="9030" x2="145" y2="9030" class="line"/>
+    <text x="150" y="9035" class="icon">📄</text>
+    <text x="175" y="9035" class="file-text">ModalSheet.tsx</text>
+    <line x1="135" y1="9055" x2="135" y2="9065" class="line"/>
+    <line x1="135" y1="9065" x2="145" y2="9065" class="line"/>
+    <text x="150" y="9070" class="icon">📄</text>
+    <text x="175" y="9070" class="file-text">ProgressBar.tsx</text>
+    <line x1="135" y1="9090" x2="135" y2="9100" class="line"/>
+    <line x1="135" y1="9100" x2="145" y2="9100" class="line"/>
+    <text x="150" y="9105" class="icon">📄</text>
+    <text x="175" y="9105" class="file-text">QuickButton.tsx</text>
+    <line x1="135" y1="9125" x2="135" y2="9135" class="line"/>
+    <line x1="135" y1="9135" x2="145" y2="9135" class="line"/>
+    <text x="150" y="9140" class="icon">📄</text>
+    <text x="175" y="9140" class="file-text">SectionHeader.tsx</text>
+    <line x1="135" y1="9160" x2="135" y2="9170" class="line"/>
+    <line x1="135" y1="9170" x2="145" y2="9170" class="line"/>
+    <text x="150" y="9175" class="icon">📄</text>
+    <text x="175" y="9175" class="file-text">SegmentedControl.tsx</text>
+    <line x1="135" y1="9195" x2="135" y2="9205" class="line"/>
+    <line x1="135" y1="9205" x2="145" y2="9205" class="line"/>
+    <text x="150" y="9210" class="icon">📄</text>
+    <text x="175" y="9210" class="file-text">StatCard.tsx</text>
+    <line x1="135" y1="9230" x2="135" y2="9240" class="line"/>
+    <line x1="135" y1="9240" x2="145" y2="9240" class="line"/>
+    <text x="150" y="9245" class="icon">📄</text>
+    <text x="175" y="9245" class="file-text">TaskCard.tsx</text>
+    <line x1="135" y1="9265" x2="135" y2="9275" class="line"/>
+    <line x1="135" y1="9275" x2="145" y2="9275" class="line"/>
+    <text x="150" y="9280" class="icon">📄</text>
+    <text x="175" y="9280" class="file-text">Toast.tsx</text>
+    <line x1="105" y1="9335" x2="105" y2="9345" class="line"/>
+    <line x1="105" y1="9345" x2="115" y2="9345" class="line"/>
+    <text x="120" y="9350" class="icon">📁</text>
+    <text x="145" y="9350" class="folder-text">layout/</text>
+    <line x1="135" y1="9365" x2="135" y2="9375" class="line"/>
+    <line x1="135" y1="9375" x2="145" y2="9375" class="line"/>
+    <text x="150" y="9380" class="icon">📄</text>
+    <text x="175" y="9380" class="file-text">ResponsiveShell.tsx</text>
+    <line x1="135" y1="9400" x2="135" y2="9410" class="line"/>
+    <line x1="135" y1="9410" x2="145" y2="9410" class="line"/>
+    <text x="150" y="9415" class="icon">📄</text>
+    <text x="175" y="9415" class="file-text">ScreenWrapper.tsx</text>
+    <line x1="135" y1="9435" x2="135" y2="9445" class="line"/>
+    <line x1="135" y1="9445" x2="145" y2="9445" class="line"/>
+    <text x="150" y="9450" class="icon">📄</text>
+    <text x="175" y="9450" class="file-text">TopBar.tsx</text>
+    <line x1="105" y1="9505" x2="105" y2="9515" class="line"/>
+    <line x1="105" y1="9515" x2="115" y2="9515" class="line"/>
+    <text x="120" y="9520" class="icon">📁</text>
+    <text x="145" y="9520" class="folder-text">typography/</text>
+    <line x1="135" y1="9535" x2="135" y2="9545" class="line"/>
+    <line x1="135" y1="9545" x2="145" y2="9545" class="line"/>
+    <text x="150" y="9550" class="icon">📄</text>
+    <text x="175" y="9550" class="file-text">Text.tsx</text>
+    <line x1="135" y1="9570" x2="135" y2="9580" class="line"/>
+    <line x1="135" y1="9580" x2="145" y2="9580" class="line"/>
+    <text x="150" y="9585" class="icon">📄</text>
+    <text x="175" y="9585" class="file-text">index.ts</text>
+    <line x1="75" y1="9675" x2="75" y2="9685" class="line"/>
+    <line x1="75" y1="9685" x2="85" y2="9685" class="line"/>
+    <text x="90" y="9690" class="icon">📁</text>
+    <text x="115" y="9690" class="folder-text">theme/</text>
+    <line x1="105" y1="9705" x2="105" y2="9715" class="line"/>
+    <line x1="105" y1="9715" x2="115" y2="9715" class="line"/>
+    <text x="120" y="9720" class="icon">📄</text>
+    <text x="145" y="9720" class="file-text">styleMaps.ts</text>
+    <line x1="105" y1="9740" x2="105" y2="9750" class="line"/>
+    <line x1="105" y1="9750" x2="115" y2="9750" class="line"/>
+    <text x="120" y="9755" class="icon">📄</text>
+    <text x="145" y="9755" class="file-text">theme.ts</text>
+    <line x1="75" y1="9810" x2="75" y2="9820" class="line"/>
+    <line x1="75" y1="9820" x2="85" y2="9820" class="line"/>
+    <text x="90" y="9825" class="icon">📁</text>
+    <text x="115" y="9825" class="folder-text">types/</text>
+    <line x1="105" y1="9840" x2="105" y2="9850" class="line"/>
+    <line x1="105" y1="9850" x2="115" y2="9850" class="line"/>
+    <text x="120" y="9855" class="icon">📄</text>
+    <text x="145" y="9855" class="file-text">domain.ts</text>
+    <line x1="75" y1="9910" x2="75" y2="9920" class="line"/>
+    <line x1="75" y1="9920" x2="85" y2="9920" class="line"/>
+    <text x="90" y="9925" class="icon">📁</text>
+    <text x="115" y="9925" class="folder-text">utils/</text>
+    <line x1="105" y1="9940" x2="105" y2="9950" class="line"/>
+    <line x1="105" y1="9950" x2="115" y2="9950" class="line"/>
+    <text x="120" y="9955" class="icon">📄</text>
+    <text x="145" y="9955" class="file-text">helpers.ts</text>
+    <line x1="105" y1="9975" x2="105" y2="9985" class="line"/>
+    <line x1="105" y1="9985" x2="115" y2="9985" class="line"/>
+    <text x="120" y="9990" class="icon">📄</text>
+    <text x="145" y="9990" class="file-text">validation.ts</text>
+    <line x1="45" y1="10080" x2="45" y2="10090" class="line"/>
+    <line x1="45" y1="10090" x2="55" y2="10090" class="line"/>
+    <text x="60" y="10095" class="icon">📁</text>
+    <text x="85" y="10095" class="folder-text">workerscreenshots/</text>
+    <line x1="75" y1="10110" x2="75" y2="10120" class="line"/>
+    <line x1="75" y1="10120" x2="85" y2="10120" class="line"/>
+    <text x="90" y="10125" class="icon">🖼️</text>
+    <text x="115" y="10125" class="file-text">attendence.png</text>
+    <line x1="75" y1="10145" x2="75" y2="10155" class="line"/>
+    <line x1="75" y1="10155" x2="85" y2="10155" class="line"/>
+    <text x="90" y="10160" class="icon">🖼️</text>
+    <text x="115" y="10160" class="file-text">complaints.png</text>
+    <line x1="75" y1="10180" x2="75" y2="10190" class="line"/>
+    <line x1="75" y1="10190" x2="85" y2="10190" class="line"/>
+    <text x="90" y="10195" class="icon">🖼️</text>
+    <text x="115" y="10195" class="file-text">home.png</text>
+    <line x1="75" y1="10215" x2="75" y2="10225" class="line"/>
+    <line x1="75" y1="10225" x2="85" y2="10225" class="line"/>
+    <text x="90" y="10230" class="icon">🖼️</text>
+    <text x="115" y="10230" class="file-text">issues.png</text>
+    <line x1="45" y1="10285" x2="45" y2="10295" class="line"/>
+    <line x1="45" y1="10295" x2="55" y2="10295" class="line"/>
+    <text x="60" y="10300" class="icon">⚙️</text>
+    <text x="85" y="10300" class="file-text">.gitignore</text>
+    <line x1="45" y1="10320" x2="45" y2="10330" class="line"/>
+    <line x1="45" y1="10330" x2="55" y2="10330" class="line"/>
+    <text x="60" y="10335" class="icon">🖼️</text>
+    <text x="85" y="10335" class="file-text">2.png</text>
+    <line x1="45" y1="10355" x2="45" y2="10365" class="line"/>
+    <line x1="45" y1="10365" x2="55" y2="10365" class="line"/>
+    <text x="60" y="10370" class="icon">📄</text>
+    <text x="85" y="10370" class="file-text">AC and UPS FY 26-27 - Facilites Apps.xlsx</text>
+    <line x1="45" y1="10390" x2="45" y2="10400" class="line"/>
+    <line x1="45" y1="10400" x2="55" y2="10400" class="line"/>
+    <text x="60" y="10405" class="icon">📝</text>
+    <text x="85" y="10405" class="file-text">AGENTS.md</text>
+    <line x1="45" y1="10425" x2="45" y2="10435" class="line"/>
+    <line x1="45" y1="10435" x2="55" y2="10435" class="line"/>
+    <text x="60" y="10440" class="icon">📄</text>
+    <text x="85" y="10440" class="file-text">App.tsx</text>
+    <line x1="45" y1="10460" x2="45" y2="10470" class="line"/>
+    <line x1="45" y1="10470" x2="55" y2="10470" class="line"/>
+    <text x="60" y="10475" class="icon">📝</text>
+    <text x="85" y="10475" class="file-text">CLAUDE.md</text>
+    <line x1="45" y1="10495" x2="45" y2="10505" class="line"/>
+    <line x1="45" y1="10505" x2="55" y2="10505" class="line"/>
+    <text x="60" y="10510" class="icon">📄</text>
+    <text x="85" y="10510" class="file-text">HVAC  AMC Data FY 26-27 Facilities Team.xlsx</text>
+    <line x1="45" y1="10530" x2="45" y2="10540" class="line"/>
+    <line x1="45" y1="10540" x2="55" y2="10540" class="line"/>
+    <text x="60" y="10545" class="icon">📄</text>
+    <text x="85" y="10545" class="file-text">INVERTER FY 26-27 facility Team.xlsx</text>
+    <line x1="45" y1="10565" x2="45" y2="10575" class="line"/>
+    <line x1="45" y1="10575" x2="55" y2="10575" class="line"/>
+    <text x="60" y="10580" class="icon">📄</text>
+    <text x="85" y="10580" class="file-text">LICENSE</text>
+    <line x1="45" y1="10600" x2="45" y2="10610" class="line"/>
+    <line x1="45" y1="10610" x2="55" y2="10610" class="line"/>
+    <text x="60" y="10615" class="icon">⚙️</text>
+    <text x="85" y="10615" class="file-text">app.json</text>
+    <line x1="45" y1="10635" x2="45" y2="10645" class="line"/>
+    <line x1="45" y1="10645" x2="55" y2="10645" class="line"/>
+    <text x="60" y="10650" class="icon">📄</text>
+    <text x="85" y="10650" class="file-text">babel.config.js</text>
+    <line x1="45" y1="10670" x2="45" y2="10680" class="line"/>
+    <line x1="45" y1="10680" x2="55" y2="10680" class="line"/>
+    <text x="60" y="10685" class="icon">⚙️</text>
+    <text x="85" y="10685" class="file-text">branch_lc_team.json</text>
+    <line x1="45" y1="10705" x2="45" y2="10715" class="line"/>
+    <line x1="45" y1="10715" x2="55" y2="10715" class="line"/>
+    <text x="60" y="10720" class="icon">⚙️</text>
+    <text x="85" y="10720" class="file-text">eas.json</text>
+    <line x1="45" y1="10740" x2="45" y2="10750" class="line"/>
+    <line x1="45" y1="10750" x2="55" y2="10750" class="line"/>
+    <text x="60" y="10755" class="icon">⚙️</text>
+    <text x="85" y="10755" class="file-text">hierarchy_output.json</text>
+    <line x1="45" y1="10775" x2="45" y2="10785" class="line"/>
+    <line x1="45" y1="10785" x2="55" y2="10785" class="line"/>
+    <text x="60" y="10790" class="icon">🖼️</text>
+    <text x="85" y="10790" class="file-text">image.png</text>
+    <line x1="45" y1="10810" x2="45" y2="10820" class="line"/>
+    <line x1="45" y1="10820" x2="55" y2="10820" class="line"/>
+    <text x="60" y="10825" class="icon">🌐</text>
+    <text x="85" y="10825" class="file-text">index (4).html</text>
+    <line x1="45" y1="10845" x2="45" y2="10855" class="line"/>
+    <line x1="45" y1="10855" x2="55" y2="10855" class="line"/>
+    <text x="60" y="10860" class="icon">📄</text>
+    <text x="85" y="10860" class="file-text">index.ts</text>
+    <line x1="45" y1="10880" x2="45" y2="10890" class="line"/>
+    <line x1="45" y1="10890" x2="55" y2="10890" class="line"/>
+    <text x="60" y="10895" class="icon">⚙️</text>
+    <text x="85" y="10895" class="file-text">package-lock.json</text>
+    <line x1="45" y1="10915" x2="45" y2="10925" class="line"/>
+    <line x1="45" y1="10925" x2="55" y2="10925" class="line"/>
+    <text x="60" y="10930" class="icon">⚙️</text>
+    <text x="85" y="10930" class="file-text">package.json</text>
+    <line x1="45" y1="10950" x2="45" y2="10960" class="line"/>
+    <line x1="45" y1="10960" x2="55" y2="10960" class="line"/>
+    <text x="60" y="10965" class="icon">⚙️</text>
+    <text x="85" y="10965" class="file-text">tsconfig.json</text>
+    <line x1="15" y1="11030" x2="25" y2="11030" class="line"/>
+    <text x="30" y="11035" class="icon">⚙️</text>
+    <text x="55" y="11035" class="file-text">.gitignore</text>
+    <line x1="15" y1="11065" x2="25" y2="11065" class="line"/>
+    <text x="30" y="11070" class="icon">⚙️</text>
+    <text x="55" y="11070" class="file-text">skills-lock.json</text>
+</svg>

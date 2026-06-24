@@ -1,0 +1,3834 @@
+[
+  {
+    "regional_manager": "Ravi Nemalikanti",
+    "branch_admin_manager": "Ishwar Rajput",
+    "admin_assistants": [
+      "Shubham Yadav"
+    ],
+    "branches": {
+      "Ambikapur": {
+        "lc": "Shital Devnath1",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shital Devnath1",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bilaspur": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Champa": {
+        "lc": "Vikash Karsh",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vikash Karsh",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Jashpurnagar": {
+        "lc": "Navneet Singh",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Navneet Singh",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Katghora": {
+        "lc": "Aman Singh",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Aman Singh",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Korba": {
+        "lc": "Lav Srivas",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Lav Srivas",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Manendragarh": {
+        "lc": "Sureshkumar Karsh",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sureshkumar Karsh",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Pamgarh": {
+        "lc": "Prabhu Patel",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Prabhu Patel",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Pathalgaon": {
+        "lc": "Abhinav Chandra",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Abhinav Chandra",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Pendra": {
+        "lc": "Vishal Sahu",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vishal Sahu",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Raigarh": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Raigarh - Additional": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Ramanujganj": {
+        "lc": "Vishesh Dewangan",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vishesh Dewangan",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Shivrinarayan": {
+        "lc": "Shyamsundar Sahu",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shyamsundar Sahu",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Surajpur": {
+        "lc": "Mohammad Ansari",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Mohammad Ansari",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Takhatpur": {
+        "lc": "Kamal Banjara",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kamal Banjara",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Balod Bazar": {
+        "lc": "Virendra Patel1",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Virendra Patel1",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Kawardha": {
+        "lc": "Pradeep Sahu2",
+        "team": [
+          {
+            "name": "Ishwar Rajput",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Pradeep Sahu2",
+            "role": "Local Coordinator"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "regional_manager": "Ravi Nemalikanti",
+    "branch_admin_manager": "Nikhil Joshi",
+    "admin_assistants": [
+      "G Teja",
+      "Guru Vishnu"
+    ],
+    "branches": {
+      "Amalapuram": {
+        "lc": "Ravi Krishna Ramoji",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Ravi Krishna Ramoji",
+            "role": "LC"
+          }
+        ]
+      },
+      "Anakapalle": {
+        "lc": "Boorapu Jaya Rajeswara Rao",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Boorapu Jaya Rajeswara Rao",
+            "role": "LC"
+          }
+        ]
+      },
+      "Bhimavaram": {
+        "lc": "Sivaneni Satish",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sivaneni Satish",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kakinada": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Kakinada Additional": {
+        "lc": "Nikhil Joshi",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Kakinada Additional 4Th Floor": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Kasibugga Palasa": {
+        "lc": "Paidi Santharao",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Paidi Santharao",
+            "role": "LC"
+          }
+        ]
+      },
+      "Mandapeta": {
+        "lc": "Badda Victor Anand",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Badda Victor Anand",
+            "role": "LC"
+          }
+        ]
+      },
+      "Narsapur": {
+        "lc": "Uppala.Suresh",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Uppala.Suresh",
+            "role": "LC"
+          }
+        ]
+      },
+      "Narsipatnam": {
+        "lc": "Bheemireddi Srinuvas",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Bheemireddi Srinuvas",
+            "role": "LC"
+          }
+        ]
+      },
+      "Paderu": {
+        "lc": "Bukka Vinod Kumar",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Bukka Vinod Kumar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Palakollu": {
+        "lc": "chintaluri Naga Kanaka Surya  Ranga sai ganesh ",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "chintaluri Naga Kanaka Surya  Ranga sai ganesh ",
+            "role": "LC"
+          }
+        ]
+      },
+      "Parvathipuram": {
+        "lc": "Routhu Vamsikrishna",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Routhu Vamsikrishna",
+            "role": "LC"
+          }
+        ]
+      },
+      "Rajahmundry": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Rajahmundry Additional": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Rajam": {
+        "lc": "Voona Rama Krishna",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Voona Rama Krishna",
+            "role": "LC"
+          }
+        ]
+      },
+      "S Kota": {
+        "lc": "Nakka Mohan",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Nakka Mohan",
+            "role": "LC"
+          }
+        ]
+      },
+      "Samalkota": {
+        "lc": "Addala Suresh",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Addala Suresh",
+            "role": "LC"
+          }
+        ]
+      },
+      "Srikakulam": {
+        "lc": "Anilkumar Yarnagula",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Anilkumar Yarnagula",
+            "role": "LC"
+          }
+        ]
+      },
+      "Tagarapuvalasa": {
+        "lc": "S.Praveen",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "S.Praveen",
+            "role": "LC"
+          }
+        ]
+      },
+      "Tanuku": {
+        "lc": "Geddada Yesubabu",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Geddada Yesubabu",
+            "role": "LC"
+          }
+        ]
+      },
+      "Tuni": {
+        "lc": "N.Jeevan kumar",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "N.Jeevan kumar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Yanam": {
+        "lc": "Sathi V",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sathi V",
+            "role": "LC"
+          }
+        ]
+      },
+      "Visakhapatnam CSB": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Visakhapatnam": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Visakhapatnam Addtiional Ground Floor": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Vizag Slpl": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Vizianagram": {
+        "lc": "C.Ramachandra",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "C.Ramachandra",
+            "role": "LC"
+          }
+        ]
+      },
+      "Eluru": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Eluru Additional": {
+        "lc": "Govada Vinay kumar",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Govada Vinay kumar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Gudivada": {
+        "lc": "Goriparti Nagaraju",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Goriparti Nagaraju",
+            "role": "LC"
+          }
+        ]
+      },
+      "Jangareddygudem": {
+        "lc": "Myreddy Babu",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Myreddy Babu",
+            "role": "LC"
+          }
+        ]
+      },
+      "Machilipatnam": {
+        "lc": "Prem Kumar M",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Prem Kumar M",
+            "role": "LC"
+          }
+        ]
+      },
+      "Tadepalligudem": {
+        "lc": "Kulukuri Venkatesh Gupta",
+        "team": [
+          {
+            "name": "Nikhil Joshi",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kulukuri Venkatesh Gupta",
+            "role": "LC"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "regional_manager": "Ravi Nemalikanti",
+    "branch_admin_manager": "Pachari Teja",
+    "admin_assistants": [
+      "Shaik Moulali Basha"
+    ],
+    "branches": {
+      "Addanki": {
+        "lc": "Bariga Raghupathi",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Bariga Raghupathi",
+            "role": "LC"
+          }
+        ]
+      },
+      "Adoni": {
+        "lc": "Kolimi shaik yunus K",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kolimi shaik yunus K",
+            "role": "LC"
+          }
+        ]
+      },
+      "Allagadda": {
+        "lc": "Pullagura Viswanath",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Pullagura Viswanath",
+            "role": "LC"
+          }
+        ]
+      },
+      "Amaravati": {
+        "lc": "Yadlapalli Sivaji",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yadlapalli Sivaji",
+            "role": "LC"
+          }
+        ]
+      },
+      "Chilakaluripet": {
+        "lc": "Shaik abdul sattar S",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shaik abdul sattar S",
+            "role": "LC"
+          }
+        ]
+      },
+      "Chirala": {
+        "lc": "Gollaprolu Gopiraju Yadav",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Gollaprolu Gopiraju Yadav",
+            "role": "LC"
+          }
+        ]
+      },
+      "Gannavaram": {
+        "lc": "Khuresh Ahmed  Basha Shaik",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Khuresh Ahmed  Basha Shaik",
+            "role": "LC"
+          }
+        ]
+      },
+      "Giddalur": {
+        "lc": "Dastagiri Pothuganti",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Dastagiri Pothuganti",
+            "role": "LC"
+          }
+        ]
+      },
+      "Guntur": {
+        "lc": "Arumalla GopiKrishna",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Arumalla GopiKrishna",
+            "role": "LC"
+          }
+        ]
+      },
+      "Guntur Additional": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Subash Manikanta",
+            "role": "Admin Manager"
+          }
+        ]
+      },
+      "Hanuman Junction": {
+        "lc": "Basava Manohar Krishna Sai",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Basava Manohar Krishna Sai",
+            "role": "LC"
+          }
+        ]
+      },
+      "Jaggayyapeta": {
+        "lc": "Naresh Pendyala",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Naresh Pendyala",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kondapalli": {
+        "lc": "Satish Babu K",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Satish Babu K",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kurnool": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Mangalagiri": {
+        "lc": "Vijaya Rayappa",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vijaya Rayappa",
+            "role": "LC"
+          }
+        ]
+      },
+      "Markapur": {
+        "lc": "Sammeta Hemanth",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sammeta Hemanth",
+            "role": "LC"
+          }
+        ]
+      },
+      "Nandikotkur": {
+        "lc": "Kandukuri Durga Prasad",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kandukuri Durga Prasad",
+            "role": "LC"
+          }
+        ]
+      },
+      "Nandyal": {
+        "lc": "Dara  nagaraju",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Dara  nagaraju",
+            "role": "LC"
+          }
+        ]
+      },
+      "Narasaraopet": {
+        "lc": "Pattan Nazeer",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Pattan Nazeer",
+            "role": "LC"
+          }
+        ]
+      },
+      "Nuziveedu": {
+        "lc": "Naveen kumar",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Naveen kumar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Piduguralla": {
+        "lc": "Shaik Mohammad Haneefa",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shaik Mohammad Haneefa",
+            "role": "LC"
+          }
+        ]
+      },
+      "Ponnur": {
+        "lc": "Shaik Abdul Khadar",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shaik Abdul Khadar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Repalle": {
+        "lc": "P Surendra Babu",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "P Surendra Babu",
+            "role": "LC"
+          }
+        ]
+      },
+      "Vijayawada Additional 1St Floor": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Edenaga\u00a0Kanaka Siva Sai",
+            "role": "Admin Manager"
+          }
+        ]
+      },
+      "Vijayawada Additional 2Nd Floor": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Vijayawada Additional 5Th Floor": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Vijayawada AF": {
+        "lc": "Srinivas Rao",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Srinivas Rao",
+            "role": "LC"
+          }
+        ]
+      },
+      "Vijayawada CSB": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Ravi Kumar N",
+            "role": "Admin Manager"
+          }
+        ]
+      },
+      "Vijayawada GH 1": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sandhya Rani",
+            "role": "Admin Manager"
+          }
+        ]
+      },
+      "Vijayawada GH 2": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sandhya Rani",
+            "role": "Admin Manager"
+          }
+        ]
+      },
+      "Vijayawada Rtc": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sandhya Rani",
+            "role": "Admin Manager"
+          }
+        ]
+      },
+      "Yemmiganur": {
+        "lc": "Sugali Jayaramnaik",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sugali Jayaramnaik",
+            "role": "LC"
+          }
+        ]
+      },
+      "Tenali": {
+        "lc": "Jujjavarapu Ravi Teja",
+        "team": [
+          {
+            "name": "Pachari Teja",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Jujjavarapu Ravi Teja",
+            "role": "LC"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "regional_manager": "Ravi Nemalikanti",
+    "branch_admin_manager": "Pandla Munirathnam",
+    "admin_assistants": [
+      "E Prem Kumar",
+      "Rajesh Yelakuntla",
+      "Y Prasanna Kumar"
+    ],
+    "branches": {
+      "Anantapur": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Chittoor": {
+        "lc": "L Praveen",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "L Praveen",
+            "role": "LC"
+          }
+        ]
+      },
+      "Dharmavaram": {
+        "lc": "Firdos Kumidikuntla",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Firdos Kumidikuntla",
+            "role": "LC"
+          }
+        ]
+      },
+      "Gudur": {
+        "lc": "K Sindura",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "K Sindura",
+            "role": "LC"
+          }
+        ]
+      },
+      "Guntakal": {
+        "lc": "Jinday Somasekhar",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Jinday Somasekhar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Hindupur": {
+        "lc": "Vinay Kumar",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vinay Kumar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kadapa": {
+        "lc": "Madhavi Panduluru",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Madhavi Panduluru",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kadapa Additional": {
+        "lc": "Shaik Usman basha",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shaik Usman basha",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kadiri": {
+        "lc": "Danda Lakshminarayana",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Danda Lakshminarayana",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kalyandurg": {
+        "lc": "PULIKANTI  SURESH",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "PULIKANTI  SURESH",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kuppam": {
+        "lc": "PETA  MADDILETY",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "PETA  MADDILETY",
+            "role": "LC"
+          }
+        ]
+      },
+      "Madanapalle": {
+        "lc": "K Sravankumar",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "K Sravankumar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Madanapalle Additional": {
+        "lc": "K Sravankumar",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "K Sravankumar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Naidupetta": {
+        "lc": "Bandi Suresh ",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Bandi Suresh ",
+            "role": "LC"
+          }
+        ]
+      },
+      "Palmaner": {
+        "lc": "B Bhanukiran",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "B Bhanukiran",
+            "role": "LC"
+          }
+        ]
+      },
+      "Pileru": {
+        "lc": "P Balakrishna",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "P Balakrishna",
+            "role": "LC"
+          }
+        ]
+      },
+      "Proddutur": {
+        "lc": "Battala Ravi Chandra",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Battala Ravi Chandra",
+            "role": "LC"
+          }
+        ]
+      },
+      "Pulivendula": {
+        "lc": "Rage Parasuramudu",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rage Parasuramudu",
+            "role": "LC"
+          }
+        ]
+      },
+      "Railway Koduru": {
+        "lc": "Kunchapu Nagendra Babu",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kunchapu Nagendra Babu",
+            "role": "LC"
+          }
+        ]
+      },
+      "Rajampet": {
+        "lc": "SHAIK MOHAMMED   ARIEF",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "SHAIK MOHAMMED   ARIEF",
+            "role": "LC"
+          }
+        ]
+      },
+      "Rayachoti": {
+        "lc": "Vodiveti Basireddy",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vodiveti Basireddy",
+            "role": "LC"
+          }
+        ]
+      },
+      "Rayadurg": {
+        "lc": "Sarode Chandrashekar",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sarode Chandrashekar",
+            "role": "LC"
+          }
+        ]
+      },
+      "Srikalahasti": {
+        "lc": "Konasamudram Rajesh",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Konasamudram Rajesh",
+            "role": "LC"
+          }
+        ]
+      },
+      "Sullurpeta": {
+        "lc": "Salu Gandhi",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Salu Gandhi",
+            "role": "LC"
+          }
+        ]
+      },
+      "Tadipatri": {
+        "lc": "TALARI Dastagirappa",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "TALARI Dastagirappa",
+            "role": "LC"
+          }
+        ]
+      },
+      "Tirupati 1st Floor": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Tirupati 2nd Floor": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Venkatagiri": {
+        "lc": "P Amanullah",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "P Amanullah",
+            "role": "LC"
+          }
+        ]
+      },
+      "Ongole": {
+        "lc": "Vinod Kaki",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vinod Kaki",
+            "role": "LC"
+          }
+        ]
+      },
+      "Ongole Additioal": {
+        "lc": "Vinod Kaki",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vinod Kaki",
+            "role": "LC"
+          }
+        ]
+      },
+      "Nellore": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Nellore Additional": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Kavali": {
+        "lc": "Cherukuru Sivaiah",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Cherukuru Sivaiah",
+            "role": "LC"
+          }
+        ]
+      },
+      "Kandakur": {
+        "lc": "T Praveen",
+        "team": [
+          {
+            "name": "Pandla Munirathnam",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "T Praveen",
+            "role": "LC"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "regional_manager": "Ravi Nemalikanti",
+    "branch_admin_manager": "Ranjana Gupta",
+    "admin_assistants": [
+      "Harish Pandey",
+      "Yashwant Sahu"
+    ],
+    "branches": {
+      "Balod": {
+        "lc": "Lakhan Burde",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Lakhan Burde",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bhatapara": {
+        "lc": "Hitendra Dewangan",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Hitendra Dewangan",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bhilai": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Bhilai Additional": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Bijapur CH": {
+        "lc": "Tarun Fulmadri",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Tarun Fulmadri",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Deobhog": {
+        "lc": "Shivashish Behera",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shivashish Behera",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Dhamtari": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Dhamtari- Additional": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Dongargarh": {
+        "lc": "Piyush Parmar",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Piyush Parmar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Jagdalpur": {
+        "lc": "Shanu Singh",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shanu Singh",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Khairagarh": {
+        "lc": "Sunil Dewangan",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sunil Dewangan",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Kharora": {
+        "lc": "Raghuvendra Awasthi",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Raghuvendra Awasthi",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Kondagaon": {
+        "lc": "Bhaskar Dewangan1",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Bhaskar Dewangan1",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Kumhari": {
+        "lc": "Hitesh Dewangan",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Hitesh Dewangan",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Mahasamund": {
+        "lc": "Mayank Vishwakarma",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Mayank Vishwakarma",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Pakhanjur": {
+        "lc": "Debashish Gain",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Debashish Gain",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Raipur": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Raipur Additional": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Rajim": {
+        "lc": "Vikrant Mishra",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vikrant Mishra",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Rajnandgaon": {
+        "lc": "Anurodh Yadav",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Anurodh Yadav",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Saraipali": {
+        "lc": "Pramod Sahu",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Pramod Sahu",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Kanker": {
+        "lc": "Omshiv Sahu",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Omshiv Sahu",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bemetara Co Ext": {
+        "lc": "Roshan Kumar Yadav",
+        "team": [
+          {
+            "name": "Ranjana Gupta",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Roshan Kumar Yadav",
+            "role": "Local Coordinator"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "regional_manager": "Ravi Nemalikanti",
+    "branch_admin_manager": "Sumit Singh",
+    "admin_assistants": [
+      "Biswajeet Mohanty",
+      "Chandan Kumar"
+    ],
+    "branches": {
+      "Barki Suriya": {
+        "lc": "Kishan Singh",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kishan Singh",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bishrampur": {
+        "lc": "Ritesh Upadhyay",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Ritesh Upadhyay",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bokaro": {
+        "lc": "Saurabh Swaraj",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Saurabh Swaraj",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bokaro Additional": {
+        "lc": "Saurabh Swaraj",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Saurabh Swaraj",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Bundu": {
+        "lc": "Sachin Kumar",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sachin Kumar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Chaibasa": {
+        "lc": "Nagesh Harpal",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Nagesh Harpal",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Chakradharpur": {
+        "lc": "Ravi Mahato",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Ravi Mahato",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Chandil": {
+        "lc": "Shubham Yadav",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shubham Yadav",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Daltonganj": {
+        "lc": "Kumar Nikhil",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kumar Nikhil",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Deoghar": {
+        "lc": "Subhash Mandal",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Subhash Mandal",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Deori": {
+        "lc": "Md Rizwan Ansari",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Md Rizwan Ansari",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Dhanbad": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Dumka": {
+        "lc": "Shibnath Saha",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shibnath Saha",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Dumri": {
+        "lc": "Abhishek Kumar Pandey",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Abhishek Kumar Pandey",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Gamharia": {
+        "lc": "Praveen Choudhary",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Praveen Choudhary",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Garhwa": {
+        "lc": "Praveen Choudhary",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Praveen Choudhary",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Ghatshila": {
+        "lc": "Gurdip Singh",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Gurdip Singh",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Giridih": {
+        "lc": "Anjani Mishra",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Anjani Mishra",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Gobindpur": {
+        "lc": "Umesh Mahato",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Umesh Mahato",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Godda": {
+        "lc": "Md Muddeasshir Hussain",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Md Muddeasshir Hussain",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Gumla": {
+        "lc": "Sibu Kumar",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sibu Kumar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Hansdiha": {
+        "lc": "Suraj Paswan",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Suraj Paswan",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Hazaribagh": {
+        "lc": "Pintu Kumar ",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Pintu Kumar ",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Jamshedpur 2RD FLOOR": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Jamshedpur 3RD FLOOR": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Jamua": {
+        "lc": "Rahul Sinha",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rahul Sinha",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Karmatar": {
+        "lc": "Vikash Kumar",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vikash Kumar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Katrasgarah": {
+        "lc": "Randhir Kumar",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Randhir Kumar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Khalari": {
+        "lc": "Ratnesh Pandey",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Ratnesh Pandey",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Khunti": {
+        "lc": "Avinash Kumar",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Avinash Kumar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Kodarma": {
+        "lc": "Uday Kumar",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Uday Kumar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Madhupur": {
+        "lc": "Nilamani Ray",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Nilamani Ray",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Mahuadanr": {
+        "lc": "Ritesh Pandey",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Ritesh Pandey",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Nirsa": {
+        "lc": "Hemant Giri",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Hemant Giri",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Pakur": {
+        "lc": "Vinit Chaudhary",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Vinit Chaudhary",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Patratu": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Surendra Mehta",
+            "role": "Admin"
+          }
+        ]
+      },
+      "Peterbar Jh": {
+        "lc": "Shubham Rana",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Shubham Rana",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Phusro": {
+        "lc": "Rocky Kumar",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rocky Kumar",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Ramgarh": {
+        "lc": "Gaurav kumar Tiwary",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Gaurav kumar Tiwary",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Ranchi": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Ranchi - Additional ": {
+        "lc": null,
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      "Sahibganj": {
+        "lc": "Sanni Pandit",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sanni Pandit",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Saraikela": {
+        "lc": "Subham Pradhan",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Subham Pradhan",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Lohardaga": {
+        "lc": "Nilesh Anand Verma",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Nilesh Anand Verma",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Japla": {
+        "lc": "Kumar Kanishk",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Kumar Kanishk",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Rajdhanwar": {
+        "lc": "Sanni Kumar Sinha",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Sanni Kumar Sinha",
+            "role": "Local Coordinator"
+          }
+        ]
+      },
+      "Sarath": {
+        "lc": "Dilip Kumar Yadav",
+        "team": [
+          {
+            "name": "Sumit Singh",
+            "role": "Branch Admin Manager (BAM)"
+          },
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Dilip Kumar Yadav",
+            "role": "Local Coordinator"
+          }
+        ]
+      }
+    }
+  }
+]

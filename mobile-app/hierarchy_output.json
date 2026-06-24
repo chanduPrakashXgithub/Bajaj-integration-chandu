@@ -1,0 +1,303 @@
+[
+  {
+    "name": "Ravi Nemalikanti",
+    "role": "Regional Manager",
+    "states_covered": [
+      "Andhra Pradesh",
+      "Chhattisgarh",
+      "Jharkhand",
+      "Puducherry"
+    ],
+    "total_bam_count": 6,
+    "total_branches": 189,
+    "branch_admin_managers": [
+      {
+        "name": "Ishwar Rajput",
+        "role": "Branch Admin Manager (BAM)",
+        "total_branches": 18,
+        "branches": [
+          "Ambikapur",
+          "Balod Bazar",
+          "Bilaspur",
+          "Champa",
+          "Jashpurnagar",
+          "Katghora",
+          "Kawardha",
+          "Korba",
+          "Manendragarh",
+          "Pamgarh",
+          "Pathalgaon",
+          "Pendra",
+          "Raigarh",
+          "Raigarh - Additional",
+          "Ramanujganj",
+          "Shivrinarayan",
+          "Surajpur",
+          "Takhatpur"
+        ],
+        "admin_assistants": [
+          {
+            "name": "Shubham Yadav",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      {
+        "name": "Nikhil Joshi",
+        "role": "Branch Admin Manager (BAM)",
+        "total_branches": 34,
+        "branches": [
+          "Amalapuram",
+          "Anakapalle",
+          "Bhimavaram",
+          "Eluru",
+          "Eluru Additional",
+          "Gudivada",
+          "Jangareddygudem",
+          "Kakinada",
+          "Kakinada Additional",
+          "Kakinada Additional 4Th Floor",
+          "Kasibugga Palasa",
+          "Machilipatnam",
+          "Mandapeta",
+          "Narsapur",
+          "Narsipatnam",
+          "Paderu",
+          "Palakollu",
+          "Parvathipuram",
+          "Rajahmundry",
+          "Rajahmundry Additional",
+          "Rajam",
+          "S Kota",
+          "Samalkota",
+          "Srikakulam",
+          "Tadepalligudem",
+          "Tagarapuvalasa",
+          "Tanuku",
+          "Tuni",
+          "Visakhapatnam",
+          "Visakhapatnam Addtiional Ground Floor",
+          "Visakhapatnam CSB",
+          "Vizag Slpl",
+          "Vizianagram",
+          "Yanam"
+        ],
+        "admin_assistants": [
+          {
+            "name": "G Teja",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Guru Vishnu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      {
+        "name": "Pachari Teja",
+        "role": "Branch Admin Manager (BAM)",
+        "total_branches": 33,
+        "branches": [
+          "Addanki",
+          "Adoni",
+          "Allagadda",
+          "Amaravati",
+          "Chilakaluripet",
+          "Chirala",
+          "Gannavaram",
+          "Giddalur",
+          "Guntur",
+          "Guntur Additional",
+          "Hanuman Junction",
+          "Jaggayyapeta",
+          "Kondapalli",
+          "Kurnool",
+          "Mangalagiri",
+          "Markapur",
+          "Nandikotkur",
+          "Nandyal",
+          "Narasaraopet",
+          "Nuziveedu",
+          "Piduguralla",
+          "Ponnur",
+          "Repalle",
+          "Tenali",
+          "Vijayawada AF",
+          "Vijayawada Additional 1St Floor",
+          "Vijayawada Additional 2Nd Floor",
+          "Vijayawada Additional 5Th Floor",
+          "Vijayawada CSB",
+          "Vijayawada GH 1",
+          "Vijayawada GH 2",
+          "Vijayawada Rtc",
+          "Yemmiganur"
+        ],
+        "admin_assistants": [
+          {
+            "name": "Shaik Moulali Basha",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      {
+        "name": "Pandla Munirathnam",
+        "role": "Branch Admin Manager (BAM)",
+        "total_branches": 34,
+        "branches": [
+          "Anantapur",
+          "Chittoor",
+          "Dharmavaram",
+          "Gudur",
+          "Guntakal",
+          "Hindupur",
+          "Kadapa",
+          "Kadapa Additional",
+          "Kadiri",
+          "Kalyandurg",
+          "Kandakur",
+          "Kavali",
+          "Kuppam",
+          "Madanapalle",
+          "Madanapalle Additional",
+          "Naidupetta",
+          "Nellore",
+          "Nellore Additional",
+          "Ongole",
+          "Ongole Additioal",
+          "Palmaner",
+          "Pileru",
+          "Proddutur",
+          "Pulivendula",
+          "Railway Koduru",
+          "Rajampet",
+          "Rayachoti",
+          "Rayadurg",
+          "Srikalahasti",
+          "Sullurpeta",
+          "Tadipatri",
+          "Tirupati 1st Floor",
+          "Tirupati 2nd Floor",
+          "Venkatagiri"
+        ],
+        "admin_assistants": [
+          {
+            "name": "E Prem Kumar",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Rajesh Yelakuntla",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Y Prasanna Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      {
+        "name": "Ranjana Gupta",
+        "role": "Branch Admin Manager (BAM)",
+        "total_branches": 23,
+        "branches": [
+          "Balod",
+          "Bemetara Co Ext",
+          "Bhatapara",
+          "Bhilai",
+          "Bhilai Additional",
+          "Bijapur CH",
+          "Deobhog",
+          "Dhamtari",
+          "Dhamtari- Additional",
+          "Dongargarh",
+          "Jagdalpur",
+          "Kanker",
+          "Khairagarh",
+          "Kharora",
+          "Kondagaon",
+          "Kumhari",
+          "Mahasamund",
+          "Pakhanjur",
+          "Raipur",
+          "Raipur Additional",
+          "Rajim",
+          "Rajnandgaon",
+          "Saraipali"
+        ],
+        "admin_assistants": [
+          {
+            "name": "Harish Pandey",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Yashwant Sahu",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      },
+      {
+        "name": "Sumit Singh",
+        "role": "Branch Admin Manager (BAM)",
+        "total_branches": 47,
+        "branches": [
+          "Barki Suriya",
+          "Bishrampur",
+          "Bokaro",
+          "Bokaro Additional",
+          "Bundu",
+          "Chaibasa",
+          "Chakradharpur",
+          "Chandil",
+          "Daltonganj",
+          "Deoghar",
+          "Deori",
+          "Dhanbad",
+          "Dumka",
+          "Dumri",
+          "Gamharia",
+          "Garhwa",
+          "Ghatshila",
+          "Giridih",
+          "Gobindpur",
+          "Godda",
+          "Gumla",
+          "Hansdiha",
+          "Hazaribagh",
+          "Jamshedpur 2RD FLOOR",
+          "Jamshedpur 3RD FLOOR",
+          "Jamua",
+          "Japla",
+          "Karmatar",
+          "Katrasgarah",
+          "Khalari",
+          "Khunti",
+          "Kodarma",
+          "Lohardaga",
+          "Madhupur",
+          "Mahuadanr",
+          "Nirsa",
+          "Pakur",
+          "Patratu",
+          "Peterbar Jh",
+          "Phusro",
+          "Rajdhanwar",
+          "Ramgarh",
+          "Ranchi",
+          "Ranchi - Additional ",
+          "Sahibganj",
+          "Saraikela",
+          "Sarath"
+        ],
+        "admin_assistants": [
+          {
+            "name": "Biswajeet Mohanty",
+            "role": "Admin Assistant (AA)"
+          },
+          {
+            "name": "Chandan Kumar",
+            "role": "Admin Assistant (AA)"
+          }
+        ]
+      }
+    ]
+  }
+]
