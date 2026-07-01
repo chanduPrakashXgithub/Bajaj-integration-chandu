@@ -75,6 +75,7 @@ export function RmMonitoringScreen() {
         location: item.location || "Inside geo fence - 40m",
         proof: item.proof || "Geo + selfie verified",
         deviation: item.deviation || "No",
+        remarks: item.remarks,
         weeklyTasks: item.weeklyTasks || [],
       }));
       setAttendanceRecords(records);
@@ -295,11 +296,20 @@ export function RmMonitoringScreen() {
                               <View style={{ flex: 1 }}>
                                 <Text style={{ fontSize: fontSize.md, fontWeight: "400", color: colors.text }}>{user?.name || "Unknown"}</Text>
                                 <Text style={{ fontSize: fontSize.xs, color: colors.textSecondary }}>
-                                  {record.date} · {isPresent ? `Punched in at ${record.checkIn}` : "Not punched in"}
+                                  {record.date} • {isPresent ? `Punched in at ${record.checkIn}` : "Not punched in"}
                                 </Text>
                               </View>
                               <Badge label={record.status || "Absent"} type={isPresent ? "Completed" : "Pending"} />
                             </View>
+
+                            {record.remarks ? (
+                              <View style={{ marginTop: spacing.md, paddingTop: spacing.md, borderTopWidth: 1, borderColor: colors.slate100, gap: spacing.xs }}>
+                                <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase" }}>Daily To-Do / Tasks</Text>
+                                <View style={{ backgroundColor: colors.slate50, padding: spacing.md, borderRadius: borderRadius.md, borderWidth: 1, borderColor: colors.slate100 }}>
+                                  <Text style={{ fontSize: fontSize.sm, color: colors.slate700 }}>{record.remarks}</Text>
+                                </View>
+                              </View>
+                            ) : null}
                           </View>
                         );
                       })}

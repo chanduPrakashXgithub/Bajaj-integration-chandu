@@ -8,15 +8,20 @@ import prisma from "../../lib/prisma";
  * GET /api/rm/dashboard
  * Returns everything the RM dashboard needs: branches, complaints, approvals, notifications.
  */
-export const rmDashboard = async (req: AuthenticatedRequest, res: Response) => {
+export const amDashboard = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const [branches, complaints, approvals, notifications] = await Promise.all([
       // Branches Ã¢â‚¬â€ health/SLA KPI fields for dashboard tiles
       prisma.branch.findMany({
+        where: branchScopeFilter,
         select: {
           id: true,
           name: true,
@@ -44,6 +49,7 @@ export const rmDashboard = async (req: AuthenticatedRequest, res: Response) => {
 
       // Complaints Ã¢â‚¬â€ for watchlist and timeline
       prisma.complaint.findMany({
+        where: relScopeFilter,
         select: {
           id: true,
           complaintId: true,
@@ -63,6 +69,7 @@ export const rmDashboard = async (req: AuthenticatedRequest, res: Response) => {
 
       // Approvals Ã¢â‚¬â€ for decision feed + capex summary
       prisma.approval.findMany({
+        where: relScopeFilter,
         select: {
           id: true,
           title: true,
@@ -82,7 +89,7 @@ export const rmDashboard = async (req: AuthenticatedRequest, res: Response) => {
 
       // Notifications Ã¢â‚¬â€ RM scope
       prisma.notification.findMany({
-        where: { scope: { has: RoleId.rm } },
+        where: { scope: { has: RoleId.am } },
         select: {
           id: true,
           title: true,
@@ -129,7 +136,7 @@ export const rmDashboard = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(200).json({ branches, complaints: normalizedComplaints, approvals: normalizedApprovals, notifications: enrichedNotifications });
   } catch (error: any) {
-    console.error("RM dashboard error:", error);
+    console.error("AM dashboard error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
@@ -138,11 +145,15 @@ export const rmDashboard = async (req: AuthenticatedRequest, res: Response) => {
  * GET /api/rm/attendance
  * Returns all attendance records + minimal user context for the RM attendance screen.
  */
-export const rmAttendance = async (req: AuthenticatedRequest, res: Response) => {
+export const amAttendance = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const [attendanceLogs, allUsers, scopedChecks] = await Promise.all([
       prisma.attendanceLog.findMany({
@@ -157,6 +168,7 @@ export const rmAttendance = async (req: AuthenticatedRequest, res: Response) => 
           proof: true,
           deviation: true,
           remarks: true,
+          photos: true,
           weeklyTasks: { select: { id: true, description: true, estimatedHours: true } },
         },
         orderBy: { date: "desc" },
@@ -165,6 +177,7 @@ export const rmAttendance = async (req: AuthenticatedRequest, res: Response) => 
 
       // Users Ã¢â‚¬â€ lean fields for roster display
       prisma.user.findMany({
+        where: userScopeFilter,
         select: {
           id: true,
           name: true,
@@ -172,7 +185,6 @@ export const rmAttendance = async (req: AuthenticatedRequest, res: Response) => 
           branchId: true,
           status: true,
           attendancePct: true,
-          branchScope: true,
         },
         orderBy: { name: "asc" },
       }),
@@ -202,7 +214,7 @@ export const rmAttendance = async (req: AuthenticatedRequest, res: Response) => 
       checks: scopedChecks.map((t) => ({ ...t, assignedTo: t.assignedToId })),
     });
   } catch (error: any) {
-    console.error("RM attendance error:", error);
+    console.error("AM attendance error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
@@ -211,14 +223,19 @@ export const rmAttendance = async (req: AuthenticatedRequest, res: Response) => 
  * GET /api/rm/finance
  * Returns approval financial data + branch budget summary.
  */
-export const rmFinance = async (req: AuthenticatedRequest, res: Response) => {
+export const amFinance = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const [approvals, branches] = await Promise.all([
       prisma.approval.findMany({
+        where: relScopeFilter,
         select: {
           id: true,
           title: true,
@@ -237,6 +254,7 @@ export const rmFinance = async (req: AuthenticatedRequest, res: Response) => {
       }),
 
       prisma.branch.findMany({
+        where: branchScopeFilter,
         select: {
           id: true,
           name: true,
@@ -259,7 +277,7 @@ export const rmFinance = async (req: AuthenticatedRequest, res: Response) => {
       branches,
     });
   } catch (error: any) {
-    console.error("RM finance error:", error);
+    console.error("AM finance error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
@@ -268,14 +286,19 @@ export const rmFinance = async (req: AuthenticatedRequest, res: Response) => {
  * GET /api/rm/users
  * Returns all users with branch context for RM user management screen.
  */
-export const rmUsers = async (req: AuthenticatedRequest, res: Response) => {
+export const amUsers = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const [users, branches] = await Promise.all([
       prisma.user.findMany({
+        where: userScopeFilter,
         select: {
           id: true,
           name: true,
@@ -296,6 +319,7 @@ export const rmUsers = async (req: AuthenticatedRequest, res: Response) => {
       }),
 
       prisma.branch.findMany({
+        where: branchScopeFilter,
         select: { id: true, name: true, city: true, code: true },
         orderBy: { name: "asc" },
       }),
@@ -303,7 +327,7 @@ export const rmUsers = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(200).json({ users, branches });
   } catch (error: any) {
-    console.error("RM users error:", error);
+    console.error("AM users error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
@@ -312,14 +336,19 @@ export const rmUsers = async (req: AuthenticatedRequest, res: Response) => {
  * GET /api/rm/analytics
  * Returns per-branch KPI aggregates for RM analytics screen.
  */
-export const rmAnalytics = async (req: AuthenticatedRequest, res: Response) => {
+export const amAnalytics = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const [branches, taskStats, complaintStats, approvalStats] = await Promise.all([
       prisma.branch.findMany({
+        where: branchScopeFilter,
         select: {
           id: true,
           name: true,
@@ -403,7 +432,7 @@ export const rmAnalytics = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(200).json({ analytics });
   } catch (error: any) {
-    console.error("RM analytics error:", error);
+    console.error("AM analytics error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
@@ -412,11 +441,15 @@ export const rmAnalytics = async (req: AuthenticatedRequest, res: Response) => {
  * GET /api/rm/tasks
  * Returns all tasks (RM scope) with lean fields.
  */
-export const rmTasks = async (req: AuthenticatedRequest, res: Response) => {
+export const amTasks = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const { status, branchId } = req.query;
 
@@ -461,7 +494,7 @@ export const rmTasks = async (req: AuthenticatedRequest, res: Response) => {
       })),
     });
   } catch (error: any) {
-    console.error("RM tasks error:", error);
+    console.error("AM tasks error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
@@ -470,18 +503,24 @@ export const rmTasks = async (req: AuthenticatedRequest, res: Response) => {
  * GET /api/rm/finance/export
  * Streams a CSV file containing all approvals and branch budget summary.
  */
-export const rmFinanceExport = async (req: AuthenticatedRequest, res: Response) => {
+export const amFinanceExport = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const [approvals, branches] = await Promise.all([
       prisma.approval.findMany({
+        where: relScopeFilter,
         select: { id: true, title: true, kind: true, amount: true, status: true, priority: true, branchId: true, stage: true, note: true, updatedAt: true },
         orderBy: { updatedAt: "desc" },
       }),
       prisma.branch.findMany({
+        where: branchScopeFilter,
         select: { id: true, name: true, city: true, code: true, monthlyBudget: true, usedBudget: true },
         orderBy: { name: "asc" },
       }),
@@ -524,7 +563,7 @@ export const rmFinanceExport = async (req: AuthenticatedRequest, res: Response) 
     res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
     return res.status(200).send(csv);
   } catch (error: any) {
-    console.error("RM finance export error:", error);
+    console.error("AM finance export error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
@@ -533,11 +572,15 @@ export const rmFinanceExport = async (req: AuthenticatedRequest, res: Response) 
  * PATCH /api/rm/users/:id/status
  * Locks or unlocks a user account. Body: { status: "Active" | "Locked" }
  */
-export const rmUpdateUserStatus = async (req: AuthenticatedRequest, res: Response) => {
+export const amUpdateUserStatus = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
     if (!user) return res.status(401).json({ message: "Unauthorized" });
-    if (user.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+    if (user.role !== RoleId.am) return res.status(403).json({ message: "Forbidden: AM only" });
+
+    const branchScopeFilter = { id: { in: user.branchScope || [] } };
+    const relScopeFilter = { branchId: { in: user.branchScope || [] } };
+    const userScopeFilter = { OR: [{ branchId: { in: user.branchScope || [] } }, { managerId: user.id }] };
 
     const { id } = req.params;
     const { status } = req.body as { status?: string };
@@ -560,7 +603,7 @@ export const rmUpdateUserStatus = async (req: AuthenticatedRequest, res: Respons
 
     return res.status(200).json({ user: updated });
   } catch (error: any) {
-    console.error("RM update user status error:", error);
+    console.error("AM update user status error:", error);
     return res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };

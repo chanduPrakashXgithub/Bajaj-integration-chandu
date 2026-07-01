@@ -267,6 +267,7 @@ interface AppContextValue {
   markTaskDone: (taskId: string | number) => void;
   revokeTask: (taskId: string | number) => void;
   updateComplaintStatus: (id: string | number, status: string, notes?: string, vendorRemarks?: string) => void;
+  acknowledgeComplaint: (id: string | number, vendorIssueId: string) => Promise<void>;
   raiseToVendor: (id: string | number) => Promise<any>;
   addComplaintRemark: (id: string | number, text: string) => void;
   closeComplaint: (id: string | number) => void;
@@ -336,6 +337,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const scopedBranchIds = useMemo(() => {
     if (!currentUser) return [];
     if (state.role === "rm") return branches.map((b) => b.id);
+    if (state.role === "rrm") return currentUser.branchScope?.length ? currentUser.branchScope : branches.map((b) => b.id);
+    if (state.role === "am") return currentUser.branchScope || [];
     if (state.role === "branchManager" || state.role === "aa") return currentUser.branchScope || [];
     return currentUser.branchId ? [currentUser.branchId] : [];
   }, [state.role, currentUser, branches]);
@@ -343,18 +346,44 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const scopedBranches = useMemo(() => branches.filter((b) => scopedBranchIds.includes(b.id)), [branches, scopedBranchIds]);
   const scopedUsers = useMemo(() => {
     if (!currentUser) return [];
+
+    if (state.role === "rm" || state.role === "rrm") {
+      return users;
+    }
+
+    // AM view must be restricted to self + managed AAs + LCs under those AAs.
+    if (state.role === "am" || state.role === "branchManager") {
+      const meId = String(currentUser.id);
+      const managedAas = users.filter((u) => u.role === "aa" && String(u.managerId) === meId);
+      const managedAaIds = new Set(managedAas.map((u) => String(u.id)));
+
+      return users.filter((u) => {
+        if (String(u.id) === meId) return true;
+        if (u.role === "aa" && String(u.managerId) === meId) return true;
+        if (u.role === "lc" && String(u.managerId) === meId) return true;
+        if (u.role === "lc" && managedAaIds.has(String(u.managerId))) return true;
+        return false;
+      });
+    }
+
     return users.filter((u) => scopedBranchIds.includes(u.branchId) || u.id === currentUser.id);
-  }, [users, scopedBranchIds, currentUser]);
+  }, [users, scopedBranchIds, currentUser, state.role]);
   // scopedTasks is defined below after allTasks merge
   const scopedComplaints = useMemo(() => complaints.filter((c) => scopedBranchIds.includes(c.branchId)), [complaints, scopedBranchIds]);
   const scopedApprovals = useMemo(() => approvals.filter((a) => scopedBranchIds.includes(a.branchId)), [approvals, scopedBranchIds]);
   const scopedAppliances = useMemo(() => appliances.filter((a) => scopedBranchIds.includes(a.branchId)), [appliances, scopedBranchIds]);
   const scopedNotifications = useMemo(() => notifications.filter((n) => n.scope.includes(state.role)), [notifications, state.role]);
   const scopedAttendance = useMemo(() => attendanceLog.filter((entry) => {
+    if (state.role === "rm" || state.role === "rrm") return true;
+
+    if (state.role === "am" || state.role === "branchManager") {
+      return scopedUsers.some((u) => String(u.id) === String(entry.userId));
+    }
+
     if (String(entry.userId) === String(currentUser?.id)) return true;
     const person = users.find((u) => String(u.id) === String(entry.userId)) || (String(entry.userId) === String(currentUser?.id) ? currentUser : undefined);
     return person && scopedBranchIds.includes(person.branchId);
-  }), [attendanceLog, users, currentUser, scopedBranchIds]);
+  }), [attendanceLog, users, currentUser, scopedBranchIds, state.role, scopedUsers]);
 
   const getBranch = useCallback((id: string | number) => branches.find((b) => String(b.id) === String(id)), [branches]);
   const getUser = useCallback((id: string | number) => users.find((u) => String(u.id) === String(id)), [users]);
@@ -388,49 +417,61 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try {
       const getEndpointsForPage = (page: string, role: string): string[] => {
         const common = ["/notifications"];
+        const isBmLike = role === "branchManager" || role === "aa";
+        const isAm = role === "am";
+        const isRmLike = role === "rm" || role === "rrm";
+
         switch (page) {
           case "home":
           case "dashboard":
             if (role === "lc") return ["/lc/dashboard", ...common];
-            if (role === "branchManager" || role === "aa") return ["/bm/dashboard", ...common];
-            if (role === "rm") return ["/rm/dashboard", ...common];
+            if (isBmLike) return ["/bm/dashboard", ...common];
+            if (isAm) return ["/am/dashboard", ...common];
+            if (isRmLike) return ["/rm/dashboard", ...common];
             return common;
           case "tasks":
             if (role === "lc") return ["/lc/tasks"];
-            if (role === "branchManager" || role === "aa") return ["/bm/tasks"];
+            if (isBmLike) return ["/bm/tasks"];
+            if (isAm) return ["/am/tasks"];
             return ["/rm/tasks"];
           case "complaints":
           case "issues":
-            if (role === "branchManager" || role === "aa") return ["/bm/complaints", "/branches"];
+            if (isBmLike) return ["/bm/complaints", "/branches"];
             return ["/complaints", "/branches"];
           case "branch":
           case "branches":
             if (role === "lc") return ["/lc/dashboard"];
-            if (role === "branchManager" || role === "aa") return ["/bm/branches"];
+            if (isBmLike) return ["/bm/branches"];
             return ["/branches", "/users", "/appliances"];
           case "intelligence":
           case "analytics":
-            if (role === "rm") return ["/rm/analytics", "/branches", "/rm/users", "/appliances"];
-            if (role === "branchManager" || role === "aa") return ["/bm/branches"];
+            if (isRmLike) return ["/rm/analytics", "/branches", "/rm/users", "/appliances"];
+            if (isAm) return ["/am/analytics", "/am/users", "/appliances"];
+            if (isBmLike) return ["/bm/branches"];
             if (role === "lc") return ["/lc/dashboard"];
             return ["/branches"];
           case "monitoring":
-            if (role === "branchManager" || role === "aa") return ["/bm/tasks", "/branches"];
-            if (role === "rm") return ["/rm/tasks", "/branches"];
+            if (isBmLike) return ["/bm/tasks", "/branches"];
+            if (isAm) return ["/am/tasks", "/am/users", "/branches"];
+            if (isRmLike) return ["/rm/tasks", "/branches"];
             return ["/lc/tasks", "/branches"];
           case "approvals":
-            if (role === "branchManager" || role === "aa") return ["/bm/approvals"];
+            if (isBmLike) return ["/bm/approvals"];
             return ["/rm/finance"];
           case "finance":
+            if (isAm) return ["/am/finance"];
             return ["/rm/finance"];
           case "visits":
-            if (role === "branchManager" || role === "aa") return ["/bm/visits"];
+            if (isBmLike) return ["/bm/visits"];
             return ["/visits", "/branches"];
           case "attendance":
             if (role === "lc") return ["/lc/attendance/calendar"];
-            if (role === "branchManager" || role === "aa") return ["/bm/attendance"];
+            if (isBmLike) return ["/bm/attendance"];
+            if (isAm) return ["/am/attendance"];
             return ["/rm/attendance"];
           case "users":
+            if (isBmLike) return ["/users", "/branches"];
+            if (isAm) return ["/am/users"];
             return ["/rm/users"];
           case "notifications":
           case "alerts":
@@ -490,18 +531,33 @@ export function AppProvider({ children }: { children: ReactNode }) {
       };
 
       // Helper to map attendance records
-      const mapAttendance = (item: any, index: number) => ({
-        id: item.id || index + 1,
-        userId: item.userId || currentUser?.id,
-        date: item.date,
-        status: item.status,
-        checkIn: item.checkIn,
-        checkOut: item.checkOut,
-        location: item.location || "Inside geo fence - 40m",
-        proof: item.proof || "Geo + selfie verified",
-        deviation: item.deviation || "No",
-        weeklyTasks: item.weeklyTasks || [],
-      });
+      const mapAttendance = (item: any, index: number) => {
+        const weeklyTasks = Array.isArray(item.weeklyTasks) ? item.weeklyTasks : [];
+        const derivedRemarks =
+          item.remarks ||
+          item.description ||
+          item.todoDescription ||
+          item.tasksDescription ||
+          (weeklyTasks.length > 0
+            ? weeklyTasks.map((t: any) => t?.description).filter(Boolean).join(", ")
+            : "");
+
+        return {
+          id: item.id || index + 1,
+          userId: item.userId || item.user?.id || currentUser?.id,
+          date: item.date,
+          status: item.status,
+          checkIn: item.checkIn,
+          checkOut: item.checkOut,
+          location: item.location || "Inside geo fence - 40m",
+          proof: item.proof || "Geo + selfie verified",
+          deviation: item.deviation || "No",
+          remarks: derivedRemarks,
+          photos: item.photos || [],
+          weeklyTasks,
+          user: item.user,
+        };
+      };
 
       endpoints.forEach((endpoint, idx) => {
         const res = results[idx];
@@ -521,12 +577,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
           return;
         }
 
-        if (endpoint === "/bm/dashboard") {
+        if (endpoint === "/bm/dashboard" || endpoint === "/am/dashboard") {
           const data = res.data;
           if (data.branches) setBranches(data.branches || []);
           if (data.approvals) setApprovals((data.approvals || []).map((a: any) => ({ ...a, age: a.age || "", requestedBy: a.requestedById || a.requestedBy })));
           if (data.visits) setVisits(data.visits || []);
           if (data.notifications) setNotifications((data.notifications || []).map((n: any) => ({ ...n, bookmarked: n.bookmarked ?? false, branchId: n.branchId || "" })));
+          if (data.complaints) setComplaints((data.complaints || []).map(mapComplaint));
           return;
         }
 
@@ -539,7 +596,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           return;
         }
 
-        if (endpoint === "/bm/attendance" || endpoint === "/rm/attendance") {
+        if (endpoint === "/bm/attendance" || endpoint === "/rm/attendance" || endpoint === "/am/attendance") {
           const data = res.data;
           const attendanceArray = Array.isArray(data) ? data : (data.attendance || []);
           if (attendanceArray) {
@@ -566,27 +623,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
           return;
         }
 
-        if (endpoint === "/rm/users") {
+        if (endpoint === "/rm/users" || endpoint === "/am/users") {
           const data = res.data;
           if (data.users) setUsers(data.users || []);
+          if (data.branches) setBranches(data.branches || []);
           return;
         }
 
-        if (endpoint === "/rm/finance") {
+        if (endpoint === "/rm/finance" || endpoint === "/am/finance") {
           const data = res.data;
           if (data.approvals) setApprovals((data.approvals || []).map((a: any) => ({ ...a, age: a.age || "", requestedBy: a.requestedById || a.requestedBy })));
           if (data.branches) setBranches(data.branches || []);
           return;
         }
 
-        if (endpoint === "/rm/analytics") {
+        if (endpoint === "/rm/analytics" || endpoint === "/am/analytics") {
           // Analytics data is not stored in state directly â€” used for analytics screen.
           // Branches are re-fetched separately for now.
           return;
         }
 
         // â”€â”€ Tasks endpoints â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        if (endpoint === "/lc/tasks" || endpoint === "/bm/tasks" || endpoint === "/rm/tasks") {
+        if (endpoint === "/lc/tasks" || endpoint === "/bm/tasks" || endpoint === "/rm/tasks" || endpoint === "/am/tasks") {
           const rawTasks = getTaskItems(res.data);
           setTasks(rawTasks.map(mapTask));
           return;
@@ -818,22 +876,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }));
       const nowStr = getTimeStr();
       const endpoint = state.role === "lc" ? "/lc/attendance" : "/attendance";
-      
+
       // Optimistic update
       setAttendanceLog(prev => {
         const existing = prev.find(a => String(a.userId) === String(currentUser.id) && a.date === state.today);
         if (existing) {
           return prev.map(a => a.id === existing.id ? { ...a, checkIn: nowStr, status: "Present", remarks: params.remarks || a.remarks } : a);
         }
-        return [{ 
-          id: Math.random().toString(), 
-          userId: String(currentUser.id), 
-          date: state.today, 
-          status: "Present", 
-          checkIn: nowStr, 
-          checkOut: "", 
-          location: "Inside geo fence - 40m", 
-          proof: "Geo + selfie verified", 
+        return [{
+          id: Math.random().toString(),
+          userId: String(currentUser.id),
+          date: state.today,
+          status: "Present",
+          checkIn: nowStr,
+          checkOut: "",
+          location: "Inside geo fence - 40m",
+          proof: "Geo + selfie verified",
           deviation: "No",
           isBranchOpening: params.isBranchOpening,
           remarks: params.remarks,
@@ -962,6 +1020,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [currentUser, addAuditEntry, showToast, refreshData]);
 
+  const acknowledgeComplaint = useCallback(async (id: string | number, vendorIssueId: string) => {
+    try {
+      try {
+        await apiClient.patch(`/complaints/${id}/status`, { status: "ACKNOWLEDGED", vendorIssueId });
+      } catch (e) {
+        // Fallback for mock backend
+      }
+      setComplaints(prev => prev.map(c => String(c.id) === String(id) ? { ...c, status: "ACKNOWLEDGED", vendorIssueId } : c));
+      addAuditEntry(`Complaint acknowledged by ${currentUser.name}`, "CheckCircle", "#10B981");
+      showToast("Complaint acknowledged");
+    } catch (e: any) {
+      console.error(e);
+      showToast("Failed to acknowledge complaint");
+    }
+  }, [currentUser, addAuditEntry, showToast]);
+
   const raiseToVendor = useCallback(async (id: string | number) => {
     try {
       const res = await apiClient.post(`/complaints/${id}/raise-to-vendor`);
@@ -1027,8 +1101,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try {
       // Assuming backend has this route, or mock it
       // await apiClient.post(`/complaints/${id}/remind`);
-      addAuditEntry(`Reminder sent for complaint by RM`, "Bell", "#008DD2");
-      showToast("Reminder sent to vendor");
+      addAuditEntry(`Reminder sent for complaint by ${currentUser.name}`, "Bell", "#008DD2");
+      showToast("Reminder sent");
     } catch (e: any) {
       console.error(e);
       showToast("Failed to send reminder");
@@ -1144,6 +1218,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         priority: data.priority,
         assetId: data.assetId,
         description: data.description,
+        attachments: data.attachmentUrls || [],
         attachmentUrls: data.attachmentUrls,
         vendorRemarks: data.vendorRemarks,
         vendorName: (data as any).vendorName,
@@ -1458,7 +1533,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     openTaskDetail, openComplaintDetail, openBranchDetail, openUserDetail,
     openApplianceDetail, openApprovalDetail, openVisitDetail,
     markAttendance, submitTaskProof, markTaskDone, revokeTask,
-    updateComplaintStatus, raiseToVendor, addComplaintRemark, closeComplaint,
+    updateComplaintStatus, acknowledgeComplaint, raiseToVendor, addComplaintRemark, closeComplaint,
     requestComplaintUpdate,
     escalateComplaint,
     sendComplaintReminder,

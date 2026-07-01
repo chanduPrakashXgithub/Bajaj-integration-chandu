@@ -50,7 +50,7 @@ export const getHierarchy = async (req: AuthenticatedRequest, res: Response) => 
 
     // Build tree manually
     const rms = allUsers.filter((u) => u.role === RoleId.rm);
-    const ams = allUsers.filter((u) => u.role === RoleId.branchManager);
+    const ams = allUsers.filter((u) => (u.role === RoleId.branchManager || u.role === RoleId.am));
     const aas = allUsers.filter((u) => u.role === RoleId.aa);
     const lcs = allUsers.filter((u) => u.role === RoleId.lc);
 
@@ -113,11 +113,11 @@ export const getHierarchy = async (req: AuthenticatedRequest, res: Response) => 
 export const getAvailableBranches = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
-    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager)) {
+    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager && user.role !== RoleId.am)) {
       return res.status(403).json({ message: "Forbidden: RM or AM only" });
     }
     // AM can only query their own branches
-    if (user.role === RoleId.branchManager && req.params.amId !== user.id) {
+    if ((user.role === RoleId.branchManager || user.role === RoleId.am) && req.params.amId !== user.id) {
       return res.status(403).json({ message: "Forbidden: you can only view your own branches" });
     }
 
@@ -128,7 +128,7 @@ export const getAvailableBranches = async (req: AuthenticatedRequest, res: Respo
       select: { branchScope: true, role: true },
     });
 
-    if (!am || (am.role !== RoleId.branchManager)) {
+    if (!am || (am.role !== RoleId.branchManager && am.role !== RoleId.am)) {
       return res.status(404).json({ message: "AM not found" });
     }
 
@@ -168,7 +168,7 @@ export const getAvailableBranches = async (req: AuthenticatedRequest, res: Respo
 export const getUnassignedBranches = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
-    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager)) {
+    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager && user.role !== RoleId.am)) {
       return res.status(403).json({ message: "Forbidden: RM or AM only" });
     }
 
@@ -203,7 +203,7 @@ export const getUnassignedBranches = async (req: AuthenticatedRequest, res: Resp
 export const assignManager = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
-    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager)) {
+    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager && user.role !== RoleId.am)) {
       return res.status(403).json({ message: "Forbidden: RM or AM only" });
     }
 
@@ -220,7 +220,7 @@ export const assignManager = async (req: AuthenticatedRequest, res: Response) =>
     }
 
     // AM can only manage their own subordinates (or unassigned users)
-    if (user.role === RoleId.branchManager && target.managerId && target.managerId !== user.id) {
+    if ((user.role === RoleId.branchManager || user.role === RoleId.am) && target.managerId && target.managerId !== user.id) {
       return res.status(403).json({ message: "Forbidden: you can only manage your own subordinates" });
     }
 
@@ -231,13 +231,13 @@ export const assignManager = async (req: AuthenticatedRequest, res: Response) =>
 
     // Validate hierarchy:
     // AM → RM, AA → AM, LC → AA
-    if (target.role === RoleId.branchManager && manager.role !== RoleId.rm) {
+    if ((target.role === RoleId.branchManager || target.role === RoleId.am) && manager.role !== RoleId.rm) {
       return res.status(400).json({ message: "AM must report to an RM" });
     }
-    if (target.role === RoleId.aa && manager.role !== RoleId.branchManager) {
+    if (target.role === RoleId.aa && (manager.role !== RoleId.branchManager && manager.role !== RoleId.am)) {
       return res.status(400).json({ message: "AA must report to an AM" });
     }
-    if (target.role === RoleId.lc && manager.role !== RoleId.aa && manager.role !== RoleId.branchManager) {
+    if (target.role === RoleId.lc && manager.role !== RoleId.aa && (manager.role !== RoleId.branchManager && manager.role !== RoleId.am)) {
       return res.status(400).json({ message: "LC must report to an AA or AM" });
     }
 
@@ -260,7 +260,7 @@ export const assignManager = async (req: AuthenticatedRequest, res: Response) =>
 export const assignBranches = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = req.user;
-    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager)) {
+    if (!user || (user.role !== RoleId.rm && user.role !== RoleId.branchManager && user.role !== RoleId.am)) {
       return res.status(403).json({ message: "Forbidden: RM or AM only" });
     }
 
@@ -285,7 +285,7 @@ export const assignBranches = async (req: AuthenticatedRequest, res: Response) =
     }
 
     // AM can only manage their own AAs
-    if (user.role === RoleId.branchManager && target.managerId !== user.id) {
+    if ((user.role === RoleId.branchManager || user.role === RoleId.am) && target.managerId !== user.id) {
       return res.status(403).json({ message: "Forbidden: you can only assign branches to your own AAs" });
     }
 
@@ -415,7 +415,7 @@ export const getUsers = async (req: AuthenticatedRequest, res: Response) => {
     if (userContext.role === RoleId.lc) {
       // LCs can only see their own branch's users
       filters.branchId = userContext.branchId || "";
-    } else if (userContext.role === RoleId.branchManager) {
+    } else if ((userContext.role === RoleId.branchManager || userContext.role === RoleId.am)) {
       // BMs see users in their scope
       if (branchId) {
         if (userContext.branchScope.includes(String(branchId))) {
@@ -424,7 +424,10 @@ export const getUsers = async (req: AuthenticatedRequest, res: Response) => {
           return res.status(403).json({ message: "Forbidden: branch out of scope" });
         }
       } else {
-        filters.branchId = { in: userContext.branchScope };
+        filters.OR = [
+          { branchId: { in: userContext.branchScope } },
+          { managerId: userContext.id },
+        ];
       }
     } else if (userContext.role === RoleId.rm) {
       if (branchId) {
@@ -466,9 +469,9 @@ export const getUsers = async (req: AuthenticatedRequest, res: Response) => {
     return res.status(200).json(users);
   } catch (error: any) {
     console.error("Get users error: ", error);
-    return res.status(500).json({ 
-      message: "Server error listing users", 
-      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred" 
+    return res.status(500).json({
+      message: "Server error listing users",
+      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred"
     });
   }
 };
@@ -485,7 +488,7 @@ export const createUser = async (req: AuthenticatedRequest, res: Response) => {
       return res.status(403).json({ message: "Forbidden: You do not have permission to create users" });
     }
     // AM can only create AA or LC
-    if (userContext.role === RoleId.branchManager) {
+    if ((userContext.role === RoleId.branchManager || userContext.role === RoleId.am)) {
       const { role: targetRole } = req.body;
       if (targetRole !== RoleId.aa && targetRole !== RoleId.lc) {
         return res.status(403).json({ message: "Forbidden: AM can only create AA or LC users" });
@@ -547,9 +550,9 @@ export const createUser = async (req: AuthenticatedRequest, res: Response) => {
     });
   } catch (error: any) {
     console.error("Create user error: ", error);
-    return res.status(500).json({ 
-      message: "Server error creating user", 
-      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred" 
+    return res.status(500).json({
+      message: "Server error creating user",
+      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred"
     });
   }
 };
@@ -607,9 +610,9 @@ export const updateUser = async (req: AuthenticatedRequest, res: Response) => {
     });
   } catch (error: any) {
     console.error("Update user error: ", error);
-    return res.status(500).json({ 
-      message: "Server error updating profile", 
-      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred" 
+    return res.status(500).json({
+      message: "Server error updating profile",
+      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred"
     });
   }
 };
@@ -656,9 +659,9 @@ export const deleteUser = async (req: AuthenticatedRequest, res: Response) => {
     return res.status(200).json({ message: "User deactivated successfully" });
   } catch (error: any) {
     console.error("Delete user error: ", error);
-    return res.status(500).json({ 
-      message: "Server error deactivating user", 
-      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred" 
+    return res.status(500).json({
+      message: "Server error deactivating user",
+      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred"
     });
   }
 };

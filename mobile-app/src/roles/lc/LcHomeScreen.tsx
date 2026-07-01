@@ -30,6 +30,23 @@ function money(value?: number) {
   return `₹${amount}`;
 }
 
+function getTimeUntilNextMonday() {
+  const now = new Date();
+  const nextMonday = new Date(now);
+  nextMonday.setDate(now.getDate() + ((7 - now.getDay()) % 7 || 7) + (now.getDay() === 1 && now.getHours() === 0 && now.getMinutes() === 0 ? 0 : 0));
+  if (now.getDay() === 1) {
+    nextMonday.setDate(now.getDate() + 7);
+  } else {
+    nextMonday.setDate(now.getDate() + ((1 + 7 - now.getDay()) % 7));
+  }
+  nextMonday.setHours(0, 0, 0, 0);
+  
+  const diffMs = nextMonday.getTime() - now.getTime();
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+  return `${diffHours}h ${diffMinutes}m left`;
+}
+
 export function LcHomeScreen() {
   const {
     state,
@@ -138,9 +155,7 @@ export function LcHomeScreen() {
 
       {/* Primary actions */}
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.sm, marginBottom: spacing.xl }}>
-        <QuickButton label="Create Check" icon={Plus} onPress={() => openFormModal("task")} variant="primary" />
-        <QuickButton label="Register Asset" icon={Plus} onPress={() => openFormModal("appliance")} variant="secondary" />
-        <QuickButton label="Report Incident" icon={Wrench} onPress={() => openFormModal("complaint")} variant="secondary" />
+        <QuickButton label="Quick Actions" icon={Plus} onPress={() => openFormModal("quick")} variant="primary" />
       </View>
 
       {/* Stats */}
@@ -234,6 +249,7 @@ export function LcHomeScreen() {
                     </Text>
                     <Text style={{ marginTop: spacing.xs, fontSize: fontSize.sm, color: colors.slate500 }} numberOfLines={1}>
                       {task.zone} · {task.schedule}
+                      {task.schedule === "Weekly" ? ` · ${getTimeUntilNextMonday()}` : ""}
                     </Text>
                   </View>
                   <Badge label={task.status} type={task.status} />

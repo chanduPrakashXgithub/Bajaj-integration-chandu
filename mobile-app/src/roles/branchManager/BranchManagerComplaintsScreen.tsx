@@ -11,7 +11,7 @@ import { useApp } from "../../context/AppContext";
 import { colors, fontSize, spacing, borderRadius } from "../../theme/theme";
 
 export function BranchManagerComplaintsScreen() {
-  const { state, setTab, scopedComplaints, scopedBranches, updateComplaintStatus, closeComplaint } = useApp();
+  const { state, setTab, scopedComplaints, scopedBranches, updateComplaintStatus } = useApp();
   const filter = state.tabs.complaints || "open";
   const [searchQuery, setSearchQuery] = useState("");
   const [showRaiseModal, setShowRaiseModal] = useState(false);
@@ -154,13 +154,10 @@ export function BranchManagerComplaintsScreen() {
           <ComplaintCard
             key={String(item.id)}
             item={item}
+            showRaiseToVendor={false}
             actions={
-              item.status === "OPEN" ? [
-                { label: "Mark In Progress", onPress: () => updateComplaintStatus(item.id, "IN_PROGRESS"), primary: true },
-              ] : item.status === "IN_PROGRESS" || item.status === "VENDOR_PENDING" ? [
+              item.status !== "RESOLVED" ? [
                 { label: "Resolve", onPress: () => updateComplaintStatus(item.id, "RESOLVED"), primary: true },
-              ] : item.status === "RESOLVED" ? [
-                { label: "Close", onPress: () => closeComplaint(item.id), primary: true },
               ] : undefined
             }
           />

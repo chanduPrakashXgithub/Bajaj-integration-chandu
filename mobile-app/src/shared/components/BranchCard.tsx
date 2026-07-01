@@ -98,7 +98,7 @@ export function BranchCard({ branch, onOverview, onDeepDive, onScheduleVisit, sh
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md, marginTop: spacing.xl }}>
         {onOverview ? (
           <TouchableOpacity onPress={onOverview} style={{ backgroundColor: colors.card, borderRadius: borderRadius["2xl"], paddingHorizontal: spacing.xl, paddingVertical: spacing.md, borderWidth: 1, borderColor: colors.border }}>
-            <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.textSecondary }}>Overview</Text>
+            <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.textSecondary }}>Branch Deep Dive</Text>
           </TouchableOpacity>
         ) : null}
         {onDeepDive ? (
@@ -107,11 +107,7 @@ export function BranchCard({ branch, onOverview, onDeepDive, onScheduleVisit, sh
             <ChevronRight size={14} color={colors.white} strokeWidth={2} />
           </TouchableOpacity>
         ) : null}
-        {onScheduleVisit ? (
-          <TouchableOpacity onPress={onScheduleVisit} style={{ backgroundColor: colors.card, borderRadius: borderRadius["2xl"], paddingHorizontal: spacing.xl, paddingVertical: spacing.md, borderWidth: 1, borderColor: colors.border }}>
-            <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.textSecondary }}>Schedule visit</Text>
-          </TouchableOpacity>
-        ) : null}
+
       </View>
     </View>
   );

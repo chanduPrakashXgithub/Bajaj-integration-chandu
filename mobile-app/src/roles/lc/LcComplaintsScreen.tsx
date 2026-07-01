@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import { AlertCircle, Clock, CheckCircle2, Send, Search, Plus, XCircle } from "lucide-react-native";
+import { AlertCircle, Clock, CheckCircle2, Search, Plus, XCircle } from "lucide-react-native";
 import { ScreenWrapper } from "../../shared/layout/ScreenWrapper";
 import { SectionHeader } from "../../shared/components/SectionHeader";
 import { StatCard } from "../../shared/components/StatCard";
@@ -102,9 +102,10 @@ export function LcComplaintsScreen() {
           <ComplaintCard
             key={String(item.id)}
             item={item}
+            showRaiseToVendor={false}
             actions={
-              item.status === "OPEN" ? [
-                { label: "Mark In Progress", onPress: () => updateComplaintStatus(item.id, "IN_PROGRESS"), primary: true },
+              item.status !== "RESOLVED" ? [
+                { label: "Resolve", onPress: () => updateComplaintStatus(item.id, "RESOLVED"), primary: true },
               ] : undefined
             }
           />

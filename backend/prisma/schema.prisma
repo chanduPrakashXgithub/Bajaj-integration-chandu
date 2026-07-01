@@ -11,6 +11,7 @@ enum RoleId {
   lc
   branchManager
   aa
+  am
   rm
 }
 
@@ -35,6 +36,7 @@ enum ComplaintStatus {
   ON_HOLD
   RESOLVED
   REOPENED
+  ACKNOWLEDGED
 }
 
 enum ApprovalStatus {
@@ -280,6 +282,7 @@ model Complaint {
   vendorEmail        String?
   priority           Priority        @default(Medium)
   description        String          @db.Text
+  vendorIssueId      String?
   attachmentUrls     String[]        @default([])
   status             ComplaintStatus @default(OPEN)
   raisedById         String

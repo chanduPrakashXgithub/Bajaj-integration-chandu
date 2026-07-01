@@ -33,11 +33,28 @@ export function LcNotificationsScreen() {
       if (task) { openTaskDetail(task.id); return; }
     }
 
-    const complaintMatch = item.detail.match(/complaint\s*([0-9a-fA-F-]+)/i);
+    const cmpMatch = item.detail.match(/(CMP-\d+-\d+)/i) || item.title.match(/(CMP-\d+-\d+)/i);
+    if (cmpMatch) {
+      const complaint = scopedComplaints.find(c => c.complaintId === cmpMatch[1]);
+      if (complaint) {
+        openComplaintDetail(complaint.id);
+        return;
+      }
+    }
+
+    const complaintMatch = item.detail.match(/complaint\s*#?(\d+)/i) || item.title.match(/complaint\s*#?(\d+)/i);
     if (complaintMatch) {
-      const complaintId = complaintMatch[1];
-      const complaint = scopedComplaints.find((c) => c.id === complaintId);
-      if (complaint) { openComplaintDetail(complaint.id); return; }
+      const complaint = scopedComplaints.find(c => String(c.id) === complaintMatch[1]);
+      if (complaint) {
+        openComplaintDetail(complaint.id);
+        return;
+      }
+    }
+
+    const isComplaintRelated = item.title.toLowerCase().includes("complaint") || item.detail.toLowerCase().includes("complaint") || item.title.toLowerCase().includes("issue") || item.detail.toLowerCase().includes("issue");
+    if (isComplaintRelated) {
+      setPage("complaints");
+      return;
     }
 
     if (item.branchId) {

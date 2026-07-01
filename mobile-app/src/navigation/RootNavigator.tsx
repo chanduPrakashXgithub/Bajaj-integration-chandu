@@ -16,6 +16,7 @@ import { SearchModal } from "../modals/forms/SearchModal";
 import { PlaceholderScreen } from "./PlaceholderScreen";
 import { LoginScreen } from "./LoginScreen";
 import { RmResolveComplaintModal } from "../modals/forms/RmResolveComplaintModal";
+import { AcknowledgeComplaintModal } from "../modals/forms/AcknowledgeComplaintModal";
 
 import { LcHomeScreen } from "../roles/lc/LcHomeScreen";
 import { LcTasksScreen } from "../roles/lc/LcTasksScreen";
@@ -41,6 +42,7 @@ import { RmAlertsScreen } from "../roles/rm/RmAlertsScreen";
 import { RmAnalyticsScreen } from "../roles/rm/RmAnalyticsScreen";
 import { RmApprovalsScreen } from "../roles/rm/RmApprovalsScreen";
 import { UserManagementScreen } from "../roles/rm/UserManagementScreen";
+import { RmUsersScreen } from "../roles/rm/RmUsersScreen";
 import { RmSettingsScreen } from "../roles/rm/RmSettingsScreen";
 import { RmNotificationsScreen } from "../roles/rm/RmNotificationsScreen";
 import { RmProfileScreen } from "../roles/rm/RmProfileScreen";
@@ -67,6 +69,7 @@ registerScreen("branchManager", "home", BranchManagerHomeScreen);
 registerScreen("branchManager", "branches", BranchManagerBranchesScreen);
 registerScreen("branchManager", "monitoring", BranchManagerMonitoringScreen);
 registerScreen("branchManager", "complaints", BranchManagerComplaintsScreen);
+registerScreen("branchManager", "users", RmUsersScreen);
 registerScreen("branchManager", "approvals", BranchManagerApprovalsScreen);
 registerScreen("branchManager", "visits", BranchManagerVisitsScreen);
 registerScreen("branchManager", "attendance", BranchManagerAttendanceScreen);
@@ -96,7 +99,39 @@ registerScreen("rm", "settings", RmSettingsScreen);
 registerScreen("rm", "attendance", RmAttendanceScreen);
 registerScreen("rm", "notifications", RmNotificationsScreen);
 registerScreen("rm", "profile", RmProfileScreen);
+registerScreen("rm", "branches", BranchManagerBranchesScreen);
 
+// AM mapping
+registerScreen("am", "dashboard", RmDashboardScreen);
+registerScreen("am", "branches", BranchManagerBranchesScreen);
+registerScreen("am", "monitoring", RmMonitoringScreen);
+registerScreen("am", "intelligence", RmIntelligenceScreen);
+registerScreen("am", "alerts", RmAlertsScreen);
+registerScreen("am", "finance", RmFinanceScreen);
+registerScreen("am", "complaints", BranchManagerComplaintsScreen);
+registerScreen("am", "analytics", RmAnalyticsScreen);
+registerScreen("am", "approvals", RmApprovalsScreen);
+registerScreen("am", "users", RmUsersScreen);
+registerScreen("am", "settings", RmSettingsScreen);
+registerScreen("am", "attendance", RmAttendanceScreen);
+registerScreen("am", "notifications", RmNotificationsScreen);
+registerScreen("am", "profile", RmProfileScreen);
+
+// RRM mapping
+registerScreen("rrm", "dashboard", RmDashboardScreen);
+registerScreen("rrm", "branches", BranchManagerBranchesScreen);
+registerScreen("rrm", "monitoring", RmMonitoringScreen);
+registerScreen("rrm", "intelligence", RmIntelligenceScreen);
+registerScreen("rrm", "alerts", RmAlertsScreen);
+registerScreen("rrm", "finance", RmFinanceScreen);
+registerScreen("rrm", "complaints", RmComplaintCommandCenter);
+registerScreen("rrm", "analytics", RmAnalyticsScreen);
+registerScreen("rrm", "approvals", RmApprovalsScreen);
+registerScreen("rrm", "users", UserManagementScreen);
+registerScreen("rrm", "settings", RmSettingsScreen);
+registerScreen("rrm", "attendance", RmAttendanceScreen);
+registerScreen("rrm", "notifications", RmNotificationsScreen);
+registerScreen("rrm", "profile", RmProfileScreen);
 function getScreen(roleId: string, pageId: string): React.ComponentType {
   return screenRegistry[roleId + "_" + pageId] || PlaceholderScreen;
 }
@@ -278,6 +313,7 @@ export function RootNavigator() {
   const [formModalVisible, setFormModalVisible] = useState(false);
   const [auditModalVisible, setAuditModalVisible] = useState(false);
   const [resolveModal, setResolveModal] = useState<{ complaintId: string | number } | null>(null);
+  const [acknowledgeModal, setAcknowledgeModal] = useState<{ complaintId: string | number } | null>(null);
   const [detailModal, setDetailModal] = useState<{ entityType: string; entityId: string } | null>(null);
 
   useEffect(() => {
@@ -291,6 +327,9 @@ export function RootNavigator() {
       dispatch({ type: "CLOSE_MODAL" });
     } else if (type === "resolveComplaint") {
       setResolveModal({ complaintId: state.modalData?.id });
+      dispatch({ type: "CLOSE_MODAL" });
+    } else if (type === "acknowledgeComplaint") {
+      setAcknowledgeModal({ complaintId: state.modalData?.id });
       dispatch({ type: "CLOSE_MODAL" });
     } else if (["task", "complaint", "branch", "user", "appliance", "approval", "visit"].includes(type)) {
       setDetailModal({ entityType: type, entityId: state.modalData?.id });
@@ -316,7 +355,7 @@ export function RootNavigator() {
         <Toast />
         <FormModal visible={formModalVisible} onClose={() => setFormModalVisible(false)} />
         <AuditTrailModal visible={auditModalVisible} onClose={() => setAuditModalVisible(false)} />
-          <SearchModal
+        <SearchModal
           visible={searchModalVisible}
           onClose={() => setSearchModalVisible(false)}
           onSelectResult={(entityType, entityId) => setDetailModal({ entityType, entityId })}
@@ -326,6 +365,13 @@ export function RootNavigator() {
             visible={!!resolveModal}
             onClose={() => setResolveModal(null)}
             complaintId={resolveModal.complaintId}
+          />
+        ) : null}
+        {acknowledgeModal ? (
+          <AcknowledgeComplaintModal
+            visible={!!acknowledgeModal}
+            onClose={() => setAcknowledgeModal(null)}
+            complaintId={acknowledgeModal.complaintId}
           />
         ) : null}
         {detailModal ? (

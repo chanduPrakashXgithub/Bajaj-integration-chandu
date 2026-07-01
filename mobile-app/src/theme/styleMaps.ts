@@ -35,6 +35,8 @@ export function roleAccent(role: RoleId): { bg: string; text: string } {
     branchManager: "#12B76A",
     aa: "#12B76A",
     rm: "#8B5CF6",
+    am: "#8B5CF6",
+    rrm: "#8B5CF6",
   };
   return { bg: map[role], text: colors.white };
 }
@@ -45,6 +47,8 @@ export function roleIcon(role: RoleId): string {
     branchManager: "Briefcase",
     aa: "User",
     rm: "Crown",
+    am: "Crown",
+    rrm: "Crown",
   };
   return map[role];
 }

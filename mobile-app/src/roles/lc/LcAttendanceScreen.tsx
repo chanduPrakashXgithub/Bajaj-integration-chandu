@@ -19,7 +19,7 @@ const SUB_TABS: { key: SubTab; label: string }[] = [
 ];
 
 export function LcAttendanceScreen() {
-  const { scopedAttendance, scopedTasks, state, getBranch, currentUser, markAttendance, showToast } = useApp();
+  const { scopedAttendance, scopedTasks, scopedUsers, state, getBranch, currentUser, markAttendance, showToast } = useApp();
   const branch = getBranch(currentUser.branchId);
   const [subTab, setSubTab] = useState<SubTab>("mark");
 
@@ -46,10 +46,12 @@ export function LcAttendanceScreen() {
     setWeeklyTasks((prev) => prev.map((t) => t.id === id ? { ...t, [field]: value } : t));
   };
 
+  const branchUsers = scopedUsers.filter((u) => u.branchId === branch?.id);
+  const presentCount = todayAttendance.filter((a) => a.status === "Present" || a.status === "Late").length;
+  const absentCount = Math.max(0, branchUsers.length - presentCount);
+
   const handleMarkAttendance = () => {
-    const validTasks = weeklyTasks.filter((t) => t.description.trim());
-    if (validTasks.length === 0) return showToast("Add at least one task for today");
-    markAttendance({ weeklyTasks: validTasks, isBranchOpening: true, remarks, photos });
+    markAttendance({ isBranchOpening: true, remarks, photos });
   };
 
   return (
@@ -72,8 +74,8 @@ export function LcAttendanceScreen() {
     return (
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: spacing.xl, paddingBottom: 40 }}>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md }}>
-          <View style={{ flex: 1, minWidth: 120 }}><StatCard label="Present" value={String(todayAttendance.filter((a) => a.status === "Present").length)} meta="Verified geo attendance" accent={colors.success} icon={UserCheck} /></View>
-          <View style={{ flex: 1, minWidth: 120 }}><StatCard label="Absent" value={String(todayAttendance.filter((a) => a.status === "Absent").length)} meta="No punch today" accent={colors.error} icon={UserX} /></View>
+          <View style={{ flex: 1, minWidth: 120 }}><StatCard label="Present" value={String(presentCount)} meta="Verified geo attendance" accent={colors.success} icon={UserCheck} /></View>
+          <View style={{ flex: 1, minWidth: 120 }}><StatCard label="Absent" value={String(absentCount)} meta="No punch today" accent={colors.error} icon={UserX} /></View>
         </View>
 
         <Card variant="glass">
@@ -91,43 +93,7 @@ export function LcAttendanceScreen() {
             </View>
           ) : (
             <View style={{ gap: spacing.xl }}>
-              <Card variant="soft" style={{ backgroundColor: colors.text }}>
-                <Text style={{ fontSize: fontSize.xs, fontWeight: "400", color: colors.slate300, textTransform: "uppercase", marginBottom: spacing.md }}>Weekly checks</Text>
-                <Text style={{ fontSize: fontSize.sm, color: colors.slate300, marginBottom: spacing.xl }}>What checks will you complete this week?</Text>
 
-                <View style={{ gap: spacing.md }}>
-                  {weeklyTasks.map((task, index) => (
-                    <View key={task.id} style={{ flexDirection: "row", gap: spacing.md, alignItems: "center" }}>
-                      <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: colors.brand + "30", alignItems: "center", justifyContent: "center" }}>
-                        <Text style={{ fontSize: fontSize.xs, fontWeight: "400", color: colors.brand }}>{index + 1}</Text>
-                      </View>
-                      <TextInput
-                        value={task.description}
-                        onChangeText={(v) => updateTaskRow(task.id, "description", v)}
-                        placeholder="Check description"
-                        placeholderTextColor={colors.slate400}
-                        style={{ flex: 1, borderRadius: borderRadius.lg, borderWidth: 1, borderColor: colors.slate600, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, fontSize: fontSize.sm, color: colors.white }}
-                      />
-                      <TextInput
-                        value={task.estimatedHours ? String(task.estimatedHours) : ""}
-                        onChangeText={(v) => updateTaskRow(task.id, "estimatedHours", Number(v) || 0)}
-                        placeholder="Hrs"
-                        placeholderTextColor={colors.slate400}
-                        keyboardType="numeric"
-                        style={{ width: 50, borderRadius: borderRadius.lg, borderWidth: 1, borderColor: colors.slate600, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, fontSize: fontSize.sm, color: colors.white, textAlign: "center" }}
-                      />
-                      <TouchableOpacity onPress={() => removeTaskRow(task.id)} style={{ padding: spacing.sm }}>
-                        <Trash2 size={14} color={colors.slate400} strokeWidth={2} />
-                      </TouchableOpacity>
-                    </View>
-                  ))}
-                </View>
-
-                <TouchableOpacity onPress={addTaskRow} style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm, marginTop: spacing.lg, paddingVertical: spacing.sm }}>
-                  <Plus size={14} color={colors.brand} strokeWidth={2} />
-                  <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.brand }}>Add another task</Text>
-                </TouchableOpacity>
-              </Card>
 
               <Card variant="soft" style={{ backgroundColor: colors.text }}>
                 <Text style={{ fontSize: fontSize.xs, fontWeight: "400", color: colors.slate300, textTransform: "uppercase", marginBottom: spacing.md }}>Opening Remarks & Photos</Text>

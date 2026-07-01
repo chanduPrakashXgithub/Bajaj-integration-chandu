@@ -2,7 +2,6 @@ import { Response } from "express";
 import { RoleId, Priority, ComplaintStatus } from "@prisma/client";
 import { AuthenticatedRequest } from "../middlewares/auth.middleware";
 import { sendPushNotification, notifyBranchManagers, notifyRegionalManagers } from "../services/notification.service";
-import { sendEmail } from "../services/email.service";
 import { recalcBranchStats } from "../lib/stats";
 import prisma from "../lib/prisma";
 import { generateWorkOrderPDF, generateCompletionPDF } from "../services/pdf.service";
@@ -208,7 +207,7 @@ export const createComplaint = async (req: AuthenticatedRequest, res: Response) 
         raisedByName: result.raisedByName,
         raisedByRole: result.raisedByRole,
       });
-      
+
       let uploadUrl = null;
       try {
         uploadUrl = await uploadPdfToCloudinary(pdfBuffer, `bajaj_operations/work_orders/${result.complaintId}`);
@@ -221,20 +220,7 @@ export const createComplaint = async (req: AuthenticatedRequest, res: Response) 
         console.error("Failed to upload work order PDF to Cloudinary:", uploadErr);
       }
 
-      // Send Email with PDF
-      const rms = await prisma.user.findMany({ where: { role: RoleId.rm }, select: { email: true } });
-      const toEmails = [...rms.map(rm => rm.email)];
-      const finalVendorEmail = vendorEmail || asset.vendorEmail;
-      if (finalVendorEmail) toEmails.push(finalVendorEmail);
-
-      if (toEmails.length > 0) {
-        await sendEmail(
-          toEmails,
-          `New Complaint Work Order: ${result.complaintId} - ${asset.name}`,
-          `<p>Please find attached the Work Order for the new complaint raised at ${result.branch.name}.</p>`,
-          [{ filename: `WorkOrder_${result.complaintId}.pdf`, content: pdfBuffer }]
-        );
-      }
+      // Email dispatch intentionally disabled for app-managed complaint flow.
     } catch (err) {
       console.error("Failed to generate or send work order PDF:", err);
     }
@@ -427,7 +413,7 @@ export const resolveComplaint = async (req: AuthenticatedRequest, res: Response)
         resolutionNotes: result.resolutionNotes,
         vendorRemarks: result.vendorRemarks,
       });
-      
+
       let uploadUrl = null;
       try {
         uploadUrl = await uploadPdfToCloudinary(pdfBuffer, `bajaj_operations/completion_reports/${result.complaintId}`);
@@ -440,15 +426,7 @@ export const resolveComplaint = async (req: AuthenticatedRequest, res: Response)
         console.error("Failed to upload completion PDF to Cloudinary:", uploadErr);
       }
 
-      // Send Email to Vendor
-      if (result.vendorEmail) {
-        await sendEmail(
-          result.vendorEmail,
-          `Service Completion Report: ${result.complaintId} - ${result.asset?.name}`,
-          `<p>Please find attached the Service Completion Report for the resolved complaint at ${result.branch.name}.</p>`,
-          [{ filename: `CompletionReport_${result.complaintId}.pdf`, content: pdfBuffer }]
-        );
-      }
+      // Email dispatch intentionally disabled for app-managed complaint flow.
     } catch (err) {
       console.error("Failed to generate/upload completion PDF:", err);
     }
@@ -521,7 +499,7 @@ export const escalateComplaint = async (req: AuthenticatedRequest, res: Response
 
     const { id } = req.params;
     const { reason } = req.body;
-    
+
     const complaint = await prisma.complaint.findUnique({ where: { id } });
     if (!complaint) return res.status(404).json({ message: "Complaint not found" });
 
@@ -545,7 +523,7 @@ export const addVendorRemark = async (req: AuthenticatedRequest, res: Response) 
 
     const { id } = req.params;
     const { text } = req.body;
-    
+
     const complaint = await prisma.complaint.findUnique({ where: { id } });
     if (!complaint) return res.status(404).json({ message: "Complaint not found" });
 

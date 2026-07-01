@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Image, Alert, Modal, ActivityIndicator, Linking } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Image, Alert, Modal, ActivityIndicator, Linking, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { X, MapPin, Calendar, User, Building, Clock, CheckCircle, XCircle, AlertTriangle, DollarSign, Wrench, HardHat, Phone, Mail, Award, Activity, Shield, TrendingUp, FileText, Camera, Upload, ImageOff, Trash2, Eye, EyeOff, ShieldAlert, ChevronRight } from "lucide-react-native";
 import { useApp } from "../../context/AppContext";
@@ -9,6 +9,7 @@ import { Badge } from "../../shared/components/Badge";
 import { ProgressBar } from "../../shared/components/ProgressBar";
 import { QuickButton } from "../../shared/components/QuickButton";
 import { ModalSheet } from "../../shared/components/ModalSheet";
+import { BranchDeepDiveScreen } from "./BranchDeepDiveScreen";
 import { formatMoney, countdown, formatPct } from "../../utils/helpers";
 import { Task, Complaint, Branch, User as UserType, Appliance, Approval, Visit } from "../../types/domain";
 
@@ -69,7 +70,7 @@ function ProofImageCard({ proofUrl, taskTitle }: { proofUrl: string | null; task
 
   return (
     <>
-      <TouchableOpacity 
+      <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => setModalVisible(true)}
         style={{ width: "100%", height: 100, borderRadius: borderRadius.md, overflow: "hidden", marginBottom: spacing.sm, backgroundColor: colors.slate200 }}
@@ -96,11 +97,11 @@ function ProofImageCard({ proofUrl, taskTitle }: { proofUrl: string | null; task
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.9)", justifyContent: "center", alignItems: "center" }}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
             onPress={() => setModalVisible(false)}
           />
-          
+
           <View style={{ position: "absolute", top: 40, left: 20, right: 20, flexDirection: "row", justifyContent: "space-between", alignItems: "center", zIndex: 1 }}>
             <View style={{ flex: 1, marginRight: 10 }}>
               <Text style={{ color: "#FFF", fontSize: 16, fontWeight: "bold" }} numberOfLines={1}>
@@ -110,7 +111,7 @@ function ProofImageCard({ proofUrl, taskTitle }: { proofUrl: string | null; task
                 {hasFallbackApplied ? "Sample Image" : "Actual Proof Image"}
               </Text>
             </View>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => setModalVisible(false)}
               style={{ backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: 20, padding: 8 }}
             >
@@ -344,7 +345,7 @@ interface Props {
 }
 
 export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
-  const { getTask, getComplaint, getBranch, getUser, getAppliance, tasks, complaints, approvals, visits, state, currentUser, submitTaskProof, markTaskDone, revokeTask, updateComplaintStatus, raiseToVendor, addComplaintRemark, closeComplaint, approveRequest, rejectRequest, showToast, deleteUser, deleteAppliance, submitVisitReport, updateAppliance, openApplianceDetail, openTaskDetail } = useApp();
+  const { getTask, getComplaint, getBranch, getUser, getAppliance, tasks, complaints, approvals, visits, state, currentUser, submitTaskProof, markTaskDone, revokeTask, updateComplaintStatus, addComplaintRemark, closeComplaint, approveRequest, rejectRequest, showToast, deleteUser, deleteAppliance, submitVisitReport, updateAppliance, openApplianceDetail, openTaskDetail, openModal } = useApp();
 
   const [proofText, setProofText] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
@@ -369,11 +370,25 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
   }, []);
 
   const takePhoto = useCallback(async () => {
+    if (Platform.OS === "web") {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        quality: 0.7,
+        allowsEditing: true,
+      });
+      if (!result.canceled && result.assets?.[0]?.uri) {
+        setPickedImage(result.assets[0].uri);
+        setSelectedImage(result.assets[0].uri);
+      }
+      return;
+    }
+
     const permission = await ImagePicker.requestCameraPermissionsAsync();
     if (!permission.granted) {
       Alert.alert("Permission required", "Camera access is needed to take a proof photo.");
       return;
     }
+
     const result = await ImagePicker.launchCameraAsync({
       quality: 0.7,
       allowsEditing: true,
@@ -569,7 +584,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
           currentUser.role === "lc" ? (
             <View style={{ gap: spacing.md, marginTop: spacing.md, borderTopWidth: 1, borderTopColor: colors.border, paddingTop: spacing.md }}>
               <Text style={{ fontSize: fontSize.md, fontWeight: "600", color: colors.slate900 }}>Submit Task Proof</Text>
-              
+
               <View>
                 <Text style={{ fontSize: fontSize.xs, color: colors.slate500, marginBottom: spacing.xs }}>Select Image Proof</Text>
                 <View style={{ flexDirection: "row", gap: spacing.sm, flexWrap: "wrap" }}>
@@ -605,13 +620,13 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
                   placeholderTextColor={colors.slate400}
                   multiline
                   numberOfLines={3}
-                  style={{ 
-                    borderRadius: borderRadius.lg, 
-                    borderWidth: 1, 
-                    borderColor: colors.border, 
-                    paddingHorizontal: spacing.md, 
-                    paddingVertical: spacing.md, 
-                    fontSize: fontSize.sm, 
+                  style={{
+                    borderRadius: borderRadius.lg,
+                    borderWidth: 1,
+                    borderColor: colors.border,
+                    paddingHorizontal: spacing.md,
+                    paddingVertical: spacing.md,
+                    fontSize: fontSize.sm,
                     color: colors.slate900,
                     backgroundColor: colors.slate50,
                     minHeight: 80,
@@ -620,8 +635,8 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
                 />
               </View>
 
-              <QuickButton 
-                label={isSubmittingProof ? "Submitting..." : "Submit Verification Proof"} 
+              <QuickButton
+                label={isSubmittingProof ? "Submitting..." : "Submit Verification Proof"}
                 onPress={async () => {
                   if (!selectedImage) {
                     showToast("Please select or capture a proof image first");
@@ -639,7 +654,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
                   } finally {
                     setIsSubmittingProof(false);
                   }
-                }} 
+                }}
               />
             </View>
           ) : (
@@ -701,9 +716,8 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
         ) : null}
         {isOpen && currentUser.role !== "rm" ? (
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.sm }}>
-            {complaint.status === "OPEN" && <QuickButton label="Raise to Vendor" onPress={() => raiseToVendor(complaint.id)} />}
-            {complaint.status === "OPEN" && <QuickButton label="Mark In Progress" onPress={() => updateComplaintStatus(complaint.id, "IN_PROGRESS")} />}
-            {(complaint.status === "IN_PROGRESS" || complaint.status === "VENDOR_PENDING") && <QuickButton label="Resolve" onPress={() => updateComplaintStatus(complaint.id, "RESOLVED")} />}
+            {complaint.status !== "ACKNOWLEDGED" && <QuickButton label="Acknowledge" onPress={() => openModal("acknowledgeComplaint", { id: complaint.id })} />}
+            <QuickButton label="Resolve" onPress={() => updateComplaintStatus(complaint.id, "RESOLVED")} />
           </View>
         ) : null}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.sm }}>
@@ -960,7 +974,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
           <EditableDetailRow icon={Wrench} label="Brand" value={editBrand} onChangeText={setEditBrand} placeholder="Brand" />
           <EditableDetailRow icon={FileText} label="Model" value={editModel} onChangeText={setEditModel} placeholder="Model" />
           <EditableDetailRow icon={Shield} label="Serial No" value={editSerial} onChangeText={setEditSerial} placeholder="Serial number" />
-          
+
           <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
             <View style={{ width: 28, height: 28, borderRadius: borderRadius.md, backgroundColor: colors.slate50, alignItems: "center", justifyContent: "center" }}>
               <Calendar size={12} color={colors.slate500} strokeWidth={1.8} />
@@ -991,7 +1005,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
               <Calendar size={12} color={colors.slate400} />
             </TouchableOpacity>
           </View>
-          
+
           <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
             <View style={{ width: 28, height: 28, borderRadius: borderRadius.md, backgroundColor: colors.slate50, alignItems: "center", justifyContent: "center" }}>
               <Clock size={12} color={colors.slate500} strokeWidth={1.8} />
@@ -1022,7 +1036,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
               <Clock size={12} color={colors.slate400} />
             </TouchableOpacity>
           </View>
-          
+
           <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
             <View style={{ width: 28, height: 28, borderRadius: borderRadius.md, backgroundColor: colors.slate50, alignItems: "center", justifyContent: "center" }}>
               <Activity size={12} color={colors.slate500} strokeWidth={1.8} />
@@ -1076,7 +1090,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
         {/* Improvement 1: Date-to-Date Task Proof Gallery */}
         <View style={{ borderTopWidth: 1, borderTopColor: colors.border, paddingTop: spacing.lg, marginTop: spacing.lg }}>
           <Text style={{ fontSize: fontSize.md, fontWeight: "600", color: colors.slate900, marginBottom: spacing.sm }}>Verification Images & Remarks</Text>
-          
+
           <View style={{ flexDirection: "row", gap: spacing.sm, marginBottom: spacing.md }}>
             <View style={{ flex: 1 }}>
               <Text style={{ fontSize: 10, color: colors.slate400, marginBottom: 2 }}>From Date</Text>
@@ -1239,12 +1253,19 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
     );
   }
 
+  if (type === "branch" && branch) {
+    return (
+      <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+        <BranchDeepDiveScreen branch={branch} onBack={onClose} />
+      </Modal>
+    );
+  }
+
   return (
     <ModalSheet visible={visible} onClose={onClose} title="Details">
       <ScrollView style={{ maxHeight: 600 }} contentContainerStyle={{ gap: spacing.xl, paddingBottom: spacing.xl }}>
         {type === "task" && renderTaskContent()}
         {type === "complaint" && renderComplaintContent()}
-        {type === "branch" && renderBranchContent()}
         {type === "user" && renderUserContent()}
         {type === "appliance" && renderApplianceContent()}
         {type === "approval" && renderApprovalContent()}
@@ -1263,9 +1284,9 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
         onSelect={handleSelectDatePicker}
         title={
           datePickerTarget === "purchaseDate" ? "Select Purchase Date" :
-          datePickerTarget === "lastService" ? "Select Last Service Date" :
-          datePickerTarget === "nextService" ? "Select Next Service Date" :
-          datePickerTarget === "fromDate" ? "Select From Date" : "Select To Date"
+            datePickerTarget === "lastService" ? "Select Last Service Date" :
+              datePickerTarget === "nextService" ? "Select Next Service Date" :
+                datePickerTarget === "fromDate" ? "Select From Date" : "Select To Date"
         }
       />
     </ModalSheet>
@@ -1341,15 +1362,15 @@ function EditableDetailRow({
 function getDaysInMonth(date: Date) {
   const year = date.getFullYear();
   const month = date.getMonth();
-  
+
   const firstDay = new Date(year, month, 1);
   const startDayOfWeek = firstDay.getDay();
-  
+
   const totalDays = new Date(year, month + 1, 0).getDate();
   const prevMonthTotalDays = new Date(year, month, 0).getDate();
-  
+
   const days = [];
-  
+
   for (let i = startDayOfWeek - 1; i >= 0; i--) {
     days.push({
       day: prevMonthTotalDays - i,
@@ -1358,7 +1379,7 @@ function getDaysInMonth(date: Date) {
       isCurrentMonth: false
     });
   }
-  
+
   for (let i = 1; i <= totalDays; i++) {
     days.push({
       day: i,
@@ -1367,7 +1388,7 @@ function getDaysInMonth(date: Date) {
       isCurrentMonth: true
     });
   }
-  
+
   const remainingCells = 42 - days.length;
   for (let i = 1; i <= remainingCells; i++) {
     days.push({
@@ -1377,7 +1398,7 @@ function getDaysInMonth(date: Date) {
       isCurrentMonth: false
     });
   }
-  
+
   return days;
 }
 
@@ -1391,7 +1412,7 @@ interface DatePickerModalProps {
 
 function DatePickerModal({ visible, onClose, value, onSelect, title }: DatePickerModalProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  
+
   useEffect(() => {
     if (visible && value) {
       const parsed = new Date(value);
@@ -1440,7 +1461,7 @@ function DatePickerModal({ visible, onClose, value, onSelect, title }: DatePicke
               <X size={18} color={colors.slate500} />
             </TouchableOpacity>
           </View>
-          
+
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <TouchableOpacity onPress={handlePrevMonth} style={{ padding: spacing.xs }}>
               <Text style={{ fontSize: fontSize.lg, fontWeight: "600", color: colors.brand }}>{"<"}</Text>
@@ -1464,7 +1485,7 @@ function DatePickerModal({ visible, onClose, value, onSelect, title }: DatePicke
               const dd = String(item.day).padStart(2, "0");
               const cellDateStr = `${item.year}-${mm}-${dd}`;
               const isSelected = value === cellDateStr;
-              
+
               return (
                 <TouchableOpacity
                   key={idx}

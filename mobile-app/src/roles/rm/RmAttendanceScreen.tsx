@@ -73,7 +73,7 @@ export function RmAttendanceScreen() {
   }, [selectedRegion, selectedBranchId, branchesInRegion]);
 
   const staffUsers = scopedUsers.filter(u => {
-    const isRoleMatched = (u.role === "lc" || u.role === "branchManager" || u.role === "aa");
+    const isRoleMatched = (u.role === "lc" || u.role === "branchManager" || u.role === "aa" || u.role === "am");
     if (!isRoleMatched) return false;
     if (u.role === "lc") return activeBranchIds.includes(u.branchId);
     return u.branchScope?.some(bId => activeBranchIds.includes(bId)) || activeBranchIds.includes(u.branchId);
@@ -85,14 +85,14 @@ export function RmAttendanceScreen() {
 
     if (selectedRoleFilter === "LC" && u.role !== "lc") return false;
     if (selectedRoleFilter === "AA" && u.role !== "aa") return false;
-    if (selectedRoleFilter === "AM" && u.role !== "branchManager") return false;
+    if (selectedRoleFilter === "AM" && !(u.role === "branchManager" || u.role === "am")) return false;
     return true;
   });
 
-  const regionAttendance = scopedAttendance.filter(a => a.date === selectedDate && staffUsers.find(u => u.id === a.userId));
+  const regionAttendance = scopedAttendance.filter(a => a.date === selectedDate && staffUsers.find(u => String(u.id) === String(a.userId)));
 
   const staffToDisplay = filteredStaff.filter(staff => {
-    const attRecord = regionAttendance.find(a => a.userId === staff.id);
+    const attRecord = regionAttendance.find(a => String(a.userId) === String(staff.id));
     const status = attRecord?.status || "Not Marked";
 
     if (selectedStatusFilter !== "All") {
@@ -201,11 +201,11 @@ export function RmAttendanceScreen() {
                       return `${year}-${month}-${day}`;
                     }
                   }).map(dateStr => (
-                    <TouchableChip 
-                      key={dateStr} 
-                      label={dateStr === state.today ? "Today" : dateStr} 
-                      isSelected={selectedDate === dateStr} 
-                      onPress={() => setSelectedDate(dateStr)} 
+                    <TouchableChip
+                      key={dateStr}
+                      label={dateStr === state.today ? "Today" : dateStr}
+                      isSelected={selectedDate === dateStr}
+                      onPress={() => setSelectedDate(dateStr)}
                     />
                   ))}
                 </ScrollView>
@@ -239,9 +239,10 @@ export function RmAttendanceScreen() {
                 <View style={{ gap: spacing.md }}>
                   {staffToDisplay.map((staff) => {
                     const branch = getBranch(staff.branchId);
-                    const attRecord = regionAttendance.find(a => a.userId === staff.id);
+                    const attRecord = regionAttendance.find(a => String(a.userId) === String(staff.id));
                     const isPresent = attRecord?.status === "Present" || attRecord?.status === "Late" /* Fixed */;
-                    const staffTasks = scopedTasks.filter(t => t.assignedTo === staff.id && (t.status === "Pending" || t.status === "In Progress" || t.status === "Completed") && (t.deadline ? String(t.deadline).slice(0, 10) === selectedDate : selectedDate === state.today));
+                    const todoText = attRecord?.remarks || (attRecord?.weeklyTasks || []).map((t) => t.description).filter(Boolean).join(", ");
+                    const staffTasks = scopedTasks.filter(t => String(t.assignedTo) === String(staff.id) && (t.status === "Pending" || t.status === "In Progress" || t.status === "Completed") && (t.deadline ? String(t.deadline).slice(0, 10) === selectedDate : selectedDate === state.today));
 
                     return (
                       <View key={staff.id} style={{ backgroundColor: colors.white, borderRadius: 24, padding: spacing.xl, borderWidth: 1, borderColor: colors.border }}>
@@ -252,7 +253,7 @@ export function RmAttendanceScreen() {
                             </View>
                             <View style={{ flex: 1 }}>
                               <Text style={{ fontSize: fontSize.md, fontWeight: "400", color: colors.slate900 }}>{staff.name}</Text>
-                              <Text style={{ fontSize: fontSize.xs, color: colors.slate500 }}>{staff.role === "branchManager" ? "BM" : staff.role === "lc" ? "LC" : staff.role.toUpperCase()} | {branch?.name}</Text>
+                              <Text style={{ fontSize: fontSize.xs, color: colors.slate500 }}>{(staff.role === "branchManager" || staff.role === "am") ? "AM" : staff.role === "lc" ? "LC" : staff.role.toUpperCase()} | {branch?.name}</Text>
                               {isPresent ? (
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.xs, marginTop: spacing.xs }}>
                                   <Clock size={12} color={colors.success} />
@@ -285,10 +286,10 @@ export function RmAttendanceScreen() {
                             <Text style={{ fontSize: fontSize.sm, color: colors.slate400, fontStyle: "italic" }}>No checks assigned for today</Text>
                           </View>
                         )}
-                        {attRecord?.remarks && (staff.role === "aa" || staff.role === "branchManager") ? (
+                        {todoText && (staff.role === "aa" || staff.role === "branchManager" || staff.role === "am") ? (
                           <View style={{ marginTop: spacing.lg, borderTopWidth: 1, borderColor: colors.slate100, paddingTop: spacing.md, gap: spacing.xs }}>
                             <Text style={{ fontSize: fontSize.xs, color: colors.slate400, textTransform: "uppercase", letterSpacing: 1, marginBottom: spacing.xs }}>Daily To-Do / Tasks</Text>
-                            <Text style={{ fontSize: fontSize.sm, color: colors.slate700 }}>{attRecord.remarks}</Text>
+                            <Text style={{ fontSize: fontSize.sm, color: colors.slate700 }}>{todoText}</Text>
                           </View>
                         ) : null}
                       </View>
@@ -329,9 +330,9 @@ export function RmAttendanceScreen() {
                     }
                   }).map((date) => {
                     const filteredStaffForDay = filteredStaff;
-                    const dayAtt = scopedAttendance.filter((a) => a.date === date && activeBranchIds.includes(getBranch(scopedUsers.find(u => u.id === a.userId)?.branchId ?? "")?.id ?? ""));
-                    const presentCount = dayAtt.filter((a) => (a.status === "Present" || a.status === "Late" /* Fixed */) && filteredStaffForDay.find(u => u.id === a.userId)).length;
-                    const absentStaff = filteredStaffForDay.filter(u => !dayAtt.find(a => a.userId === u.id && (a.status === "Present" || a.status === "Late" /* Fixed */)));
+                    const dayAtt = scopedAttendance.filter((a) => a.date === date && filteredStaffForDay.some(u => String(u.id) === String(a.userId)));
+                    const presentCount = dayAtt.filter((a) => a.status === "Present" || a.status === "Late" /* Fixed */).length;
+                    const absentStaff = filteredStaffForDay.filter(u => !dayAtt.find(a => String(a.userId) === String(u.id) && (a.status === "Present" || a.status === "Late" /* Fixed */)));
 
                     return (
                       <View key={date} style={{ backgroundColor: colors.white, borderRadius: 24, padding: spacing.xl, borderWidth: 1, borderColor: colors.border }}>

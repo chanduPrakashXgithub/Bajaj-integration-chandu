@@ -7,6 +7,7 @@ import {
   Route,
   CalendarPlus,
   Stamp,
+  Users,
   ChevronRight,
   MapPin,
   Calendar
@@ -136,10 +137,10 @@ export function BranchManagerHomeScreen() {
         action={
           <View style={{ flexDirection: "row", gap: spacing.sm }}>
             <QuickButton
-              label="Schedule Visit"
-              icon={CalendarPlus}
-              variant="primary"
-              onPress={() => setPage("visits")}
+              label="View Users"
+              icon={Users}
+              variant="secondary"
+              onPress={() => setPage("users")}
             />
             <QuickButton
               label="Review Approvals"
@@ -305,20 +306,20 @@ export function BranchManagerHomeScreen() {
               item.tone === "error"
                 ? colors.error
                 : item.tone === "warning"
-                ? colors.warning
-                : colors.brandSecondary;
+                  ? colors.warning
+                  : colors.brandSecondary;
             const bgColor =
               item.tone === "error"
                 ? colors.rose50
                 : item.tone === "warning"
-                ? colors.amber50
-                : colors.sky50;
+                  ? colors.amber50
+                  : colors.sky50;
             const textColor =
               item.tone === "error"
                 ? colors.rose700
                 : item.tone === "warning"
-                ? colors.amber700
-                : colors.sky700;
+                  ? colors.amber700
+                  : colors.sky700;
 
             return (
               <React.Fragment key={i}>
@@ -506,24 +507,24 @@ export function BranchManagerHomeScreen() {
           <View style={{ flex: 1 }}>
             <Text style={{ fontSize: fontSize.xs, color: colors.slate400, marginBottom: 2 }}>From Date</Text>
             <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.white, borderRadius: borderRadius.md, borderWidth: 1, borderColor: colors.border, paddingHorizontal: spacing.sm }}>
-              <TextInput 
-                value={incidentFromDate} 
-                onChangeText={setIncidentFromDate} 
-                placeholder="YYYY-MM-DD" 
-                placeholderTextColor={colors.slate400} 
-                style={{ flex: 1, paddingVertical: spacing.sm, fontSize: fontSize.xs, color: colors.slate900 }} 
+              <TextInput
+                value={incidentFromDate}
+                onChangeText={setIncidentFromDate}
+                placeholder="YYYY-MM-DD"
+                placeholderTextColor={colors.slate400}
+                style={{ flex: 1, paddingVertical: spacing.sm, fontSize: fontSize.xs, color: colors.slate900 }}
               />
             </View>
           </View>
           <View style={{ flex: 1 }}>
             <Text style={{ fontSize: fontSize.xs, color: colors.slate400, marginBottom: 2 }}>To Date</Text>
             <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.white, borderRadius: borderRadius.md, borderWidth: 1, borderColor: colors.border, paddingHorizontal: spacing.sm }}>
-              <TextInput 
-                value={incidentToDate} 
-                onChangeText={setIncidentToDate} 
-                placeholder="YYYY-MM-DD" 
-                placeholderTextColor={colors.slate400} 
-                style={{ flex: 1, paddingVertical: spacing.sm, fontSize: fontSize.xs, color: colors.slate900 }} 
+              <TextInput
+                value={incidentToDate}
+                onChangeText={setIncidentToDate}
+                placeholder="YYYY-MM-DD"
+                placeholderTextColor={colors.slate400}
+                style={{ flex: 1, paddingVertical: spacing.sm, fontSize: fontSize.xs, color: colors.slate900 }}
               />
             </View>
           </View>
@@ -538,11 +539,11 @@ export function BranchManagerHomeScreen() {
           }).map((incident) => {
             const branch = getBranch(incident.branchId);
             return (
-              <View 
-                key={incident.id} 
-                style={{ 
-                  backgroundColor: colors.bg, 
-                  borderRadius: borderRadius.lg, 
+              <View
+                key={incident.id}
+                style={{
+                  backgroundColor: colors.bg,
+                  borderRadius: borderRadius.lg,
                   padding: spacing.lg,
                   borderLeftWidth: 3,
                   borderLeftColor: incident.priority === "Critical" ? colors.error : colors.brand
@@ -571,10 +572,10 @@ export function BranchManagerHomeScreen() {
             if (incidentToDate && cDate > incidentToDate) return false;
             return true;
           }).length === 0 && (
-            <Text style={{ fontSize: fontSize.xs, color: colors.slate500, fontStyle: "italic", textAlign: "center", paddingVertical: spacing.md }}>
-              No critical incidents or complaints in this period.
-            </Text>
-          )}
+              <Text style={{ fontSize: fontSize.xs, color: colors.slate500, fontStyle: "italic", textAlign: "center", paddingVertical: spacing.md }}>
+                No critical incidents or complaints in this period.
+              </Text>
+            )}
         </View>
       </Card>
     </ScreenWrapper>

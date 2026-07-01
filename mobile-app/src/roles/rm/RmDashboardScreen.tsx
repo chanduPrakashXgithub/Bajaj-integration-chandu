@@ -72,7 +72,7 @@ export function RmDashboardScreen() {
           </Text>
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md }}>
             <QuickButton label="Add User" icon={UserPlus} onPress={() => setPage("users")} variant="primary" />
-            <QuickButton label="Approvals" icon={Stamp} onPress={() => setPage("approvals")} variant="secondary" />
+            <QuickButton label="View Users" icon={Users} onPress={() => setPage("users")} variant="secondary" />
             <QuickButton label="Analytics" icon={ChartColumn} onPress={() => setPage("analytics")} variant="secondary" />
             <QuickButton label="Alerts" icon={Bell} onPress={() => setPage("alerts")} variant="warning" />
             <QuickButton label="Attendance" icon={Users} onPress={() => setPage("attendance")} variant="secondary" />

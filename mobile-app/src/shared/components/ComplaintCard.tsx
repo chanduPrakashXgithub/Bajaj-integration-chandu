@@ -32,8 +32,8 @@ const statusLabel = (status: string) => {
   }
 };
 
-export function ComplaintCard({ item, showRaiseToVendor = true, actions }: Props) {
-  const { getBranch, openComplaintDetail, raiseToVendor } = useApp();
+export function ComplaintCard({ item, showRaiseToVendor = false, actions }: Props) {
+  const { state, getBranch, openComplaintDetail, raiseToVendor, openModal } = useApp();
   const branch = getBranch(item.branchId);
 
   const handleRaiseToVendor = async () => {
@@ -41,6 +41,7 @@ export function ComplaintCard({ item, showRaiseToVendor = true, actions }: Props
   };
 
   const canRaiseToVendor = showRaiseToVendor && item.status === "OPEN" && item.vendorId !== "Not assigned";
+  const canAcknowledge = state.role !== "rm" && item.status !== "RESOLVED" && item.status !== "ACKNOWLEDGED";
 
   return (
     <View style={{ backgroundColor: colors.white, borderRadius: 20, padding: spacing.xl, borderWidth: 1, borderColor: colors.border, marginBottom: spacing.lg, ...shadows.card }}>
@@ -88,6 +89,15 @@ export function ComplaintCard({ item, showRaiseToVendor = true, actions }: Props
               style={{ borderRadius: borderRadius.lg, paddingHorizontal: spacing.lg, paddingVertical: spacing.md, backgroundColor: colors.brand }}
             >
               <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.white }}>Raise to Vendor</Text>
+            </TouchableOpacity>
+          )}
+
+          {canAcknowledge && (
+            <TouchableOpacity
+              onPress={() => openModal("acknowledgeComplaint", { id: item.id })}
+              style={{ borderRadius: borderRadius.lg, paddingHorizontal: spacing.lg, paddingVertical: spacing.md, backgroundColor: colors.success }}
+            >
+              <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.white }}>Acknowledge</Text>
             </TouchableOpacity>
           )}
 

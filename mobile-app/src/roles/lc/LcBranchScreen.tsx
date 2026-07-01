@@ -141,12 +141,6 @@ export function LcBranchScreen() {
                 onPress={() => (activeTab === "audit" ? openAuditTrail() : openFormModal(currentFab.formType))}
                 variant="primary"
               />
-              <QuickButton
-                label="Notify team"
-                icon={Phone}
-                onPress={() => {}}
-                variant="secondary"
-              />
             </View>
           </View>
         }

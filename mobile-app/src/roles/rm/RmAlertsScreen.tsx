@@ -33,7 +33,7 @@ function TouchableChip({ label, isSelected, onPress }: { label: string; isSelect
 }
 
 export function RmAlertsScreen() {
-  const { state, setTab, scopedNotifications, scopedBranches, alertStates, acknowledgeAlert, escalateAlert, openBranchDetail } = useApp();
+  const { state, setTab, setPage, scopedNotifications, scopedBranches, scopedComplaints, alertStates, acknowledgeAlert, escalateAlert, openBranchDetail, openComplaintDetail } = useApp();
   const filter = state.tabs.rmAlerts || "critical";
 
   const [selectedRegion, setSelectedRegion] = useState("");
@@ -133,7 +133,34 @@ export function RmAlertsScreen() {
                       {isAcknowledged && <Badge label="Acknowledged" type="Completed" />}
                       {isEscalated && <Badge label="Escalated" type="Critical" />}
                     </View>
-                    <TouchableOpacity onPress={() => { const b = scopedBranches.find((br) => br.id === item.branchId); if (b) openBranchDetail(b.id); }}>
+                    <TouchableOpacity onPress={() => { 
+                      const cmpMatch = item.detail.match(/(CMP-\d+-\d+)/i) || item.title.match(/(CMP-\d+-\d+)/i);
+                      if (cmpMatch) {
+                        const complaint = scopedComplaints.find(c => c.complaintId === cmpMatch[1]);
+                        if (complaint) {
+                          openComplaintDetail(complaint.id);
+                          return;
+                        }
+                      }
+
+                      const complaintMatch = item.detail.match(/complaint\s*#?(\d+)/i) || item.title.match(/complaint\s*#?(\d+)/i);
+                      if (complaintMatch) {
+                        const complaint = scopedComplaints.find(c => String(c.id) === complaintMatch[1]);
+                        if (complaint) {
+                          openComplaintDetail(complaint.id);
+                          return;
+                        }
+                      }
+
+                      const isComplaintRelated = item.title.toLowerCase().includes("complaint") || item.detail.toLowerCase().includes("complaint") || item.title.toLowerCase().includes("issue") || item.detail.toLowerCase().includes("issue");
+                      if (isComplaintRelated) {
+                        setPage("complaints");
+                        return;
+                      }
+
+                      const b = scopedBranches.find((br) => br.id === item.branchId); 
+                      if (b) openBranchDetail(b.id); 
+                    }}>
                       <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.text, marginTop: spacing.md }}>{item.title}</Text>
                     </TouchableOpacity>
                     <Text style={{ fontSize: fontSize.sm, color: colors.textSecondary, marginTop: spacing.xs }}>{item.detail}</Text>

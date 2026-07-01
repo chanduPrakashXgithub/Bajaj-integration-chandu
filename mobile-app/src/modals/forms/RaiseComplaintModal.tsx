@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { Send, ChevronDown, Image as ImageIcon } from "lucide-react-native";
+import * as ImagePicker from "expo-image-picker";
 import { ModalSheet } from "../../shared/components/ModalSheet";
 import { useApp } from "../../context/AppContext";
 import { colors, fontSize, spacing, borderRadius } from "../../theme/theme";
@@ -72,7 +73,7 @@ export function RaiseComplaintModal({ visible, onClose }: Props) {
   const [showBranchDropdown, setShowBranchDropdown] = useState(false);
   const [showAssetDropdown, setShowAssetDropdown] = useState(false);
   const [vendorName, setVendorName] = useState("");
-  const [vendorEmail, setVendorEmail] = useState("");
+  const [attachments, setAttachments] = useState<string[]>([]);
 
   // Auto-select branch for LC
   useEffect(() => {
@@ -100,9 +101,7 @@ export function RaiseComplaintModal({ visible, onClose }: Props) {
   useEffect(() => {
     if (selectedAsset) {
       setVendorName(selectedAsset.amcVendor || "");
-      setVendorEmail(selectedAsset.vendorEmail || "");
-      
-      const category = Object.keys(ASSET_SUGGESTIONS).find(k => 
+      const category = Object.keys(ASSET_SUGGESTIONS).find(k =>
         selectedAsset.category.toLowerCase().includes(k.toLowerCase())
       );
       if (category && ASSET_SUGGESTIONS[category].length > 0) {
@@ -113,13 +112,12 @@ export function RaiseComplaintModal({ visible, onClose }: Props) {
     } else {
       setDescription("");
       setVendorName("");
-      setVendorEmail("");
     }
   }, [selectedAsset]);
 
   const currentSuggestions = useMemo(() => {
     if (!selectedAsset?.category) return [];
-    const category = Object.keys(ASSET_SUGGESTIONS).find(k => 
+    const category = Object.keys(ASSET_SUGGESTIONS).find(k =>
       selectedAsset.category.toLowerCase().includes(k.toLowerCase())
     );
     return category ? ASSET_SUGGESTIONS[category] : [];
@@ -141,19 +139,26 @@ export function RaiseComplaintModal({ visible, onClose }: Props) {
       return;
     }
 
+    if (!vendorName.trim()) {
+      setErrors((prev) => ({ ...prev, vendorName: "Vendor name is required" }));
+      return;
+    }
+
     createComplaint({
       branchId: selectedBranchId,
       assetId: selectedAssetId,
       priority: priority as any,
       description,
-      vendorName: vendorName.trim() || undefined,
-      vendorEmail: vendorEmail.trim() || undefined,
+      vendorName: vendorName.trim(),
+      attachmentUrls: attachments,
     } as any);
 
     // Reset
     setDescription("");
     setSelectedAssetId("");
     setPriority("Medium");
+    setVendorName("");
+    setAttachments([]);
     setErrors({});
     onClose();
   };
@@ -162,12 +167,48 @@ export function RaiseComplaintModal({ visible, onClose }: Props) {
     setDescription("");
     setSelectedAssetId("");
     setPriority("Medium");
+    setVendorName("");
+    setAttachments([]);
     setErrors({});
     onClose();
   };
 
+  const pickFromGallery = async () => {
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      showToast("Gallery permission is required");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      quality: 0.8,
+    });
+
+    if (result.canceled || !result.assets?.length) return;
+    setAttachments((prev) => [...prev, result.assets[0].uri]);
+  };
+
+  const pickFromCamera = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permission.granted) {
+      showToast("Camera permission is required");
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      quality: 0.8,
+    });
+
+    if (result.canceled || !result.assets?.length) return;
+    setAttachments((prev) => [...prev, result.assets[0].uri]);
+  };
+
   return (
-    <ModalSheet visible={visible} onClose={handleClose} title="Raise Complaint" subtitle="Report an issue with a branch asset">
+    <ModalSheet visible={visible} onClose={handleClose} title="Raise Complaint" subtitle="Upload vendor invoice or mail screenshot and track status">
       <ScrollView showsVerticalScrollIndicator={false} style={{ maxHeight: 500 }}>
         <View style={{ gap: spacing.xl, paddingBottom: spacing["3xl"] }}>
 
@@ -242,38 +283,85 @@ export function RaiseComplaintModal({ visible, onClose }: Props) {
             )}
           </View>
 
-          {/* Vendor Details */}
-          <View style={{ gap: spacing.md }}>
-            <View>
-              <Text style={{ fontSize: fontSize.sm, fontWeight: "500", color: colors.textSecondary, marginBottom: spacing.xs }}>Vendor Name</Text>
-              <TextInput
-                value={vendorName}
-                onChangeText={setVendorName}
-                placeholder="Enter vendor name"
-                placeholderTextColor={colors.slate400}
+          {/* Vendor Name */}
+          <View>
+            <Text style={{ fontSize: fontSize.sm, fontWeight: "500", color: colors.textSecondary, marginBottom: spacing.xs }}>Vendor</Text>
+            <TextInput
+              value={vendorName}
+              onChangeText={(text) => {
+                setVendorName(text);
+                if (errors.vendorName) {
+                  setErrors((prev) => ({ ...prev, vendorName: "" }));
+                }
+              }}
+              placeholder="Enter vendor name"
+              placeholderTextColor={colors.slate400}
+              style={{
+                borderRadius: borderRadius.lg,
+                borderWidth: 1,
+                borderColor: errors.vendorName ? colors.error : colors.border,
+                paddingHorizontal: spacing.xl,
+                paddingVertical: spacing.md,
+                fontSize: fontSize.sm,
+                color: colors.text,
+              }}
+            />
+            {errors.vendorName ? <Text style={{ fontSize: fontSize.xs, color: colors.error, marginTop: spacing.xs }}>{errors.vendorName}</Text> : null}
+          </View>
+
+          {/* Attachment */}
+          <View>
+            <Text style={{ fontSize: fontSize.sm, fontWeight: "500", color: colors.textSecondary, marginBottom: spacing.xs }}>Invoice / Mail Screenshot</Text>
+            <View style={{ flexDirection: "row", gap: spacing.sm }}>
+              <TouchableOpacity
+                onPress={pickFromGallery}
                 style={{
-                  borderRadius: borderRadius.lg, borderWidth: 1, borderColor: colors.border,
-                  paddingHorizontal: spacing.xl, paddingVertical: spacing.md,
-                  fontSize: fontSize.sm, color: colors.text,
+                  flex: 1,
+                  borderRadius: borderRadius.lg,
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                  borderStyle: "dashed",
+                  paddingVertical: spacing.lg,
+                  alignItems: "center",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  gap: spacing.sm,
+                  backgroundColor: colors.slate50,
                 }}
-              />
-            </View>
-            <View>
-              <Text style={{ fontSize: fontSize.sm, fontWeight: "500", color: colors.textSecondary, marginBottom: spacing.xs }}>Vendor Email</Text>
-              <TextInput
-                value={vendorEmail}
-                onChangeText={setVendorEmail}
-                placeholder="vendor@example.com"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                placeholderTextColor={colors.slate400}
+              >
+                <ImageIcon size={16} color={colors.brand} />
+                <Text style={{ fontSize: fontSize.sm, color: colors.brand, fontWeight: "600" }}>Gallery</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={pickFromCamera}
                 style={{
-                  borderRadius: borderRadius.lg, borderWidth: 1, borderColor: colors.border,
-                  paddingHorizontal: spacing.xl, paddingVertical: spacing.md,
-                  fontSize: fontSize.sm, color: colors.text,
+                  flex: 1,
+                  borderRadius: borderRadius.lg,
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                  borderStyle: "dashed",
+                  paddingVertical: spacing.lg,
+                  alignItems: "center",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  gap: spacing.sm,
+                  backgroundColor: colors.slate50,
                 }}
-              />
+              >
+                <ImageIcon size={16} color={colors.brand} />
+                <Text style={{ fontSize: fontSize.sm, color: colors.brand, fontWeight: "600" }}>Camera</Text>
+              </TouchableOpacity>
             </View>
+
+            {attachments.length > 0 && (
+              <View style={{ marginTop: spacing.sm, gap: spacing.xs }}>
+                {attachments.map((name, idx) => (
+                  <View key={`${name}_${idx}`} style={{ backgroundColor: colors.slate100, borderRadius: borderRadius.md, paddingHorizontal: spacing.md, paddingVertical: spacing.sm }}>
+                    <Text style={{ fontSize: fontSize.xs, color: colors.slate600 }}>{name.split("/").pop() || `attachment_${idx + 1}`}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
           </View>
 
           {/* Priority */}
@@ -320,16 +408,16 @@ export function RaiseComplaintModal({ visible, onClose }: Props) {
               <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: spacing.sm }}>
                 <View style={{ flexDirection: "row", gap: spacing.sm, paddingRight: spacing.xl }}>
                   {currentSuggestions.map((s, idx) => (
-                    <TouchableOpacity 
+                    <TouchableOpacity
                       key={idx}
                       onPress={() => setDescription(s)}
-                      style={{ 
-                        paddingHorizontal: spacing.md, 
-                        paddingVertical: spacing.xs, 
-                        backgroundColor: colors.slate100, 
+                      style={{
+                        paddingHorizontal: spacing.md,
+                        paddingVertical: spacing.xs,
+                        backgroundColor: colors.slate100,
                         borderRadius: borderRadius.full,
                         borderWidth: 1,
-                        borderColor: description === s ? colors.brand : colors.slate200 
+                        borderColor: description === s ? colors.brand : colors.slate200
                       }}
                     >
                       <Text style={{ fontSize: 12, color: description === s ? colors.brand : colors.slate600 }}>{s}</Text>

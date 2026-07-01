@@ -158,6 +158,8 @@ export const bmAttendance = async (req: AuthenticatedRequest, res: Response) => 
           location: true,
           proof: true,
           deviation: true,
+          remarks: true,
+          photos: true,
           weeklyTasks: { select: { id: true, description: true, estimatedHours: true } },
         },
         orderBy: { date: "desc" },

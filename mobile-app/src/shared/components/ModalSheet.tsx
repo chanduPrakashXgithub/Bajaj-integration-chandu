@@ -4,6 +4,7 @@ import {
   TouchableWithoutFeedback,
   View,
   Text,
+  Modal,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -54,9 +55,10 @@ export function ModalSheet({
 
   return (
     <View
-      style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100 }}
+      style={{ flex: 1, zIndex: 100 }}
       pointerEvents="box-none"
     >
+      <Modal transparent visible={visible} animationType="none" onRequestClose={onClose}>
       {/* Backdrop */}
       <TouchableWithoutFeedback onPress={onClose}>
         <Animated.View
@@ -137,6 +139,7 @@ export function ModalSheet({
         {/* Content */}
         {children}
       </Animated.View>
+      </Modal>
     </View>
   );
 }

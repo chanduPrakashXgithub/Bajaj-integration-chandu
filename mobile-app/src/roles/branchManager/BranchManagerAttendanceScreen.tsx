@@ -108,6 +108,7 @@ export function BranchManagerAttendanceScreen() {
               {calendarDays.map((date) => {
                 const attRecord = scopedAttendance.find((a) => String(a.userId) === String(currentUser?.id) && a.date === date);
                 const wasPresent = attRecord?.status === "Present" || attRecord?.status === "Late";
+                const todoText = attRecord?.remarks || (attRecord?.weeklyTasks || []).map((t) => t.description).filter(Boolean).join(", ");
 
                 return (
                   <View key={date} style={{ backgroundColor: colors.white, borderRadius: borderRadius.lg, padding: spacing.xl, borderWidth: 1, borderColor: colors.border, gap: spacing.md }}>
@@ -116,11 +117,11 @@ export function BranchManagerAttendanceScreen() {
                       <Badge label={wasPresent ? "Present" : "Absent"} type={wasPresent ? "Completed" : "Pending"} />
                     </View>
 
-                    {attRecord?.remarks ? (
+                    {todoText ? (
                       <View style={{ gap: spacing.sm, paddingTop: spacing.xs }}>
                         <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase" }}>Daily To-Do / Tasks</Text>
                         <View style={{ backgroundColor: colors.slate50, padding: spacing.md, borderRadius: borderRadius.md, borderWidth: 1, borderColor: colors.slate100 }}>
-                          <Text style={{ fontSize: fontSize.sm, color: colors.slate700 }}>{attRecord.remarks}</Text>
+                          <Text style={{ fontSize: fontSize.sm, color: colors.slate700 }}>{todoText}</Text>
                         </View>
                       </View>
                     ) : (

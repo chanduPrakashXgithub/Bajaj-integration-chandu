@@ -14,6 +14,7 @@ import notificationRoutes from "./notification.routes";
 import lcRoutes from "./role/lc.routes";
 import bmRoutes from "./role/bm.routes";
 import rmRoutes from "./role/rm.routes";
+import amRoutes from "./role/am.routes";
 
 const router = Router();
 
@@ -57,5 +58,6 @@ router.use("/notifications", notificationRoutes);
 router.use("/lc", lcRoutes);   // LC: /lc/dashboard, /lc/tasks, /lc/attendance/calendar
 router.use("/bm", bmRoutes);   // BM: /bm/dashboard, /bm/attendance, /bm/tasks, /bm/approvals, /bm/branches, /bm/complaints, /bm/visits
 router.use("/rm", rmRoutes);   // RM: /rm/dashboard, /rm/attendance, /rm/finance, /rm/users, /rm/analytics, /rm/tasks
+router.use("/am", amRoutes);   // AM: /am/dashboard, /am/attendance, /am/finance, /am/users, /am/analytics, /am/tasks
 
 export default router;

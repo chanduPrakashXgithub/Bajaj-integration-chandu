@@ -76,13 +76,18 @@ export function RmUsersScreen() {
     return scopedUsers.filter((user) => {
       if (filter === "active" && user.status !== "Present") return false;
       if (filter === "inactive" && user.status === "Present") return false;
-      if (!activeBranchIds.includes(user.branchId)) return false;
+
+      const belongsToSelectedBranches =
+        activeBranchIds.includes(user.branchId) ||
+        (Array.isArray(user.branchScope) && user.branchScope.some((bId) => activeBranchIds.includes(bId)));
+
+      if (!belongsToSelectedBranches) return false;
       return true;
     });
   }, [scopedUsers, filter, selectedBranchId, branchesInRegion]);
 
-  const list = statusFiltered.filter(u => 
-    u.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+  const list = statusFiltered.filter(u =>
+    u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     u.phone?.includes(searchQuery) ||
     u.role.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -154,12 +159,12 @@ export function RmUsersScreen() {
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md, marginTop: spacing.xl }}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center", backgroundColor: colors.white, borderRadius: borderRadius.lg, paddingHorizontal: spacing.md, borderWidth: 1, borderColor: colors.border }}>
           <Search size={16} color={colors.slate400} />
-          <TextInput 
+          <TextInput
             value={searchQuery}
             onChangeText={setSearchQuery}
-            placeholder="Search by name, role, or phone..." 
+            placeholder="Search by name, role, or phone..."
             placeholderTextColor={colors.slate400}
-            style={{ flex: 1, paddingVertical: spacing.md, paddingHorizontal: spacing.sm, color: colors.slate900, fontSize: fontSize.sm }} 
+            style={{ flex: 1, paddingVertical: spacing.md, paddingHorizontal: spacing.sm, color: colors.slate900, fontSize: fontSize.sm }}
           />
         </View>
       </View>
@@ -229,7 +234,7 @@ export function RmUsersScreen() {
 
           <View style={{ flex: 2, minWidth: 280, gap: spacing.xl }}>
             {sortedList.map((user) => {
-              const branch = getBranch(user.branchId);
+              const branch = getBranch(user.branchId) || (Array.isArray(user.branchScope) && user.branchScope.length > 0 ? getBranch(user.branchScope[0]) : undefined);
               const userRoleString = user.role as string;
               return (
                 <TouchableOpacity key={user.id} onPress={() => openUserDetail(user.id)} activeOpacity={0.7}>
@@ -245,7 +250,7 @@ export function RmUsersScreen() {
                             <Badge label={userRoleString === "rm" ? "RM" : userRoleString === "branchManager" ? "BM" : userRoleString === "am" ? "AM" : userRoleString === "employee" ? "Emp" : "W"} type={userRoleString === "rm" ? "Critical" : userRoleString === "branchManager" ? "High" : userRoleString === "am" ? "Medium" : "Low"} />
                           </View>
                           {userRoleString !== "rm" && (
-                            <TouchableOpacity 
+                            <TouchableOpacity
                               onPress={() => {
                                 Alert.alert(
                                   "Delete User",

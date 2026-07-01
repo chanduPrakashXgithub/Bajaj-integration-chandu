@@ -33,7 +33,7 @@ function TouchableChip({ label, isSelected, onPress }: { label: string; isSelect
 }
 
 export function BranchManagerBranchesScreen() {
-  const { scopedBranches, openBranchDetail, openFormModal } = useApp();
+  const { scopedBranches, openBranchDetail, openFormModal, state } = useApp();
   const [selectedRegion, setSelectedRegion] = useState("all");
 
 
@@ -158,17 +158,10 @@ export function BranchManagerBranchesScreen() {
                 </View>
 
                 {/* Action Buttons Row */}
-                <View style={{ borderTopWidth: 1, borderColor: colors.slate100, paddingTop: spacing.md, flexDirection: "row", gap: spacing.sm }}>
-                  <TouchableOpacity onPress={() => openBranchDetail(branch.id)} style={{ flex: 1, backgroundColor: colors.slate900, borderRadius: borderRadius.lg, paddingVertical: spacing.md, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm }}>
-                    <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.white }}>Overview</Text>
+                <View style={{ borderTopWidth: 1, borderColor: colors.slate100, paddingTop: spacing.md, flexDirection: "row", gap: spacing.sm, flexWrap: "wrap" }}>
+                  <TouchableOpacity onPress={() => openBranchDetail(branch.id)} style={{ flex: 1, minWidth: 100, backgroundColor: colors.brand, borderRadius: borderRadius.lg, paddingVertical: spacing.md, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm }}>
+                    <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.white }}>Branch Deep Dive</Text>
                     <ChevronRight size={14} color={colors.white} strokeWidth={2} />
-                  </TouchableOpacity>
-
-                  <TouchableOpacity 
-                    onPress={() => openFormModal("visit")} 
-                    style={{ backgroundColor: colors.sky50, borderRadius: 8, paddingHorizontal: spacing.md, paddingVertical: 8, alignItems: "center", justifyContent: "center" }}
-                  >
-                    <Text style={{ fontSize: 12, fontWeight: "600", color: colors.sky700 }}>Schedule</Text>
                   </TouchableOpacity>
                 </View>
               </View>

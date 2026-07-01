@@ -1,10 +1,10 @@
-export type RoleId = "lc" | "branchManager" | "aa" | "rm";
+export type RoleId = "lc" | "branchManager" | "aa" | "rm" | "am" | "rrm";
 
 export type Priority = "Critical" | "High" | "Medium" | "Low";
 
 export type TaskStatus = "Pending" | "In Progress" | "Completed" | "Revoked";
 
-export type ComplaintStatus = "OPEN" | "VENDOR_PENDING" | "IN_PROGRESS" | "ON_HOLD" | "RESOLVED" | "REOPENED";
+export type ComplaintStatus = "OPEN" | "VENDOR_PENDING" | "IN_PROGRESS" | "ON_HOLD" | "RESOLVED" | "REOPENED" | "ACKNOWLEDGED";
 
 export type ComplaintRemark = {
   user: string;
@@ -132,6 +132,7 @@ export type Complaint = {
   assetId: string | number | null;
   assetName?: string;
   description: string;
+  vendorIssueId?: string;
   attachmentUrls: string[];
   vendorRemarks?: string | null;
   resolutionNotes?: string | null;

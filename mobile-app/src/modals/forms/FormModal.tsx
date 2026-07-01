@@ -174,12 +174,8 @@ export function FormModal({ visible, onClose }: Props) {
       render: () => (
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md }}>
           {[
-            { label: "Create task", icon: Plus, color: colors.text, bg: colors.text, action: () => openForm("task") },
-            { label: "Raise complaint", icon: Zap, color: colors.brand, bg: colors.card, border: true, action: () => openForm("complaint") },
+            { label: "Raise Complaint Form", icon: Zap, color: colors.brand, bg: colors.card, border: true, action: () => openForm("complaint") },
             { label: "Add appliance", icon: Wrench, color: colors.success, bg: colors.card, border: true, action: () => openForm("appliance") },
-            { label: "Work order", icon: DollarSign, color: colors.warning, bg: colors.card, border: true, action: () => openForm("expense") },
-            { label: "Schedule visit", icon: Calendar, color: colors.brandSecondary, bg: colors.card, border: true, action: () => openForm("visit") },
-            { label: "Create user", icon: Plus, color: colors.info, bg: colors.card, border: true, action: () => openForm("user") },
           ].map((item, i) => (
             <TouchableOpacity key={i} onPress={item.action} style={{ width: "47%", backgroundColor: item.bg, borderRadius: borderRadius.xl, padding: spacing.xl, borderWidth: item.border ? 1 : 0, borderColor: colors.border }}>
               <item.icon size={20} color={item.color} strokeWidth={2} />

@@ -233,14 +233,8 @@ export function BranchesScreen() {
 
                     <View style={{ borderTopWidth: 1, borderColor: colors.border, marginTop: spacing.xl, paddingTop: spacing.xl, flexDirection: "row", flexWrap: "wrap", gap: spacing.md }}>
                       <TouchableOpacity onPress={() => openBranchDetail(branch.id)} style={{ flex: 1, minWidth: 120, backgroundColor: colors.white, borderRadius: borderRadius.lg, paddingVertical: spacing.md, borderWidth: 1, borderColor: colors.border, alignItems: "center" }}>
-                        <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate700 }}>Overview</Text>
+                        <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate700 }}>Branch Deep Dive</Text>
                       </TouchableOpacity>
-
-                      {!isRm ? (
-                        <TouchableOpacity onPress={() => openFormModal("visit")} style={{ backgroundColor: colors.sky50, borderRadius: borderRadius.lg, paddingHorizontal: spacing.lg, paddingVertical: spacing.md, alignItems: "center", justifyContent: "center" }}>
-                          <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.sky700 }}>Schedule</Text>
-                        </TouchableOpacity>
-                      ) : null}
                     </View>
                   </View>
                 );
@@ -357,14 +351,8 @@ export function BranchesScreen() {
 
                 <View style={{ borderTopWidth: 1, borderColor: colors.border, marginTop: spacing.xl, paddingTop: spacing.xl, flexDirection: "row", flexWrap: "wrap", gap: spacing.md }}>
                   <TouchableOpacity onPress={() => openBranchDetail(branch.id)} style={{ flex: 1, minWidth: 120, backgroundColor: colors.white, borderRadius: borderRadius.lg, paddingVertical: spacing.md, borderWidth: 1, borderColor: colors.border, alignItems: "center" }}>
-                    <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate700 }}>Overview</Text>
+                    <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate700 }}>Branch Deep Dive</Text>
                   </TouchableOpacity>
-
-                  {!isRm ? (
-                    <TouchableOpacity onPress={() => openFormModal("visit")} style={{ backgroundColor: colors.sky50, borderRadius: borderRadius.lg, paddingHorizontal: spacing.lg, paddingVertical: spacing.md, alignItems: "center", justifyContent: "center" }}>
-                      <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.sky700 }}>Schedule</Text>
-                    </TouchableOpacity>
-                  ) : null}
                 </View>
               </View>
             );
