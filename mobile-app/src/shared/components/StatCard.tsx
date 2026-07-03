@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { LucideIcon } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors, fontSize, spacing, borderRadius, shadows } from "../../theme/theme";
@@ -10,14 +10,14 @@ interface Props {
   meta: string;
   accent?: string;
   icon?: LucideIcon;
+  onPress?: () => void;
 }
 
 function getGradientColors(): [string, string] {
-  // Always use the professional brand-bluish gradient for visual uniformity
   return ["#FFFFFF", "#ECF4FA"];
 }
 
-export function StatCard({ label, value, meta, accent, icon: Icon }: Props) {
+export function StatCard({ label, value, meta, accent, icon: Icon, onPress }: Props) {
   const finalAccent = accent || colors.brand;
   const gradientColors = getGradientColors();
   
@@ -31,7 +31,7 @@ export function StatCard({ label, value, meta, accent, icon: Icon }: Props) {
     ? finalAccent + "15" // ~8% opacity
     : "rgba(0, 91, 172, 0.08)";
 
-  return (
+  const content = (
     <LinearGradient
       colors={gradientColors}
       start={{ x: 0, y: 0 }}
@@ -44,7 +44,6 @@ export function StatCard({ label, value, meta, accent, icon: Icon }: Props) {
         ...shadows.card
       }}
     >
-      {/* Top Row: Label and Icon */}
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
         <Text 
           numberOfLines={1} 
@@ -68,7 +67,6 @@ export function StatCard({ label, value, meta, accent, icon: Icon }: Props) {
         ) : null}
       </View>
 
-      {/* Middle Row: Value */}
       <Text 
         numberOfLines={1} 
         style={{ 
@@ -82,7 +80,6 @@ export function StatCard({ label, value, meta, accent, icon: Icon }: Props) {
         {value}
       </Text>
 
-      {/* Bottom Row: Meta description */}
       <Text 
         numberOfLines={1} 
         style={{ 
@@ -95,5 +92,10 @@ export function StatCard({ label, value, meta, accent, icon: Icon }: Props) {
       </Text>
     </LinearGradient>
   );
+
+  if (onPress) {
+    return <TouchableOpacity onPress={onPress} activeOpacity={0.7}>{content}</TouchableOpacity>;
+  }
+  return content;
 }
 

@@ -243,7 +243,7 @@ export const updateComplaintStatus = async (req: AuthenticatedRequest, res: Resp
     if (!userContext) return res.status(401).json({ message: "Unauthorized" });
 
     const { id } = req.params;
-    const { status } = req.body;
+    const { status, vendorIssueId } = req.body;
 
     if (!status) return res.status(400).json({ message: "Status is required" });
 
@@ -257,6 +257,7 @@ export const updateComplaintStatus = async (req: AuthenticatedRequest, res: Resp
     const updateData: any = { status };
 
     if (status === ComplaintStatus.RESOLVED) updateData.resolvedAt = new Date();
+    if (vendorIssueId !== undefined) updateData.vendorIssueId = vendorIssueId;
 
     const result = await prisma.$transaction(async (tx) => {
       const updated = await tx.complaint.update({ where: { id }, data: updateData });
@@ -365,8 +366,8 @@ export const closeComplaint = async (req: AuthenticatedRequest, res: Response) =
 export const resolveComplaint = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const userContext = req.user;
-    if (!userContext || userContext.role !== RoleId.rm) {
-      return res.status(403).json({ message: "Forbidden: Only RM can resolve complaints via this endpoint." });
+    if (!userContext || (userContext.role !== RoleId.rm && userContext.role !== RoleId.lc)) {
+      return res.status(403).json({ message: "Forbidden: Only RM or LC can resolve complaints via this endpoint." });
     }
 
     const { id } = req.params;

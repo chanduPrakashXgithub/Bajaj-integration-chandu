@@ -161,16 +161,16 @@ export function LcHomeScreen() {
       {/* Stats */}
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md }}>
         <View style={{ width: "47%", flexGrow: 1 }}>
-          <StatCard label="Health" value={pct(branch.health)} meta={`SLA ${pct(branch.sla)}`} icon={Activity} accent={colors.success} />
+          <StatCard label="Health" value={pct(branch.health)} meta={`SLA ${pct(branch.sla)}`} icon={Activity} accent={colors.success} onPress={() => setPage("branch")} />
         </View>
         <View style={{ width: "47%", flexGrow: 1 }}>
-          <StatCard label="My open Checks" value={String(myActiveTasks.length)} meta={`${myPendingTasks.length} pending`} icon={ClipboardList} accent={colors.brand} />
+          <StatCard label="My open Checks" value={String(myActiveTasks.length)} meta={`${myPendingTasks.length} pending`} icon={ClipboardList} accent={colors.brand} onPress={() => setPage("tasks")} />
         </View>
         <View style={{ width: "47%", flexGrow: 1 }}>
-          <StatCard label="Issues" value={String(openComplaints.length)} meta={`${branch.criticalAlerts} critical`} icon={ShieldAlert} accent={colors.warning} />
+          <StatCard label="Issues" value={String(openComplaints.length)} meta={`${branch.criticalAlerts} critical`} icon={ShieldAlert} accent={colors.warning} onPress={() => setPage("complaints")} />
         </View>
         <View style={{ width: "47%", flexGrow: 1 }}>
-          <StatCard label="Appliances" value={String(appliances.length)} meta={`${riskyAppliances.length} need review`} icon={Cpu} accent={colors.brandSecondary} />
+          <StatCard label="Appliances" value={String(appliances.length)} meta={`${riskyAppliances.length} need review`} icon={Cpu} accent={colors.brandSecondary} onPress={() => setPage("branch")} />
         </View>
       </View>
 

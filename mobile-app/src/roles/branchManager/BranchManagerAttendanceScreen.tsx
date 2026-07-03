@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
-import { CheckCircle2, CalendarDays, Send } from "lucide-react-native";
+import { CheckCircle2, CalendarDays, Send, Plus, Trash2 } from "lucide-react-native";
 import { ScreenWrapper } from "../../shared/layout/ScreenWrapper";
 import { SectionHeader } from "../../shared/components/SectionHeader";
 import { Card } from "../../shared/components/Card";
@@ -8,11 +8,28 @@ import { Badge } from "../../shared/components/Badge";
 import { SegmentedControl } from "../../shared/components/SegmentedControl";
 import { useApp } from "../../context/AppContext";
 import { colors, fontSize, spacing, borderRadius } from "../../theme/theme";
+import { WeeklyTaskItem } from "../../types/domain";
 
 export function BranchManagerAttendanceScreen() {
   const { scopedAttendance, state, currentUser, markAttendance, showToast } = useApp();
   const [activeTab, setActiveTab] = useState("mark");
   const [remarks, setRemarks] = useState("");
+  const [weeklyTasks, setWeeklyTasks] = useState<WeeklyTaskItem[]>([
+    { id: "1", description: "", estimatedHours: 0 },
+  ]);
+
+  const addTaskRow = () => {
+    setWeeklyTasks((prev) => [...prev, { id: String(prev.length + 1), description: "", estimatedHours: 0 }]);
+  };
+
+  const removeTaskRow = (id: string) => {
+    if (weeklyTasks.length <= 1) return;
+    setWeeklyTasks((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  const updateTaskRow = (id: string, field: keyof WeeklyTaskItem, value: string | number) => {
+    setWeeklyTasks((prev) => prev.map((t) => t.id === id ? { ...t, [field]: value } : t));
+  };
 
   const myAttendance = scopedAttendance.filter((a) => String(a.userId) === String(currentUser?.id));
   const myToday = myAttendance.find((a) => a.date === state.today);
@@ -41,7 +58,7 @@ export function BranchManagerAttendanceScreen() {
   }
 
   const handleMarkAttendance = () => {
-    markAttendance({ remarks });
+    markAttendance({ remarks, weeklyTasks: weeklyTasks.filter(t => t.description.trim() !== "") });
   };
 
   return (
@@ -76,11 +93,46 @@ export function BranchManagerAttendanceScreen() {
             ) : (
               <View style={{ gap: spacing.md }}>
                 <View style={{ backgroundColor: colors.slate50, borderRadius: borderRadius.lg, padding: spacing.md, borderWidth: 1, borderColor: colors.border }}>
-                  <Text style={{ fontSize: fontSize.sm, fontWeight: "500", color: colors.slate700, marginBottom: spacing.xs }}>Daily To-Do / Tasks Completed</Text>
+                  <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: spacing.md }}>
+                    <Text style={{ fontSize: fontSize.sm, fontWeight: "500", color: colors.slate700 }}>Tasks / Checks Planned</Text>
+                    <TouchableOpacity onPress={addTaskRow} style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                      <Plus size={14} color={colors.brand} />
+                      <Text style={{ fontSize: fontSize.xs, color: colors.brand, fontWeight: "600" }}>Add Task</Text>
+                    </TouchableOpacity>
+                  </View>
+                  
+                  {weeklyTasks.map((task, index) => (
+                    <View key={task.id} style={{ flexDirection: "row", gap: spacing.sm, marginBottom: spacing.md }}>
+                      <TextInput
+                        value={task.description}
+                        onChangeText={(val) => updateTaskRow(task.id, "description", val)}
+                        placeholder="Task description..."
+                        placeholderTextColor={colors.slate400}
+                        style={{ flex: 1, backgroundColor: colors.white, borderWidth: 1, borderColor: colors.border, borderRadius: borderRadius.md, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, color: colors.slate900, fontSize: fontSize.sm }}
+                      />
+                      <TextInput
+                        value={String(task.estimatedHours || "")}
+                        onChangeText={(val) => updateTaskRow(task.id, "estimatedHours", parseFloat(val) || 0)}
+                        placeholder="Hrs"
+                        placeholderTextColor={colors.slate400}
+                        keyboardType="numeric"
+                        style={{ width: 60, backgroundColor: colors.white, borderWidth: 1, borderColor: colors.border, borderRadius: borderRadius.md, paddingHorizontal: spacing.sm, paddingVertical: spacing.sm, color: colors.slate900, fontSize: fontSize.sm, textAlign: "center" }}
+                      />
+                      {weeklyTasks.length > 1 && (
+                        <TouchableOpacity onPress={() => removeTaskRow(task.id)} style={{ justifyContent: "center", paddingHorizontal: spacing.xs }}>
+                          <Trash2 size={16} color={colors.error} />
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                  ))}
+                </View>
+
+                <View style={{ backgroundColor: colors.slate50, borderRadius: borderRadius.lg, padding: spacing.md, borderWidth: 1, borderColor: colors.border }}>
+                  <Text style={{ fontSize: fontSize.sm, fontWeight: "500", color: colors.slate700, marginBottom: spacing.xs }}>Daily Remarks</Text>
                   <TextInput
                     value={remarks}
                     onChangeText={setRemarks}
-                    placeholder="Enter what you plan to do or have completed today..."
+                    placeholder="Enter any additional remarks..."
                     placeholderTextColor={colors.slate400}
                     style={{ fontSize: fontSize.sm, color: colors.slate900, minHeight: 80, textAlignVertical: "top" }}
                     multiline

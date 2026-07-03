@@ -51,7 +51,7 @@ export function LcAttendanceScreen() {
   const absentCount = Math.max(0, branchUsers.length - presentCount);
 
   const handleMarkAttendance = () => {
-    markAttendance({ isBranchOpening: true, remarks, photos });
+    markAttendance({ isBranchOpening: true, remarks: "", photos: [], weeklyTasks: [] });
   };
 
   return (
@@ -95,28 +95,7 @@ export function LcAttendanceScreen() {
             <View style={{ gap: spacing.xl }}>
 
 
-              <Card variant="soft" style={{ backgroundColor: colors.text }}>
-                <Text style={{ fontSize: fontSize.xs, fontWeight: "400", color: colors.slate300, textTransform: "uppercase", marginBottom: spacing.md }}>Opening Remarks & Photos</Text>
-                <TextInput
-                  value={remarks}
-                  onChangeText={setRemarks}
-                  placeholder="Any remarks for opening?"
-                  placeholderTextColor={colors.slate400}
-                  multiline
-                  style={{ borderRadius: borderRadius.lg, borderWidth: 1, borderColor: colors.slate600, paddingHorizontal: spacing.lg, paddingVertical: spacing.md, fontSize: fontSize.sm, color: colors.white, minHeight: 80, textAlignVertical: "top" }}
-                />
-                <TouchableOpacity onPress={() => setPhotos([...photos, `photo_${Date.now()}.jpg`])} style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm, marginTop: spacing.lg, paddingVertical: spacing.sm }}>
-                  <Plus size={14} color={colors.brand} strokeWidth={2} />
-                  <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.brand }}>Attach Photo (Mock)</Text>
-                </TouchableOpacity>
-                <View style={{ flexDirection: "row", gap: spacing.sm, flexWrap: "wrap", marginTop: photos.length > 0 ? spacing.md : 0 }}>
-                  {photos.map((p, i) => (
-                    <View key={i} style={{ paddingHorizontal: spacing.sm, paddingVertical: spacing.xs, backgroundColor: colors.slate800, borderRadius: borderRadius.sm }}>
-                      <Text style={{ color: colors.slate300, fontSize: fontSize.xs }}>{p}</Text>
-                    </View>
-                  ))}
-                </View>
-              </Card>
+
 
               <TouchableOpacity onPress={handleMarkAttendance} style={{ backgroundColor: colors.brand, borderRadius: borderRadius.lg, paddingHorizontal: spacing.xl, paddingVertical: spacing.md, alignItems: "center", flexDirection: "row", justifyContent: "center", gap: spacing.sm }}>
                 <Send size={14} color={colors.white} strokeWidth={2} />

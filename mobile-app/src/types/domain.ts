@@ -153,6 +153,7 @@ export type Appliance = {
   brand: string;
   model: string;
   serial: string;
+  imageUrl: string;
   healthScore: number;
   status: ApplianceStatus;
   purchaseDate: string;

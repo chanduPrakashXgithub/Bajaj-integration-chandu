@@ -1,10 +1,277 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model User {
+  id                 String          @id @default(uuid())
+  name               String
+  email              String          @unique
+  password           String
+  role               RoleId
+  position           String
+  phone              String          @default("Pending")
+  shift              String          @default("09:00 - 18:00")
+  joinDate           DateTime        @default(now())
+  status             String          @default("Present")
+  rating             Float           @default(4.0)
+  attendancePct      Float           @default(100.0)
+  tasksClosed        Int             @default(0)
+  proofRate          Float           @default(100.0)
+  escalations        Int             @default(0)
+  managerId          String?
+  salary             Float           @default(0.0)
+  lastCheckIn        String          @default("Not marked")
+  skills             Json            @default("[]")
+  emergencyContact   String          @default("Pending")
+  documents          Json            @default("[]")
+  deviceId           String          @default("")
+  expoPushToken      String?
+  branchId           String?
+  branchScope        String[]
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  requestedApprovals Approval[]      @relation("RequestedApprovals")
+  attendanceLogs     AttendanceLog[]
+  reportedComplaints Complaint[]     @relation("ReportedComplaints")
+  resolvedComplaints Complaint[]     @relation("ResolvedComplaints")
+  createdChecks      Check[]         @relation("CreatedChecks")
+  assignedChecks     Check[]         @relation("AssignedChecks")
+  completedChecks    Check[]         @relation("CompletedChecks")
+  branch             Branch?         @relation("UserBranch", fields: [branchId], references: [id])
+  manager            User?           @relation("UserToManager", fields: [managerId], references: [id])
+  subordinates       User[]          @relation("UserToManager")
+  scheduledVisits    Visit[]         @relation("ManagerVisits")
+
+  @@index([role])
+}
+
+model Branch {
+  id               String         @id @default(uuid())
+  code             String         @unique
+  name             String         @unique
+  city             String
+  address          String
+  phone            String         @default("Pending")
+  email            String         @default("Pending")
+  geoRadius        Float          @default(180.0)
+  shiftWindow      String         @default("07:00 - 15:00")
+  health           Float          @default(100.0)
+  performance      Float          @default(100.0)
+  todayAttendance  Float          @default(100.0)
+  staffCount       Int            @default(0)
+  workerCount      Int            @default(0)
+  monthlyBudget    Float          @default(50000.0)
+  usedBudget       Float          @default(0.0)
+  openIssues       Int            @default(0)
+  criticalAlerts   Int            @default(0)
+  applianceRisk    Int            @default(0)
+  auditScore       Float          @default(100.0)
+  lastVisit        String         @default("Not visited")
+  nextVisit        String         @default("Pending")
+  revenueIndex     Float          @default(1.0)
+  customerFootfall Int            @default(0)
+  sla              Float          @default(100.0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  district         String         @default("Unknown")
+  appliances       Appliance[]
+  approvals        Approval[]
+  complaints       Complaint[]
+  notifications    Notification[]
+  checks           Check[]
+  users            User[]         @relation("UserBranch")
+  visits           Visit[]
+
+  @@index([name])
+}
+
+model Appliance {
+  id             String          @id @default(uuid())
+  branchId       String
+  name           String
+  category       String
+  zone           String          @default("Branch premises")
+  brand          String
+  model          String          @default("Pending")
+  serial         String          @unique
+  imageUrl       String          @default("")
+  healthScore    Int             @default(100)
+  status         ApplianceStatus @default(Operational)
+  purchaseDate   DateTime?
+  lastService    DateTime?
+  nextService    DateTime?
+  warranty       String          @default("Pending")
+  amcVendor      String          @default("To be assigned")
+  vendorEmail    String          @default("")
+  purchaseCost   Float           @default(0.0)
+  approvalStatus String          @default("Approved")
+  pendingParts   String          @default("None")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  branch         Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  complaints     Complaint[]
+  checks         Check[]
+
+  @@index([branchId])
+  @@index([category])
+}
+
+model Check {
+  id             String     @id @default(uuid())
+  title          String
+  branchId       String
+  audience       RoleId     @default(lc)
+  schedule       String     @default("Daily")
+  priority       Priority   @default(High)
+  zone           String     @default("Branch premises")
+  deadline       DateTime
+  assignedToId   String?
+  assignedById   String
+  status         TaskStatus @default(Pending)
+  checklistDone  Int        @default(0)
+  checklistTotal Int        @default(1)
+  proofRequired  Boolean    @default(false)
+  proofLabel     String     @default("Photo proof")
+  proofUrl       String?
+  completedById  String?
+  completedAt    DateTime?
+  notes          String
+  escalation     String     @default("None")
+  redoReason     String?
+  applianceId    String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  appliance      Appliance? @relation(fields: [applianceId], references: [id])
+  assignedBy     User       @relation("CreatedChecks", fields: [assignedById], references: [id], onDelete: Cascade)
+  assignedTo     User?      @relation("AssignedChecks", fields: [assignedToId], references: [id])
+  branch         Branch     @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  completedBy    User?      @relation("CompletedChecks", fields: [completedById], references: [id])
+
+  @@index([branchId])
+  @@index([assignedToId])
+  @@index([status])
+  @@map("Task")
+}
+
+model AttendanceLog {
+  id              String               @id @default(uuid())
+  userId          String
+  date            String
+  status          AttStatus            @default(Present)
+  checkIn         String
+  checkOut        String?
+  location        String               @default("Inside geo fence")
+  proof           String               @default("Geo + selfie verified")
+  deviation       String               @default("No")
+  latitude        Float?
+  longitude       Float?
+  isBranchOpening Boolean              @default(false)
+  remarks         String?
+  photos          Json                 @default("[]")
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  user            User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  weeklyTasks     WeeklyTaskPlanItem[]
+
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+model WeeklyTaskPlanItem {
+  id             String        @id @default(uuid())
+  attendanceId   String
+  description    String
+  estimatedHours Float         @default(0.0)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  attendance     AttendanceLog @relation(fields: [attendanceId], references: [id], onDelete: Cascade)
+}
+
+model Complaint {
+  id               String          @id @default(uuid())
+  complaintId      String          @unique
+  branchId         String
+  assetId          String?
+  vendorId         String?
+  vendorEmail      String?
+  priority         Priority        @default(Medium)
+  description      String
+  attachmentUrls   String[]        @default([])
+  status           ComplaintStatus @default(OPEN)
+  raisedById       String
+  raisedByName     String?
+  raisedByRole     String?
+  resolvedById     String?
+  resolvedByName   String?
+  resolutionNotes  String?
+  vendorRemarks    String?
+  vendorIssueId    String?
+  resolvedAt       DateTime?
+  workOrderPdfUrl  String?
+  completionPdfUrl String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  asset            Appliance?      @relation(fields: [assetId], references: [id])
+  branch           Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  raisedBy         User            @relation("ReportedComplaints", fields: [raisedById], references: [id], onDelete: Cascade)
+  resolvedBy       User?           @relation("ResolvedComplaints", fields: [resolvedById], references: [id])
+
+  @@index([branchId])
+  @@index([status])
+  @@index([raisedById])
+}
+
+model Approval {
+  id            String         @id @default(uuid())
+  title         String
+  kind          String
+  branchId      String
+  amount        Float
+  requestedById String
+  status        ApprovalStatus @default(Pending)
+  stage         String         @default("Branch Manager")
+  priority      Priority       @default(High)
+  age           String         @default("Just now")
+  note          String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  branch        Branch         @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  requestedBy   User           @relation("RequestedApprovals", fields: [requestedById], references: [id], onDelete: Cascade)
+}
+
+model Visit {
+  id          String      @id @default(uuid())
+  branchId    String
+  managerId   String
+  scheduledAt DateTime
+  purpose     String
+  agenda      String
+  status      VisitStatus @default(Scheduled)
+  report      String      @default("Pending")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  branch      Branch      @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  manager     User        @relation("ManagerVisits", fields: [managerId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id         String   @id @default(uuid())
+  title      String
+  detail     String
+  scope      RoleId[]
+  branchId   String
+  priority   Priority @default(Medium)
+  read       Boolean  @default(false)
+  bookmarked Boolean  @default(false)
+  time       String   @default("Just now")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  branch     Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
 }
 
 enum RoleId {
@@ -63,297 +330,4 @@ enum AttStatus {
   Present
   Late
   Absent
-}
-
-model User {
-  id                 String          @id @default(uuid())
-  name               String
-  email              String          @unique
-  password           String          // Hashed
-  role               RoleId
-  position           String          // E.g. "Local Coordinator", "Branch Admin Manager (BAM)"
-  phone              String          @default("Pending")
-  shift              String          @default("09:00 - 18:00")
-  joinDate           DateTime        @default(now())
-  status             String          @default("Present")
-  rating             Float           @default(4.0)
-  attendancePct      Float           @default(100.0)
-  tasksClosed        Int             @default(0)
-  proofRate          Float           @default(100.0)
-  escalations        Int             @default(0)
-  managerId          String?
-  manager            User?           @relation("UserToManager", fields: [managerId], references: [id], onDelete: SetNull)
-  subordinates       User[]          @relation("UserToManager")
-  salary             Float           @default(0.0)
-  lastCheckIn        String          @default("Not marked")
-  skills             Json            @default("[]") // Store as string array in JSON
-  emergencyContact   String          @default("Pending")
-  documents          Json            @default("[]") // Store as string array in JSON
-  deviceId           String          @default("")
-  expoPushToken      String?
-  
-  // Scoping relationships
-  branchId           String?
-  branch             Branch?         @relation("UserBranch", fields: [branchId], references: [id], onDelete: SetNull)
-  branchScope        String[]        // Array of branch UUIDs that a BM / AA is allowed to view
-  
-  // Operations Relationships
-  createdChecks      Check[]         @relation("CreatedChecks")
-  assignedChecks     Check[]         @relation("AssignedChecks")
-  completedChecks    Check[]         @relation("CompletedChecks")
-  reportedComplaints Complaint[]     @relation("ReportedComplaints")
-  resolvedComplaints Complaint[]     @relation("ResolvedComplaints")
-  requestedApprovals Approval[]      @relation("RequestedApprovals")
-  scheduledVisits    Visit[]         @relation("ManagerVisits")
-  attendanceLogs     AttendanceLog[]
-  
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-
-  @@index([role])
-}
-
-model Branch {
-  id                 String          @id @default(uuid())
-  code               String          @unique
-  name               String          @unique
-  city               String
-  address            String          @db.Text
-  phone              String          @default("Pending")
-  email              String          @default("Pending")
-  geoRadius          Float           @default(180.0)
-  shiftWindow        String          @default("07:00 - 15:00")
-  health             Float           @default(100.0)
-  performance        Float           @default(100.0)
-  todayAttendance    Float           @default(100.0)
-  staffCount         Int             @default(0)
-  workerCount        Int             @default(0)
-  monthlyBudget      Float           @default(50000.0)
-  usedBudget         Float           @default(0.0)
-  openIssues         Int             @default(0)
-  criticalAlerts     Int             @default(0)
-  applianceRisk      Int             @default(0)
-  auditScore         Float           @default(100.0)
-  lastVisit          String          @default("Not visited")
-  nextVisit          String          @default("Pending")
-  revenueIndex       Float           @default(1.0)
-  customerFootfall   Int             @default(0)
-  sla                Float           @default(100.0)
-  
-  // Relations
-  users              User[]          @relation("UserBranch")
-  appliances         Appliance[]
-  checks             Check[]
-  complaints         Complaint[]
-  approvals          Approval[]
-  visits             Visit[]
-  notifications      Notification[]
-  
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-
-  @@index([name])
-}
-
-model Appliance {
-  id                 String          @id @default(uuid())
-  branchId           String
-  branch             Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  name               String
-  category           String          // AC, UPS, Inverter
-  zone               String          @default("Branch premises")
-  brand              String
-  model              String          @default("Pending")
-  serial             String          @unique
-  healthScore        Int             @default(100)
-  status             ApplianceStatus @default(Operational)
-  purchaseDate       DateTime?
-  lastService        DateTime?
-  nextService        DateTime?
-  warranty           String          @default("Pending")
-  amcVendor          String          @default("To be assigned")
-  vendorEmail        String          @default("")
-  purchaseCost       Float           @default(0.0)
-  approvalStatus     String          @default("Approved")
-  pendingParts       String          @default("None")
-  
-  // Track checks generated for this appliance
-  checks             Check[]
-  complaints         Complaint[]
-  
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-
-  @@index([branchId])
-  @@index([category])
-}
-
-model Check {
-  id                 String          @id @default(uuid())
-  title              String
-  branchId           String
-  branch             Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  audience           RoleId          @default(lc)
-  schedule           String          @default("Daily") // Daily, Weekly, One-Time
-  priority           Priority        @default(High)
-  zone               String          @default("Branch premises")
-  deadline           DateTime
-  
-  assignedToId       String?
-  assignedTo         User?           @relation("AssignedChecks", fields: [assignedToId], references: [id], onDelete: SetNull)
-  assignedById       String
-  assignedBy         User            @relation("CreatedChecks", fields: [assignedById], references: [id], onDelete: Cascade)
-  
-  status             TaskStatus      @default(Pending)
-  checklistDone      Int             @default(0)
-  checklistTotal     Int             @default(1)
-  proofRequired      Boolean         @default(false)
-  proofLabel         String          @default("Photo proof")
-  proofUrl           String?         // Cloudinary image URL
-  
-  completedById      String?
-  completedBy        User?           @relation("CompletedChecks", fields: [completedById], references: [id], onDelete: SetNull)
-  completedAt        DateTime?
-  
-  notes              String          @db.Text
-  escalation         String          @default("None")
-  redoReason         String?         @db.Text
-  
-  // Optional link to appliance (for weekly checks)
-  applianceId        String?
-  appliance          Appliance?      @relation(fields: [applianceId], references: [id], onDelete: SetNull)
-
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-
-  @@index([branchId])
-  @@index([assignedToId])
-  @@index([status])
-
-  @@map("Task")
-}
-
-model AttendanceLog {
-  id                 String          @id @default(uuid())
-  userId             String
-  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  date               String          // YYYY-MM-DD
-  status             AttStatus       @default(Present)
-  checkIn            String          // "HH:MM"
-  checkOut           String?         // "HH:MM"
-  location           String          @default("Inside geo fence")
-  proof              String          @default("Geo + selfie verified")
-  deviation          String          @default("No")
-  latitude           Float?
-  longitude          Float?
-  isBranchOpening    Boolean         @default(false)
-  remarks            String?         @db.Text
-  photos             Json            @default("[]") // Array of image URLs
-  
-  // Embedded plan items
-  weeklyTasks        WeeklyTaskPlanItem[]
-  
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-
-  @@unique([userId, date])
-  @@index([userId])
-}
-
-model WeeklyTaskPlanItem {
-  id                 String          @id @default(uuid())
-  attendanceId       String
-  attendance         AttendanceLog   @relation(fields: [attendanceId], references: [id], onDelete: Cascade)
-  description        String
-  estimatedHours     Float           @default(0.0)
-  
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-}
-
-model Complaint {
-  id                 String          @id @default(uuid())
-  complaintId        String          @unique
-  branchId           String
-  branch             Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  assetId            String?
-  asset              Appliance?      @relation(fields: [assetId], references: [id], onDelete: SetNull)
-  vendorId           String?
-  vendorEmail        String?
-  priority           Priority        @default(Medium)
-  description        String          @db.Text
-  vendorIssueId      String?
-  attachmentUrls     String[]        @default([])
-  status             ComplaintStatus @default(OPEN)
-  raisedById         String
-  raisedBy           User            @relation("ReportedComplaints", fields: [raisedById], references: [id], onDelete: Cascade)
-  raisedByName       String?
-  raisedByRole       String?
-  resolvedById       String?
-  resolvedBy         User?           @relation("ResolvedComplaints", fields: [resolvedById], references: [id])
-  resolvedByName     String?
-  resolutionNotes    String?         @db.Text
-  vendorRemarks      String?         @db.Text
-  resolvedAt         DateTime?
-  workOrderPdfUrl    String?
-  completionPdfUrl   String?
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-
-  @@index([branchId])
-  @@index([status])
-  @@index([raisedById])
-}
-
-model Approval {
-  id                 String          @id @default(uuid())
-  title              String
-  kind               String          // "Expense", "Appliance Repair"
-  branchId           String
-  branch             Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  amount             Float
-  
-  requestedById      String
-  requestedBy        User            @relation("RequestedApprovals", fields: [requestedById], references: [id], onDelete: Cascade)
-  
-  status             ApprovalStatus  @default(Pending)
-  stage              String          @default("Branch Manager")
-  priority           Priority        @default(High)
-  age                String          @default("Just now")
-  note               String          @db.Text
-
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-}
-
-model Visit {
-  id                 String          @id @default(uuid())
-  branchId           String
-  branch             Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  managerId          String
-  manager            User            @relation("ManagerVisits", fields: [managerId], references: [id], onDelete: Cascade)
-  scheduledAt        DateTime
-  purpose            String
-  agenda             String          @db.Text
-  status             VisitStatus     @default(Scheduled)
-  report             String          @default("Pending") @db.Text
-
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-}
-
-model Notification {
-  id                 String          @id @default(uuid())
-  title              String
-  detail             String
-  scope              RoleId[]        // Custom mapping to array of RoleId
-  branchId           String
-  branch             Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  priority           Priority        @default(Medium)
-  read               Boolean         @default(false)
-  bookmarked         Boolean         @default(false)
-  time               String          @default("Just now")
-
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
 }

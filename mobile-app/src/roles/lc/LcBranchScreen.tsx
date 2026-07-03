@@ -148,7 +148,7 @@ export function LcBranchScreen() {
 
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md }}>
         <View style={{ flex: 1, minWidth: 120 }}>
-          <StatCard label="Appliance Risk" value={String(branch.applianceRisk)} meta="Need service" icon={ShieldAlert} accent={colors.brand} />
+          <StatCard label="Appliance Risk" value={String(branch.applianceRisk)} meta="Need service" icon={ShieldAlert} accent={colors.brand} onPress={() => setTab("lcBranch", "appliances")} />
         </View>
         <View style={{ flex: 1, minWidth: 120 }}>
           {(() => {
@@ -161,6 +161,7 @@ export function LcBranchScreen() {
                 meta={`${operational} ok · ${atRisk} flagged`}
                 icon={Cpu}
                 accent={colors.brand}
+                onPress={() => setTab("lcBranch", "appliances")}
               />
             );
           })()}

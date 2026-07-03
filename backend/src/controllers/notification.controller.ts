@@ -257,3 +257,37 @@ export const escalateAlert = async (req: AuthenticatedRequest, res: Response) =>
     });
   }
 };
+
+export const broadcastNotification = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const userContext = req.user;
+    if (!userContext || userContext.role !== RoleId.rm) {
+      return res.status(403).json({ message: "Forbidden: Only RM can broadcast notifications" });
+    }
+
+    const { text } = req.body;
+    if (!text) {
+      return res.status(400).json({ message: "Text is required for broadcast" });
+    }
+
+    // Here we could iterate over users and use Expo push notification API
+    // if expoPushToken exists in the database.
+    // For now, we simulate this or create a global Notification in the DB.
+    
+    // We will create a notification for all roles across all branches for simulation.
+    // Since notifications are tied to branchId, we could create one per branch, or just one with a special branchId like "global".
+    // Alternatively, we use notifyRegionalManagers service to simulate.
+    await notifyRegionalManagers("Broadcast from RM", text);
+
+    return res.status(200).json({
+      message: "Notification sent successfully",
+      success: true
+    });
+  } catch (error: any) {
+    console.error("Broadcast notification error: ", error);
+    return res.status(500).json({ 
+      message: "Server error broadcasting notification", 
+      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred" 
+    });
+  }
+};

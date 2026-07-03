@@ -167,6 +167,7 @@ export function BranchManagerHomeScreen() {
             meta={`Coverage under ${currentUser.name}`}
             icon={Building}
             accent={colors.warning}
+            onPress={() => setPage("branches")}
           />
         </View>
         <View style={{ flex: 1, minWidth: 160 }}>
@@ -176,6 +177,7 @@ export function BranchManagerHomeScreen() {
             meta="Safety, appliance and SLA exceptions"
             icon={TriangleAlert}
             accent={colors.error}
+            onPress={() => setPage("complaints")}
           />
         </View>
       </View>
@@ -187,6 +189,7 @@ export function BranchManagerHomeScreen() {
             meta={"of Rs " + totalBudget.toLocaleString("en-IN")}
             icon={Wallet}
             accent={colors.slate900}
+            onPress={() => setPage("monitoring")}
           />
         </View>
         <View style={{ flex: 1, minWidth: 160 }}>
@@ -196,6 +199,7 @@ export function BranchManagerHomeScreen() {
             meta={pendingApprovals.length > 0 ? `${pendingApprovals.length} approval(s) pending` : "Reports pending"}
             icon={Route}
             accent={colors.brandSecondary}
+            onPress={() => setPage("visits")}
           />
         </View>
       </View>

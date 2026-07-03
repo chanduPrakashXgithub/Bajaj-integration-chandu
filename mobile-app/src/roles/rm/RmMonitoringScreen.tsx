@@ -336,16 +336,6 @@ export function RmMonitoringScreen() {
                         <TaskCard
                           key={task.id}
                           task={task}
-                          actions={
-                            task.status === "Pending" || task.status === "In Progress"
-                              ? [
-                                { label: "Mark Complete", onPress: () => markTaskDone(task.id), primary: true },
-                                { label: "Revoke", onPress: () => revokeTask(task.id) },
-                              ]
-                              : task.status === "Revoked"
-                                ? [{ label: "Review", onPress: () => openTaskDetail(task.id) }]
-                                : undefined
-                          }
                         />
                       ))}
 

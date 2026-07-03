@@ -909,6 +909,11 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
 
     return (
       <>
+        {appliance.imageUrl ? (
+          <View style={{ borderRadius: borderRadius["2xl"], overflow: "hidden", height: 180, marginBottom: spacing.md }}>
+            <Image source={{ uri: appliance.imageUrl }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
+          </View>
+        ) : null}
         <View style={{ gap: spacing.md }}>
           <View style={{ gap: spacing.xs }}>
             <Text style={{ fontSize: fontSize.xs, color: colors.slate400, fontWeight: "600", textTransform: "uppercase" }}>Appliance Name</Text>

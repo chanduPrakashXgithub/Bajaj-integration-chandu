@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, useWindowDimensions } from "react-native";
+import { View, Text, TouchableOpacity, useWindowDimensions, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Home, ListChecks, Wrench, MapPin, Bell, IdCard, BarChart3, AlertCircle, Building, LineChart, Stamp, Route, Satellite, TriangleAlert, Wallet, ChartColumn, Users, Sliders, Circle } from "lucide-react-native";
 import { useApp } from "../context/AppContext";
@@ -37,9 +37,7 @@ import { BranchManagerProfileScreen } from "../roles/branchManager/BranchManager
 import { BranchManagerAttendanceScreen } from "../roles/branchManager/BranchManagerAttendanceScreen";
 
 import { RmDashboardScreen } from "../roles/rm/RmDashboardScreen";
-import { RmIntelligenceScreen } from "../roles/rm/RmIntelligenceScreen";
 import { RmAlertsScreen } from "../roles/rm/RmAlertsScreen";
-import { RmAnalyticsScreen } from "../roles/rm/RmAnalyticsScreen";
 import { RmApprovalsScreen } from "../roles/rm/RmApprovalsScreen";
 import { UserManagementScreen } from "../roles/rm/UserManagementScreen";
 import { RmUsersScreen } from "../roles/rm/RmUsersScreen";
@@ -88,11 +86,9 @@ registerScreen("aa", "profile", BranchManagerProfileScreen);
 
 registerScreen("rm", "dashboard", RmDashboardScreen);
 registerScreen("rm", "monitoring", RmMonitoringScreen);
-registerScreen("rm", "intelligence", RmIntelligenceScreen);
 registerScreen("rm", "alerts", RmAlertsScreen);
 registerScreen("rm", "finance", RmFinanceScreen);
 registerScreen("rm", "complaints", RmComplaintCommandCenter);
-registerScreen("rm", "analytics", RmAnalyticsScreen);
 registerScreen("rm", "approvals", RmApprovalsScreen);
 registerScreen("rm", "users", UserManagementScreen);
 registerScreen("rm", "settings", RmSettingsScreen);
@@ -105,11 +101,9 @@ registerScreen("rm", "branches", BranchManagerBranchesScreen);
 registerScreen("am", "dashboard", RmDashboardScreen);
 registerScreen("am", "branches", BranchManagerBranchesScreen);
 registerScreen("am", "monitoring", RmMonitoringScreen);
-registerScreen("am", "intelligence", RmIntelligenceScreen);
 registerScreen("am", "alerts", RmAlertsScreen);
 registerScreen("am", "finance", RmFinanceScreen);
 registerScreen("am", "complaints", BranchManagerComplaintsScreen);
-registerScreen("am", "analytics", RmAnalyticsScreen);
 registerScreen("am", "approvals", RmApprovalsScreen);
 registerScreen("am", "users", RmUsersScreen);
 registerScreen("am", "settings", RmSettingsScreen);
@@ -121,11 +115,9 @@ registerScreen("am", "profile", RmProfileScreen);
 registerScreen("rrm", "dashboard", RmDashboardScreen);
 registerScreen("rrm", "branches", BranchManagerBranchesScreen);
 registerScreen("rrm", "monitoring", RmMonitoringScreen);
-registerScreen("rrm", "intelligence", RmIntelligenceScreen);
 registerScreen("rrm", "alerts", RmAlertsScreen);
 registerScreen("rrm", "finance", RmFinanceScreen);
 registerScreen("rrm", "complaints", RmComplaintCommandCenter);
-registerScreen("rrm", "analytics", RmAnalyticsScreen);
 registerScreen("rrm", "approvals", RmApprovalsScreen);
 registerScreen("rrm", "users", UserManagementScreen);
 registerScreen("rrm", "settings", RmSettingsScreen);
@@ -147,7 +139,6 @@ function GlassTabBar({ pages }: { pages: Array<{ id: string; label: string }> })
   const { state, setPage } = useApp();
   const insets = useSafeAreaInsets();
   const accent = roleAccent(state.role).bg;
-  const visibleRoutes = pages.slice(0, 5);
 
   const compactLabel = (label: string, pageId: string) => {
     const map: Record<string, string> = {
@@ -188,17 +179,18 @@ function GlassTabBar({ pages }: { pages: Array<{ id: string; label: string }> })
           elevation: 6,
         }}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            height: 66,
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
             alignItems: "center",
-            justifyContent: "space-between",
             paddingHorizontal: 8,
-            paddingVertical: 7,
+          }}
+          style={{
+            height: 66,
           }}
         >
-          {visibleRoutes.map((route) => {
+          {pages.map((route) => {
             const isFocused = state.page === route.id;
             const iconName = pageIcon(route.id);
             const Icon = iconMap[iconName] || Circle;
@@ -214,11 +206,11 @@ function GlassTabBar({ pages }: { pages: Array<{ id: string; label: string }> })
                 }}
                 activeOpacity={0.7}
                 style={{
-                  flex: isFocused ? 1.25 : 1,
                   alignItems: "center",
                   justifyContent: "center",
                   height: 50,
-                  paddingHorizontal: isFocused ? 10 : 6,
+                  paddingHorizontal: 12,
+                  marginHorizontal: 2,
                   borderRadius: 24,
                   backgroundColor: isFocused ? "rgba(15,23,42,0.96)" : "transparent",
                 }}
@@ -250,7 +242,7 @@ function GlassTabBar({ pages }: { pages: Array<{ id: string; label: string }> })
                     ) : null}
                   </View>
                   {isFocused ? (
-                    <View style={{ maxWidth: 74 }}>
+                    <View>
                       <Text
                         style={{
                           fontSize: 10,
@@ -269,6 +261,7 @@ function GlassTabBar({ pages }: { pages: Array<{ id: string; label: string }> })
                           borderRadius: 99,
                           backgroundColor: accent,
                           marginTop: 4,
+                          alignSelf: "center",
                         }}
                       />
                     </View>
@@ -277,7 +270,7 @@ function GlassTabBar({ pages }: { pages: Array<{ id: string; label: string }> })
               </TouchableOpacity>
             );
           })}
-        </View>
+        </ScrollView>
       </View>
     </View>
   );

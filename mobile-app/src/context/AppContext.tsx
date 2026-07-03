@@ -436,8 +436,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
             return ["/rm/tasks"];
           case "complaints":
           case "issues":
-            if (isBmLike) return ["/bm/complaints", "/branches"];
-            return ["/complaints", "/branches"];
+            if (isBmLike) return ["/bm/complaints", "/branches", "/appliances"];
+            return ["/complaints", "/branches", "/appliances"];
           case "branch":
           case "branches":
             if (role === "lc") return ["/lc/dashboard"];

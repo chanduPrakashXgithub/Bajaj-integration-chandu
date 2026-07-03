@@ -8,6 +8,7 @@ import { Badge } from "./Badge";
 interface Props {
   item: Complaint;
   showRaiseToVendor?: boolean;
+  onPress?: () => void;
   actions?: { label: string; onPress: () => void; primary?: boolean; danger?: boolean; warning?: boolean }[];
 }
 
@@ -32,7 +33,7 @@ const statusLabel = (status: string) => {
   }
 };
 
-export function ComplaintCard({ item, showRaiseToVendor = false, actions }: Props) {
+export function ComplaintCard({ item, showRaiseToVendor = false, onPress, actions }: Props) {
   const { state, getBranch, openComplaintDetail, raiseToVendor, openModal } = useApp();
   const branch = getBranch(item.branchId);
 
@@ -43,7 +44,7 @@ export function ComplaintCard({ item, showRaiseToVendor = false, actions }: Prop
   const canRaiseToVendor = showRaiseToVendor && item.status === "OPEN" && item.vendorId !== "Not assigned";
   const canAcknowledge = state.role !== "rm" && item.status !== "RESOLVED" && item.status !== "ACKNOWLEDGED";
 
-  return (
+  const content = (
     <View style={{ backgroundColor: colors.white, borderRadius: 20, padding: spacing.xl, borderWidth: 1, borderColor: colors.border, marginBottom: spacing.lg, ...shadows.card }}>
       <View style={{ gap: spacing.md }}>
         {/* Header */}
@@ -118,4 +119,9 @@ export function ComplaintCard({ item, showRaiseToVendor = false, actions }: Prop
       </View>
     </View>
   );
+
+  if (onPress) {
+    return <TouchableOpacity onPress={onPress} activeOpacity={0.7}>{content}</TouchableOpacity>;
+  }
+  return content;
 }

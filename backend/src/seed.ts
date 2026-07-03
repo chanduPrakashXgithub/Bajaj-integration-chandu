@@ -139,10 +139,31 @@ async function main() {
   console.log("Creating appliances...");
   const categories = ["AC", "UPS", "Inverter"];
   const brands = ["Daikin", "APC", "Microtek"];
+  const categoryImages: Record<string, string[]> = {
+    AC: [
+      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1631545806602-1d4fd8f7ec79?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=600&h=400&fit=crop",
+    ],
+    UPS: [
+      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=400&fit=crop",
+    ],
+    Inverter: [
+      "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop",
+    ],
+  };
+  const catImgIdx: Record<string, number> = { AC: 0, UPS: 0, Inverter: 0 };
   let serialCounter = 1;
 
   for (const b of branchRecords) {
     for (const cat of categories) {
+      const imgs = categoryImages[cat];
+      const imgUrl = imgs[catImgIdx[cat] % imgs.length];
+      catImgIdx[cat]++;
       await prisma.appliance.create({
         data: {
           branchId: b.id,
@@ -150,6 +171,7 @@ async function main() {
           category: cat,
           brand: brands[categories.indexOf(cat)],
           serial: `APL-${String(serialCounter).padStart(5, "0")}`,
+          imageUrl: imgUrl,
           zone: "Branch premises",
           status: "Operational",
           healthScore: 85 + Math.floor(Math.random() * 16),

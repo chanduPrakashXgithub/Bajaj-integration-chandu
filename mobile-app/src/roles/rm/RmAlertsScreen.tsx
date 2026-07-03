@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { TriangleAlert, AlertCircle, Info, Bell, CheckCircle, Shield, Layers } from "lucide-react-native";
 import { ScreenWrapper } from "../../shared/layout/ScreenWrapper";
 import { SectionHeader } from "../../shared/components/SectionHeader";
@@ -34,7 +34,7 @@ function TouchableChip({ label, isSelected, onPress }: { label: string; isSelect
 
 export function RmAlertsScreen() {
   const { state, setTab, setPage, scopedNotifications, scopedBranches, scopedComplaints, alertStates, acknowledgeAlert, escalateAlert, openBranchDetail, openComplaintDetail } = useApp();
-  const filter = state.tabs.rmAlerts || "critical";
+  const filter = state.tabs.rmAlerts || "all";
 
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedBranchId, setSelectedBranchId] = useState<string | number>("");
@@ -63,14 +63,27 @@ export function RmAlertsScreen() {
   }, [scopedBranches, selectedRegion]);
 
   const filtered = scopedNotifications.filter((item) => {
-    if (filter !== "all" && item.priority.toLowerCase() !== filter) return false;
     if (selectedBranchId === "all") {
       const regionBranchIds = branchesInRegion.map(b => b.id);
       if (!regionBranchIds.includes(item.branchId)) return false;
     } else if (selectedBranchId !== "") {
       if (item.branchId !== selectedBranchId) return false;
     }
-    return true;
+
+    const titleStr = item.title.toLowerCase();
+    const detailStr = item.detail.toLowerCase();
+
+    if (filter === "complaints") {
+      return titleStr.includes("cmp") || titleStr.includes("complaint") || titleStr.includes("issue") || detailStr.includes("cmp") || detailStr.includes("complaint");
+    } else if (filter === "approvals") {
+      return titleStr.includes("approval") || titleStr.includes("budget") || titleStr.includes("approve") || detailStr.includes("approval") || detailStr.includes("budget");
+    } else if (filter === "attendance") {
+      return titleStr.includes("attendance") || titleStr.includes("punched") || titleStr.includes("absent") || detailStr.includes("attendance");
+    } else if (filter === "tasks") {
+      return titleStr.includes("task") || titleStr.includes("check") || titleStr.includes("sla") || detailStr.includes("task") || detailStr.includes("sla");
+    }
+
+    return true; // "all"
   });
 
   return (
@@ -78,7 +91,19 @@ export function RmAlertsScreen() {
       <SectionHeader
         title="Alert Center"
         action={
-          <SegmentedControl tabs={[{ label: "Critical", value: "critical" }, { label: "Warning", value: "warning" }, { label: "Info", value: "info" }, { label: "All", value: "all" }]} activeKey={filter} onChange={(v) => setTab("rmAlerts", v)} />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <SegmentedControl 
+              tabs={[
+                { label: "All", value: "all" }, 
+                { label: "Issues", value: "complaints" }, 
+                { label: "Approvals", value: "approvals" }, 
+                { label: "Attendance", value: "attendance" }, 
+                { label: "Tasks", value: "tasks" }
+              ]} 
+              activeKey={filter} 
+              onChange={(v) => setTab("rmAlerts", v)} 
+            />
+          </ScrollView>
         }
       />
 

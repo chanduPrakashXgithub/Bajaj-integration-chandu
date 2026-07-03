@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, TextInput, ActivityIndicator } from "react-native";
 import {
   HeartPulse, MapPin, TriangleAlert, Stamp,
   FileText, Route, ShieldCheck, UserPlus, ChartColumn, Users,
@@ -12,6 +12,7 @@ import { StatCard } from "../../shared/components/StatCard";
 import { Card } from "../../shared/components/Card";
 import { QuickButton } from "../../shared/components/QuickButton";
 import { useApp } from "../../context/AppContext";
+import { apiClient } from "../../services/api/client";
 import { colors, fontSize, spacing, borderRadius } from "../../theme/theme";
 
 export function RmDashboardScreen() {
@@ -24,6 +25,23 @@ export function RmDashboardScreen() {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedBranchId, setSelectedBranchId] = useState<string | number>("all");
+
+  const [notificationText, setNotificationText] = useState("");
+  const [isSending, setIsSending] = useState(false);
+
+  const sendNotification = async () => {
+    if (!notificationText.trim()) return;
+    setIsSending(true);
+    try {
+      await apiClient.post("/notifications/broadcast", { text: notificationText.trim() });
+      showToast("Notification sent to all users successfully", "success");
+      setNotificationText("");
+    } catch (e) {
+      showToast("Failed to send notification", "error");
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const uniqueRegions = useMemo(() => {
     const regions = scopedBranches.map((b) => {
@@ -138,6 +156,38 @@ export function RmDashboardScreen() {
             )}
           </View>
         )}
+
+        {/* ── Broadcast Notification ── */}
+        <View style={{ marginTop: spacing.xl }}>
+          <Card variant="glass">
+            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.md, marginBottom: spacing.md }}>
+              <View style={{ width: 32, height: 32, borderRadius: borderRadius.md, backgroundColor: colors.brand + "15", alignItems: "center", justifyContent: "center" }}>
+                <Bell size={16} color={colors.brand} strokeWidth={2} />
+              </View>
+              <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.slate900 }}>Send Broadcast Notification</Text>
+            </View>
+            <View style={{ flexDirection: "row", gap: spacing.md, alignItems: "center" }}>
+              <TextInput
+                value={notificationText}
+                onChangeText={setNotificationText}
+                placeholder="Write a message to all users..."
+                placeholderTextColor={colors.slate400}
+                style={{ flex: 1, backgroundColor: colors.white, borderWidth: 1, borderColor: colors.border, borderRadius: borderRadius.lg, paddingHorizontal: spacing.md, paddingVertical: spacing.md, color: colors.slate900, fontSize: fontSize.sm }}
+              />
+              <TouchableOpacity
+                onPress={sendNotification}
+                disabled={isSending || !notificationText.trim()}
+                style={{ backgroundColor: colors.brand, paddingHorizontal: spacing.xl, paddingVertical: spacing.md, borderRadius: borderRadius.lg, opacity: isSending || !notificationText.trim() ? 0.6 : 1 }}
+              >
+                {isSending ? (
+                  <ActivityIndicator size="small" color={colors.white} />
+                ) : (
+                  <Text style={{ color: colors.white, fontSize: fontSize.sm, fontWeight: "600" }}>Send</Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          </Card>
+        </View>
 
         {/* ── Watchlist + Decision Feed ── */}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.xl, marginTop: spacing.xl }}>
