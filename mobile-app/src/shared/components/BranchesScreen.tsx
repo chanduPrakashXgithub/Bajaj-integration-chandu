@@ -173,10 +173,7 @@ export function BranchesScreen() {
                         <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Attendance</Text>
                         <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.slate900 }}>{branch.todayAttendance}%</Text>
                       </View>
-                      <View style={{ flex: 1, minWidth: 80 }}>
-                        <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>SLA</Text>
-                        <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.slate900 }}>{branch.sla}%</Text>
-                      </View>
+
                       <View style={{ flex: 1, minWidth: 80 }}>
                         <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Issues</Text>
                         <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: branch.openIssues > 0 ? colors.amber700 : colors.emerald600 }}>{branch.openIssues}</Text>
@@ -291,10 +288,7 @@ export function BranchesScreen() {
                     <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Attendance</Text>
                     <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.slate900 }}>{branch.todayAttendance}%</Text>
                   </View>
-                  <View style={{ flex: 1, minWidth: 80 }}>
-                    <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>SLA</Text>
-                    <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.slate900 }}>{branch.sla}%</Text>
-                  </View>
+
                   <View style={{ flex: 1, minWidth: 80 }}>
                     <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Issues</Text>
                     <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: branch.openIssues > 0 ? colors.amber700 : colors.emerald600 }}>{branch.openIssues}</Text>

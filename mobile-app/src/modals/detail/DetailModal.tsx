@@ -15,6 +15,14 @@ import { Task, Complaint, Branch, User as UserType, Appliance, Approval, Visit }
 
 // Ã¢â€â‚¬Ã¢â€â‚¬ Proof Image Card Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
+
+const getRenderableImageUri = (value?: string | null) => {
+  const uri = typeof value === "string" ? value.trim() : "";
+  if (!uri || uri === "null") return null;
+  if (uri.startsWith("blob:") && Platform.OS !== "web") return null;
+  return /^(https?:|data:image\/|file:|content:|ph:|blob:)/i.test(uri) ? uri : null;
+};
+
 function ProofImageCard({ proofUrl, taskTitle }: { proofUrl: string | null; taskTitle?: string }) {
   const [loading, setLoading] = useState(true);
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
@@ -351,6 +359,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
   const [selectedImage, setSelectedImage] = useState("");
   const [isSubmittingProof, setIsSubmittingProof] = useState(false);
   const [pickedImage, setPickedImage] = useState<string | null>(null);
+  const [previewImageUri, setPreviewImageUri] = useState<string | null>(null);
 
   const pickImage = useCallback(async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -580,7 +589,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
             <Text style={{ fontSize: fontSize.sm, color: colors.emerald700, marginTop: spacing.xs }}>By user #{task.completedBy} at {task.completedAt}</Text>
           </View>
         ) : null}
-        {task.status !== "Completed" ? (
+        {task.status !== "Completed" && currentUser.role !== "rm" ? (
           currentUser.role === "lc" ? (
             <View style={{ gap: spacing.md, marginTop: spacing.md, borderTopWidth: 1, borderTopColor: colors.border, paddingTop: spacing.md }}>
               <Text style={{ fontSize: fontSize.md, fontWeight: "600", color: colors.slate900 }}>Submit Task Proof</Text>
@@ -701,6 +710,23 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
             <Text style={{ fontSize: fontSize.sm, color: colors.slate500, marginTop: spacing.xs }}>{complaint.description}</Text>
           </View>
         ) : null}
+
+        {complaint.attachmentUrls && complaint.attachmentUrls.length > 0 ? (
+          <View style={{ backgroundColor: colors.slate50, borderRadius: borderRadius["2xl"], padding: spacing.lg }}>
+            <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate900, marginBottom: spacing.sm }}>Attachments (Tap to view full screen)</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.sm }}>
+              {complaint.attachmentUrls.map((url, i) => {
+                const imageUri = getRenderableImageUri(url);
+                if (!imageUri) return null;
+                return (
+                  <TouchableOpacity key={i} onPress={() => setPreviewImageUri(imageUri)} activeOpacity={0.8} style={{ width: 120, height: 90, borderRadius: borderRadius.md, overflow: "hidden", borderWidth: 1, borderColor: colors.border }}>
+                    <Image source={{ uri: imageUri }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+          </View>
+        ) : null}
         {vendorRemarks.length > 0 ? (
           <View style={{ backgroundColor: colors.slate50, borderRadius: borderRadius["2xl"], padding: spacing.lg }}>
             <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate900, marginBottom: spacing.sm }}>Activity / Remarks</Text>
@@ -742,6 +768,10 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
     const manager = getUser(branch.managerId);
     const aa = getUser(branch.assistantManagerId);
     const budgetPct = Math.round((branch.usedBudget / branch.monthlyBudget) * 100);
+    const branchTasks = tasks.filter((t: any) => t.branchId === branch.id);
+    const completedTasksCount = branchTasks.filter((t: any) => t.status === "Completed").length;
+    const totalTasksCount = branchTasks.length;
+
     return (
       <>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.xl }}>
@@ -754,7 +784,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
                 {[
                   { label: "Health", value: branch.health + "%", color: colors.success },
                   { label: "Attendance", value: branch.todayAttendance + "%", color: colors.brandLight },
-                  { label: "SLA", value: branch.sla + "%", color: colors.sky200 },
+                  { label: "Tasks", value: `${completedTasksCount}/${totalTasksCount}`, color: colors.sky200 },
                   { label: "Alerts", value: String(branch.criticalAlerts), color: colors.error },
                 ].map((s) => (
                   <View key={s.label} style={{ flex: 1, minWidth: 60, backgroundColor: "rgba(255,255,255,0.1)", borderRadius: borderRadius["2xl"], padding: spacing.md, alignItems: "center" }}>
@@ -845,7 +875,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
         <View style={{ alignItems: "center", gap: spacing.md, paddingVertical: spacing.md }}>
           <View style={{ width: 64, height: 64, borderRadius: 24, backgroundColor: colors.brandLight, alignItems: "center", justifyContent: "center" }}>
             <Text style={{ fontSize: fontSize["3xl"], fontWeight: "400", color: colors.brand }}>
-              {user.name.split(" ").map((n: string) => n[0]).join("")}
+              {(user.name || "").split(" ").map((n: string) => n?.[0] || "").join("").slice(0, 2).toUpperCase()}
             </Text>
           </View>
           <View style={{ alignItems: "center" }}>
@@ -870,7 +900,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
         <View style={{ backgroundColor: colors.slate50, borderRadius: borderRadius["4xl"], padding: spacing.xl }}>
           <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate900, marginBottom: spacing.sm }}>Skills</Text>
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.xs }}>
-            {user.skills.map((s: string) => (
+            {(Array.isArray(user.skills) ? user.skills : []).map((s: string) => (
               <View key={s} style={{ backgroundColor: colors.white, borderRadius: borderRadius.full, paddingHorizontal: spacing.lg, paddingVertical: spacing.xs, borderWidth: 1, borderColor: colors.border }}>
                 <Text style={{ fontSize: fontSize.xs, color: colors.textSecondary }}>{s}</Text>
               </View>
@@ -879,7 +909,7 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
         </View>
         <View style={{ backgroundColor: colors.slate50, borderRadius: borderRadius["4xl"], padding: spacing.xl }}>
           <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.slate900, marginBottom: spacing.sm }}>Documents</Text>
-          {user.documents.map((d: string) => (
+          {(Array.isArray(user.documents) ? user.documents : []).map((d: string) => (
             <View key={d} style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm, marginBottom: spacing.xs }}>
               <CheckCircle size={12} color={colors.success} />
               <Text style={{ fontSize: fontSize.sm, color: colors.textSecondary }}>{d}</Text>
@@ -1262,7 +1292,8 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
   }
 
   return (
-    <ModalSheet visible={visible} onClose={onClose} title="Details">
+    <>
+      <ModalSheet visible={visible} onClose={onClose} title="Details">
       <ScrollView style={{ maxHeight: 600 }} contentContainerStyle={{ gap: spacing.xl, paddingBottom: spacing.xl }}>
         {type === "task" && renderTaskContent()}
         {type === "complaint" && renderComplaintContent()}
@@ -1290,6 +1321,17 @@ export function DetailModal({ visible, onClose, entityType, entityId }: Props) {
         }
       />
     </ModalSheet>
+      {previewImageUri ? (
+        <Modal visible={!!previewImageUri} transparent animationType="fade" onRequestClose={() => setPreviewImageUri(null)}>
+          <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.9)", justifyContent: "center", alignItems: "center" }}>
+            <TouchableOpacity onPress={() => setPreviewImageUri(null)} style={{ position: "absolute", top: 40, right: 20, zIndex: 10, padding: 10 }}>
+              <X color={colors.white} size={28} />
+            </TouchableOpacity>
+            <Image source={{ uri: previewImageUri }} style={{ width: "95%", height: "80%", borderRadius: 12 }} resizeMode="contain" />
+          </View>
+        </Modal>
+      ) : null}
+    </>
   );
 }
 

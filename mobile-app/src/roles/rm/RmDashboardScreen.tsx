@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import {
   HeartPulse, MapPin, TriangleAlert, Stamp,
   FileText, Route, ShieldCheck, UserPlus, ChartColumn, Users,
-  Bell, AlertTriangle, Briefcase, Building, Layers, ChevronDown,
+  Bell, AlertTriangle, Briefcase, Building, Layers, ChevronDown, ChevronUp,
 } from "lucide-react-native";
 import { ScreenWrapper } from "../../shared/layout/ScreenWrapper";
 import { SectionHeader } from "../../shared/components/SectionHeader";
@@ -98,7 +98,11 @@ export function RmDashboardScreen() {
         {/* ── Quick filter toggle ── */}
         <TouchableOpacity onPress={() => setShowFilters(!showFilters)}
           style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm, marginTop: spacing.xl, paddingVertical: spacing.sm }}>
-          <ChevronDown size={14} color={colors.textSecondary} style={{ transform: showFilters ? [{ rotate: "180deg" }] : [] }} />
+          {showFilters ? (
+            <ChevronUp size={14} color={colors.textSecondary} />
+          ) : (
+            <ChevronDown size={14} color={colors.textSecondary} />
+          )}
           <Text style={{ fontSize: fontSize.xs, color: colors.textSecondary, fontWeight: "600" }}>
             {showFilters ? "HIDE FILTERS" : "FILTER BY REGION / BRANCH"}
           </Text>
@@ -189,9 +193,7 @@ export function RmDashboardScreen() {
                     const b = scopedBranches.find((br) => br.id === a.branchId);
                     items.push({ text: `${a.title} at ${b?.name || "branch"} awaiting RM approval.`, priority: a.priority });
                   });
-                  scopedBranches.filter((b) => b.sla < 90).forEach((b) => {
-                    items.push({ text: `${b.name} SLA at ${b.sla}% — push visit report within 24 hrs.`, priority: "High" });
-                  });
+
                   const list = items.slice(0, 4);
                   return list.length > 0 ? list.map((item, idx) => (
                     <View key={idx} style={{ backgroundColor: colors.slate50, borderRadius: borderRadius["2xl"], padding: spacing.xl, borderLeftWidth: 3, borderLeftColor: item.priority === "Critical" ? colors.error : item.priority === "High" ? colors.warning : colors.brand }}>
