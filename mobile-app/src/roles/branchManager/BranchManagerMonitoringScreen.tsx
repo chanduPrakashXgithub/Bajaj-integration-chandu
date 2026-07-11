@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import { ClipboardCheck, Search, Timer, FileCheck, Layers, ChevronDown } from "lucide-react-native";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import { ClipboardCheck, Search, Timer, FileCheck, Layers, ChevronDown, Clock, CheckCircle2, XCircle, UserCheck } from "lucide-react-native";
 import { ScreenWrapper } from "../../shared/layout/ScreenWrapper";
 import { SectionHeader } from "../../shared/components/SectionHeader";
 import { StatCard } from "../../shared/components/StatCard";
@@ -9,7 +9,9 @@ import { TaskCard } from "../../shared/components/TaskCard";
 import { SegmentedControl } from "../../shared/components/SegmentedControl";
 import { DatePickerDropdown } from "../../shared/components/DatePickerDropdown";
 import { FilterDropdown } from "../../shared/components/FilterDropdown";
+import { Badge } from "../../shared/components/Badge";
 import { useApp } from "../../context/AppContext";
+import { apiClient } from "../../services/api/client";
 import { colors, fontSize, spacing, borderRadius } from "../../theme/theme";
 
 function TouchableChip({ label, isSelected, onPress }: { label: string; isSelected: boolean; onPress: () => void }) {
@@ -36,8 +38,8 @@ function TouchableChip({ label, isSelected, onPress }: { label: string; isSelect
 }
 
 export function BranchManagerMonitoringScreen() {
-  const { state, setTab, scopedBranches, scopedTasks, markTaskDone, revokeTask, openTaskDetail } = useApp();
-  const activeTab = state.tabs.managerMonitoring === "tasks" ? "tasks" : "weekly";
+  const { state, setTab, scopedBranches, scopedTasks, markTaskDone, revokeTask, openTaskDetail, scopedUsers } = useApp();
+  const activeTab = state.tabs.managerMonitoring === "attendance" ? "attendance" : "weekly";
 
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedBranchId, setSelectedBranchId] = useState<string | number>("");
@@ -46,6 +48,27 @@ export function BranchManagerMonitoringScreen() {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [visibleTasksLimit, setVisibleTasksLimit] = useState(30);
+
+  const [attendanceRecords, setAttendanceRecords] = useState<any[]>([]);
+  const [loadingAttendance, setLoadingAttendance] = useState(false);
+
+  const fetchAttendance = useCallback(async () => {
+    if (activeTab !== "attendance") return;
+    setLoadingAttendance(true);
+    try {
+      const res = await apiClient.get("/bm/attendance");
+      setAttendanceRecords(res.data.attendance || []);
+    } catch (e) {
+      console.error("Failed to fetch attendance:", e);
+      setAttendanceRecords([]);
+    } finally {
+      setLoadingAttendance(false);
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    fetchAttendance();
+  }, [fetchAttendance]);
 
   const STATUS_OPTIONS = [
     { label: "All Status", value: "all" },
@@ -120,6 +143,30 @@ export function BranchManagerMonitoringScreen() {
     return filteredTasks.slice(0, visibleTasksLimit);
   }, [filteredTasks, visibleTasksLimit]);
 
+  const filteredAttendance = useMemo(() => {
+    if (!selectedRegion || selectedBranchId === "") return [];
+
+    const activeBranchIds = selectedBranchId !== "all"
+      ? [selectedBranchId]
+      : branchesInRegion.map(b => b.id);
+
+    const branchUserIds = scopedUsers.filter(u => activeBranchIds.includes(u.branchId) && u.role === "aa").map(u => u.id);
+
+    return attendanceRecords.filter(a => {
+      if (!branchUserIds.includes(a.userId)) return false;
+      
+      const dateStr = a.date;
+      if (fromDate && dateStr < fromDate) return false;
+      if (toDate && dateStr > toDate) return false;
+      
+      if (searchQuery) {
+        const u = scopedUsers.find(user => user.id === a.userId);
+        if (!u?.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      }
+      return true;
+    });
+  }, [attendanceRecords, branchesInRegion, selectedRegion, selectedBranchId, scopedUsers, fromDate, toDate, searchQuery]);
+
   return (
     <ScreenWrapper>
       <SectionHeader title="Task & Checks Monitor" />
@@ -164,17 +211,24 @@ export function BranchManagerMonitoringScreen() {
             <SegmentedControl
               tabs={[
                 { label: "Weekly Checks", value: "weekly" },
-                { label: "One-Time Tasks", value: "tasks" },
+                { label: "Attendance", value: "attendance" },
               ]}
               activeKey={activeTab}
               onChange={(v) => setTab("managerMonitoring", v)}
             />
           </View>
 
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.lg, marginTop: spacing.xl }}>
-            <View style={{ flex: 1, minWidth: 280 }}><StatCard label="Pending" value={String(pending)} meta="Awaiting completion" accent={colors.brand} icon={Timer} /></View>
-            <View style={{ flex: 1, minWidth: 280 }}><StatCard label="Completed" value={String(completed)} meta="Proof accepted" accent={colors.success} icon={FileCheck} /></View>
-          </View>
+          {activeTab === "attendance" ? (
+            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.lg, marginTop: spacing.xl }}>
+              <View style={{ flex: 1, minWidth: 280 }}><StatCard label="Present" value={String(filteredAttendance.filter(a => a.status === "Present" || a.status === "Late").length)} meta="Punched in" accent={colors.success} icon={UserCheck} /></View>
+              <View style={{ flex: 1, minWidth: 280 }}><StatCard label="Absent" value={String(filteredAttendance.filter(a => a.status !== "Present" && a.status !== "Late").length)} meta="No punch-in" accent={colors.error} icon={XCircle} /></View>
+            </View>
+          ) : (
+            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.lg, marginTop: spacing.xl }}>
+              <View style={{ flex: 1, minWidth: 280 }}><StatCard label="Pending" value={String(pending)} meta="Awaiting completion" accent={colors.brand} icon={Timer} /></View>
+              <View style={{ flex: 1, minWidth: 280 }}><StatCard label="Completed" value={String(completed)} meta="Proof accepted" accent={colors.success} icon={FileCheck} /></View>
+            </View>
+          )}
 
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.md, marginTop: spacing.xl }}>
             <View style={{ flex: 1, minWidth: 200, flexDirection: "row", alignItems: "center", backgroundColor: colors.white, borderRadius: borderRadius.lg, paddingHorizontal: spacing.md, borderWidth: 1, borderColor: colors.border }}>
@@ -182,12 +236,16 @@ export function BranchManagerMonitoringScreen() {
               <TextInput
                 value={searchQuery}
                 onChangeText={setSearchQuery}
-                placeholder="Search checks..."
+                placeholder={activeTab === "attendance" ? "Search AA staff..." : "Search checks..."}
                 placeholderTextColor={colors.slate400}
                 style={{ flex: 1, paddingVertical: spacing.md, paddingHorizontal: spacing.sm, color: colors.slate900, fontSize: fontSize.sm }}
               />
-              <View style={{ width: 1, height: 24, backgroundColor: colors.border, marginHorizontal: spacing.xs }} />
-              <FilterDropdown value={statusFilter} options={STATUS_OPTIONS} onChange={setStatusFilter} placeholder="Status" />
+              {activeTab !== "attendance" && (
+                <>
+                  <View style={{ width: 1, height: 24, backgroundColor: colors.border, marginHorizontal: spacing.xs }} />
+                  <FilterDropdown value={statusFilter} options={STATUS_OPTIONS} onChange={setStatusFilter} placeholder="Status" />
+                </>
+              )}
             </View>
           </View>
 
@@ -200,62 +258,114 @@ export function BranchManagerMonitoringScreen() {
             </View>
           </View>
 
-          <View style={{ marginTop: spacing.xl }}>
-            <Card variant="glass">
-              <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.md, marginBottom: spacing.lg }}>
-                <View style={{ width: 32, height: 32, borderRadius: borderRadius.md, backgroundColor: colors.brand + "15", alignItems: "center", justifyContent: "center" }}>
-                  <ClipboardCheck size={16} color={colors.brand} strokeWidth={2} />
+          {activeTab === "attendance" ? (
+            <View style={{ marginTop: spacing.xl }}>
+              <Card variant="glass">
+                <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.md, marginBottom: spacing.lg }}>
+                  <View style={{ width: 32, height: 32, borderRadius: borderRadius.md, backgroundColor: colors.success + "15", alignItems: "center", justifyContent: "center" }}>
+                    <Clock size={16} color={colors.success} strokeWidth={2} />
+                  </View>
+                  <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.text }}>Admin Assistant Attendance</Text>
                 </View>
-                <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.text }}>Check List</Text>
-              </View>
-              <View style={{ gap: spacing.xl }}>
-                {slicedTasks.length > 0 ? (
-                  <>
-                    {slicedTasks.map((task) => (
-                      <TaskCard
-                        key={task.id}
-                        task={task}
-                        actions={
-                          task.status === "Pending" || task.status === "In Progress"
-                            ? [
-                              { label: "Mark Complete", onPress: () => markTaskDone(task.id), primary: true },
-                              { label: "Revoke", onPress: () => revokeTask(task.id) },
-                            ]
-                            : task.status === "Revoked"
-                              ? [{ label: "Review", onPress: () => openTaskDetail(task.id) }]
-                              : undefined
-                        }
-                      />
-                    ))}
+                <ScrollView style={{ maxHeight: 500 }} showsVerticalScrollIndicator={false}>
+                  {loadingAttendance ? (
+                    <Text style={{ fontSize: fontSize.sm, color: colors.textSecondary, textAlign: "center", padding: spacing["4xl"] }}>Loading attendance...</Text>
+                  ) : filteredAttendance.length > 0 ? (
+                    <View style={{ gap: spacing.md }}>
+                      {filteredAttendance.map((record) => {
+                        const user = scopedUsers.find(u => u.id === record.userId);
+                        const isPresent = record.status === "Present" || record.status === "Late";
+                        return (
+                          <View key={record.id} style={{ backgroundColor: colors.white, borderRadius: borderRadius["2xl"], padding: spacing.xl, borderWidth: 1, borderColor: colors.border }}>
+                            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.md }}>
+                              <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: isPresent ? colors.emerald50 : colors.rose50, alignItems: "center", justifyContent: "center" }}>
+                                {isPresent ? <CheckCircle2 size={18} color={colors.emerald700} strokeWidth={2} /> : <XCircle size={18} color={colors.rose700} strokeWidth={2} />}
+                              </View>
+                              <View style={{ flex: 1 }}>
+                                <Text style={{ fontSize: fontSize.md, fontWeight: "400", color: colors.text }}>{user?.name || "Unknown"}</Text>
+                                <Text style={{ fontSize: fontSize.xs, color: colors.textSecondary }}>
+                                  {record.date} • {isPresent ? `Punched in at ${record.checkIn}` : "Not punched in"}
+                                </Text>
+                              </View>
+                              <Badge label={record.status || "Absent"} type={isPresent ? "Completed" : "Pending"} />
+                            </View>
 
-                    {/* Pagination Load More Button */}
-                    {filteredTasks.length > visibleTasksLimit && (
-                      <TouchableOpacity
-                        onPress={() => setVisibleTasksLimit(prev => prev + 30)}
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          backgroundColor: colors.slate100,
-                          borderRadius: borderRadius.lg,
-                          paddingVertical: spacing.md,
-                          marginTop: spacing.md,
-                          gap: spacing.sm
-                        }}
-                      >
-                        <ChevronDown size={16} color={colors.slate600} />
-                        <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.slate600 }}>
-                          Load More (+{filteredTasks.length - visibleTasksLimit} checks remaining)
-                        </Text>
-                      </TouchableOpacity>
-                    )}
-                  </>
-                ) : (
-                  <Text style={{ fontSize: fontSize.sm, color: colors.textSecondary, textAlign: "center", padding: spacing["4xl"] }}>No checks to show</Text>
-                )}
-              </View>
-            </Card>
-          </View>
+                            {record.remarks ? (
+                              <View style={{ marginTop: spacing.md, paddingTop: spacing.md, borderTopWidth: 1, borderColor: colors.slate100, gap: spacing.xs }}>
+                                <Text style={{ fontSize: fontSize.xs, color: colors.slate500, textTransform: "uppercase" }}>Daily To-Do / Tasks</Text>
+                                <View style={{ backgroundColor: colors.slate50, padding: spacing.md, borderRadius: borderRadius.md, borderWidth: 1, borderColor: colors.slate100 }}>
+                                  <Text style={{ fontSize: fontSize.sm, color: colors.slate700 }}>{record.remarks}</Text>
+                                </View>
+                              </View>
+                            ) : null}
+                          </View>
+                        );
+                      })}
+                    </View>
+                  ) : (
+                    <Text style={{ fontSize: fontSize.sm, color: colors.textSecondary, textAlign: "center", padding: spacing["4xl"] }}>No attendance records for the selected filters</Text>
+                  )}
+                </ScrollView>
+              </Card>
+            </View>
+          ) : (
+            <View style={{ marginTop: spacing.xl }}>
+              <Card variant="glass">
+                <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.md, marginBottom: spacing.lg }}>
+                  <View style={{ width: 32, height: 32, borderRadius: borderRadius.md, backgroundColor: colors.brand + "15", alignItems: "center", justifyContent: "center" }}>
+                    <ClipboardCheck size={16} color={colors.brand} strokeWidth={2} />
+                  </View>
+                  <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.text }}>Check List</Text>
+                </View>
+                <View style={{ gap: spacing.xl }}>
+                  {slicedTasks.length > 0 ? (
+                    <>
+                      {slicedTasks.map((task) => (
+                        <TaskCard
+                          key={task.id}
+                          task={task}
+                          actions={
+                            task.status === "Pending" || task.status === "In Progress"
+                              ? [
+                                { label: "Mark Complete", onPress: () => markTaskDone(task.id), primary: true },
+                                { label: "Revoke", onPress: () => revokeTask(task.id) },
+                              ]
+                              : task.status === "Revoked"
+                                ? [{ label: "Review", onPress: () => openTaskDetail(task.id) }]
+                                : undefined
+                          }
+                        />
+                      ))}
+
+                      {/* Pagination Load More Button */}
+                      {filteredTasks.length > visibleTasksLimit && (
+                        <TouchableOpacity
+                          onPress={() => setVisibleTasksLimit(prev => prev + 30)}
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            backgroundColor: colors.slate100,
+                            borderRadius: borderRadius.lg,
+                            paddingVertical: spacing.md,
+                            marginTop: spacing.md,
+                            gap: spacing.sm
+                          }}
+                        >
+                          <ChevronDown size={16} color={colors.slate600} />
+                          <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.slate600 }}>
+                            Load More (+{filteredTasks.length - visibleTasksLimit} checks remaining)
+                          </Text>
+                        </TouchableOpacity>
+                      )}
+                    </>
+                  ) : (
+                    <Text style={{ fontSize: fontSize.sm, color: colors.textSecondary, textAlign: "center", padding: spacing["4xl"] }}>No checks to show</Text>
+                  )}
+                </View>
+              </Card>
+            </View>
+          )}
         </>
       ) : (
         selectedRegion !== "" && (
