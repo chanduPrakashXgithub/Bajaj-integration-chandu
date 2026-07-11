@@ -1,0 +1,10 @@
+{
+  "name": "bajaj-operations-root",
+  "version": "1.0.0",
+  "description": "Root forwarder for backend deployment on Render",
+  "scripts": {
+    "preinstall": "npm install --prefix backend --include=dev",
+    "build": "npm run build --prefix backend",
+    "start": "npm start --prefix backend"
+  }
+}
