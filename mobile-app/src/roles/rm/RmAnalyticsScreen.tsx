@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from "react-native";
-import { CheckCircle, AlertTriangle, AlertCircle, Clock, DollarSign, Layers, Activity, User as UserIcon, Building } from "lucide-react-native";
+import { CheckCircle, AlertTriangle, AlertCircle, Clock, DollarSign, Layers, Activity, User as UserIcon, Building, ShieldCheck } from "lucide-react-native";
 import { LineChart } from "react-native-chart-kit";
 import { ScreenWrapper } from "../../shared/layout/ScreenWrapper";
 import { SectionHeader } from "../../shared/components/SectionHeader";
