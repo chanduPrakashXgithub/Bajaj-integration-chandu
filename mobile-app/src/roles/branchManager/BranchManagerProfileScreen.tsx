@@ -14,6 +14,9 @@ export function BranchManagerProfileScreen() {
   const { currentUser, scopedBranches, openAuditTrail, logout } = useApp();
   const [editVisible, setEditVisible] = useState(false);
   if (!currentUser) return null;
+  const initials = (currentUser.name || "").split(" ").map((n: any) => n?.[0] || "").join("").slice(0, 2).toUpperCase();
+  const skills = Array.isArray(currentUser.skills) ? currentUser.skills : [];
+  const documents = Array.isArray(currentUser.documents) ? currentUser.documents : [];
 
   const detailRows = [
     { label: "Phone", value: currentUser.phone, icon: Phone },
@@ -35,7 +38,7 @@ export function BranchManagerProfileScreen() {
             <View style={{ backgroundColor: colors.text, borderRadius: borderRadius.xl, padding: spacing.xl }}>
               <View style={{ width: 56, height: 56, borderRadius: 28, backgroundColor: colors.brandLight, alignItems: "center", justifyContent: "center" }}>
                 <Text style={{ fontSize: fontSize["3xl"], fontWeight: "400", color: colors.brand }}>
-                  {currentUser.name.split(" ").map((n) => n[0]).join("")}
+                  {initials}
                 </Text>
               </View>
               <Text style={{ fontSize: fontSize["4xl"], fontWeight: "400", color: colors.white, marginTop: spacing.xl }}>{currentUser.name}</Text>
@@ -68,7 +71,7 @@ export function BranchManagerProfileScreen() {
               <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.text }}>Skills & Expertise</Text>
             </View>
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.sm }}>
-              {currentUser.skills.map((skill) => (
+              {skills.map((skill) => (
                 <View key={skill} style={{ backgroundColor: colors.slate100, borderRadius: borderRadius.full, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm }}>
                   <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.textSecondary }}>{skill}</Text>
                 </View>
@@ -96,7 +99,7 @@ export function BranchManagerProfileScreen() {
                 <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.text }}>Documents</Text>
               </View>
               <View style={{ gap: spacing.sm }}>
-                {currentUser.documents.map((doc) => (
+                {documents.map((doc) => (
                   <View key={doc} style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                     <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm, flex: 1 }}>
                       <FileText size={12} color={colors.textSecondary} strokeWidth={2} />

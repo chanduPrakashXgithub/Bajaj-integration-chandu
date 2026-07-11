@@ -142,12 +142,7 @@ export function BranchManagerHomeScreen() {
               variant="secondary"
               onPress={() => setPage("users")}
             />
-            <QuickButton
-              label="Review Approvals"
-              icon={Stamp}
-              variant="secondary"
-              onPress={() => setPage("approvals")}
-            />
+
           </View>
         }
       />
@@ -370,135 +365,9 @@ export function BranchManagerHomeScreen() {
         )}
       </Card>
 
-      {/* Upcoming Visits */}
-      <SectionHeader
-        title="Upcoming visits"
-        action={
-          <QuickButton
-            label="View All"
-            icon={ChevronRight}
-            variant="secondary"
-            onPress={() => setPage("visits")}
-          />
-        }
-      />
-      <Card>
-        {scopedVisits.length > 0 ? (
-          scopedVisits.map((visit, i) => {
-            const branch = getBranch(visit.branchId);
-            return (
-              <React.Fragment key={visit.id}>
-                <TouchableOpacity
-                  onPress={() => setPage("visits")}
-                  activeOpacity={0.7}
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    paddingVertical: spacing.md,
-                  }}
-                >
-                  <View style={{ flex: 1 }}>
-                    <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.slate900 }}>
-                      {branch?.name || "Branch " + visit.branchId}
-                    </Text>
-                    <Text style={{ fontSize: fontSize.xs, color: colors.slate500, marginTop: 2 }}>
-                      {visit.purpose}
-                    </Text>
-                    <Text style={{ fontSize: fontSize.xs, color: colors.slate400, marginTop: 2 }}>
-                      {visit.scheduledAt}
-                    </Text>
-                  </View>
-                  <View style={{ alignItems: "flex-end", gap: spacing.xs }}>
-                    <Badge label={visit.status} type={visit.status} />
-                  </View>
-                </TouchableOpacity>
-                {i < scopedVisits.length - 1 ? (
-                  <View style={{ height: 1, backgroundColor: colors.slate100 }} />
-                ) : null}
-              </React.Fragment>
-            );
-          })
-        ) : (
-          <Text style={{ fontSize: fontSize.sm, color: colors.slate500 }}>
-            No visits scheduled
-          </Text>
-        )}
-      </Card>
 
-      {/* Pending Approvals Quick View */}
-      {pendingApprovals.length > 0 ? (
-        <>
-          <SectionHeader
-            title="Pending Approvals"
-            action={
-              <QuickButton
-                label="View All"
-                icon={ChevronRight}
-                variant="secondary"
-                onPress={() => setPage("approvals")}
-              />
-            }
-          />
-          <Card variant="glass">
-            <View style={{ gap: spacing.md }}>
-              {pendingApprovals.slice(0, 3).map((a) => {
-                const branch = getBranch(a.branchId);
-                return (
-                  <View
-                    key={a.id}
-                    style={{
-                      backgroundColor: colors.bg,
-                      borderRadius: borderRadius.lg,
-                      padding: spacing.xl,
-                    }}
-                  >
-                    <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <View style={{ flex: 1 }}>
-                        <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.slate900 }}>
-                          {a.title}
-                        </Text>
-                        <Text style={{ fontSize: fontSize.xs, color: colors.slate500, marginTop: spacing.xs }}>
-                          {a.kind} | {branch?.name} | Rs {a.amount.toLocaleString("en-IN")}
-                        </Text>
-                      </View>
-                      <Badge label={a.priority} type={a.priority} />
-                    </View>
-                    <View style={{ flexDirection: "row", gap: spacing.sm, marginTop: spacing.lg }}>
-                      <TouchableOpacity
-                        onPress={() => approveRequest(a.id)}
-                        style={{
-                          backgroundColor: colors.success,
-                          borderRadius: borderRadius.lg,
-                          paddingHorizontal: spacing.xl,
-                          paddingVertical: spacing.md,
-                        }}
-                      >
-                        <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.white }}>
-                          Approve
-                        </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => rejectRequest(a.id)}
-                        style={{
-                          backgroundColor: colors.error,
-                          borderRadius: borderRadius.lg,
-                          paddingHorizontal: spacing.xl,
-                          paddingVertical: spacing.md,
-                        }}
-                      >
-                        <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.white }}>
-                          Reject
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                );
-              })}
-            </View>
-          </Card>
-        </>
-      ) : null}
+
+
 
       {/* Improvement 2: Date-to-Date SLA Incident Timeline */}
       <SectionHeader title="Territory Incident Timeline" subtitle="Track escalations and SLA exceptions from date to date" />

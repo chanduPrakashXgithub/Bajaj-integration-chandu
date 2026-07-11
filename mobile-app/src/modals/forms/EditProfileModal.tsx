@@ -17,7 +17,7 @@ export function EditProfileModal({ visible, onClose }: Props) {
   const [email, setEmail] = useState(currentUser.email);
   const [shift, setShift] = useState(currentUser.shift);
   const [emergencyContact, setEmergencyContact] = useState(currentUser.emergencyContact);
-  const [skills, setSkills] = useState(currentUser.skills.join(", "));
+  const [skills, setSkills] = useState((Array.isArray(currentUser.skills) ? currentUser.skills : []).join(", "));
 
   useEffect(() => {
     if (visible) {
@@ -25,7 +25,7 @@ export function EditProfileModal({ visible, onClose }: Props) {
       setEmail(currentUser.email);
       setShift(currentUser.shift);
       setEmergencyContact(currentUser.emergencyContact);
-      setSkills(currentUser.skills.join(", "));
+      setSkills((Array.isArray(currentUser.skills) ? currentUser.skills : []).join(", "));
     }
   }, [visible]);
 
@@ -66,7 +66,7 @@ export function EditProfileModal({ visible, onClose }: Props) {
         <View style={{ backgroundColor: colors.text, borderRadius: borderRadius.xl, padding: spacing.xl, flexDirection: "row", alignItems: "center", gap: spacing.lg }}>
           <View style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: colors.brand, alignItems: "center", justifyContent: "center" }}>
             <Text style={{ fontSize: fontSize.xl, fontWeight: fontWeight.bold, color: colors.white }}>
-              {currentUser.name.split(" ").map((n) => n[0]).join("")}
+              {(currentUser.name || "").split(" ").map((n: string) => n?.[0] || "").join("").slice(0, 2).toUpperCase()}
             </Text>
           </View>
           <View>

@@ -27,8 +27,6 @@ export const ROLES: Record<RoleId, RoleDef> = {
       { id: "attendance", label: "Branch Opening", icon: "users-viewfinder" },
       { id: "complaints", label: "Complaints", icon: "sitemap" },
       { id: "users", label: "Users", icon: "users-cog" },
-      { id: "approvals", label: "Approvals", icon: "stamp" },
-      { id: "visits", label: "Visits", icon: "route" },
       { id: "notifications", label: "Alerts", icon: "bell" },
       { id: "profile", label: "Profile", icon: "id-badge" },
     ],
@@ -40,9 +38,7 @@ export const ROLES: Record<RoleId, RoleDef> = {
       { id: "dashboard", label: "Dashboard", icon: "chart-pie" },
       { id: "branches", label: "Branches", icon: "building" },
       { id: "monitoring", label: "Task Monitor", icon: "list-checks" },
-      { id: "intelligence", label: "Branch Intel", icon: "satellite-dish" },
       { id: "complaints", label: "Complaints", icon: "circle-exclamation" },
-      { id: "alerts", label: "Alert Center", icon: "triangle-exclamation" },
       { id: "users", label: "Users", icon: "users-cog" },
       { id: "analytics", label: "Analytics", icon: "chart-column" },
       { id: "attendance", label: "Branch Opening", icon: "users-viewfinder" },
@@ -52,7 +48,7 @@ export const ROLES: Record<RoleId, RoleDef> = {
     ],
   },
   aa: {
-    id: "aa", name: "Admin Assistant", short: "Branch cluster oversight", icon: "fa-user-gear",
+    id: "aa", name: "Admin Assistant", short: "AA", icon: "fa-user-gear",
     hierarchy: "AA -> AM -> RM", accent: "bg-teal-500",
     pages: [
       { id: "home", label: "Overview", icon: "house" },
@@ -60,8 +56,6 @@ export const ROLES: Record<RoleId, RoleDef> = {
       { id: "monitoring", label: "Task Monitor", icon: "chart-line" },
       { id: "attendance", label: "Branch Opening", icon: "users-viewfinder" },
       { id: "complaints", label: "Complaints", icon: "sitemap" },
-      { id: "approvals", label: "Approvals", icon: "stamp" },
-      { id: "visits", label: "Visits", icon: "route" },
       { id: "notifications", label: "Alerts", icon: "bell" },
       { id: "profile", label: "Profile", icon: "id-badge" },
     ],
@@ -73,9 +67,7 @@ export const ROLES: Record<RoleId, RoleDef> = {
       { id: "dashboard", label: "Dashboard", icon: "chart-pie" },
       { id: "branches", label: "Branches", icon: "building" },
       { id: "monitoring", label: "Task Monitor", icon: "list-checks" },
-      { id: "intelligence", label: "Branch Intel", icon: "satellite-dish" },
       { id: "complaints", label: "Complaints", icon: "circle-exclamation" },
-      { id: "alerts", label: "Alert Center", icon: "triangle-exclamation" },
       { id: "users", label: "Users", icon: "users-cog" },
       { id: "analytics", label: "Analytics", icon: "chart-column" },
       { id: "attendance", label: "Branch Opening", icon: "users-viewfinder" },
@@ -91,9 +83,7 @@ export const ROLES: Record<RoleId, RoleDef> = {
       { id: "dashboard", label: "Dashboard", icon: "chart-pie" },
       { id: "branches", label: "Branches", icon: "building" },
       { id: "monitoring", label: "Task Monitor", icon: "list-checks" },
-      { id: "intelligence", label: "Branch Intel", icon: "satellite-dish" },
       { id: "complaints", label: "Complaints", icon: "circle-exclamation" },
-      { id: "alerts", label: "Alert Center", icon: "triangle-exclamation" },
       { id: "users", label: "Users", icon: "users-cog" },
       { id: "analytics", label: "Analytics", icon: "chart-column" },
       { id: "attendance", label: "Branch Opening", icon: "users-viewfinder" },
@@ -14492,4 +14482,4 @@ export const attendanceLog: AttendanceLog[] = [
   }
 ];
 
-export const currentUserByRole: Record<RoleId, number> = { lc: 8, branchManager: 2, aa: 0, rm: 1 };
+export const currentUserByRole: Record<RoleId, number> = { lc: 8, branchManager: 2, aa: 0, rm: 1, am: 1, rrm: 1 };

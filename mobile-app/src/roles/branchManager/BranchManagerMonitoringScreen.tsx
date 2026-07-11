@@ -121,7 +121,7 @@ export function BranchManagerMonitoringScreen() {
 
   return (
     <ScreenWrapper>
-      <SectionHeader title="Task Monitor" />
+      <SectionHeader title="Task & Checks Monitor" />
 
       {/* STEP 1: REGIONS PICKER */}
       <View style={{ marginTop: spacing.xl }}>

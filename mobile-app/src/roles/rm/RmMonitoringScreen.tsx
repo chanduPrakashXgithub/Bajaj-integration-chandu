@@ -181,7 +181,7 @@ export function RmMonitoringScreen() {
 
   return (
     <ScreenWrapper>
-      <SectionHeader title="Regional Task Monitor" />
+      <SectionHeader title="Regional Task & Checks Monitor" />
 
       {/* STEP 1: REGIONS PICKER */}
       <View style={{ marginTop: spacing.xl }}>

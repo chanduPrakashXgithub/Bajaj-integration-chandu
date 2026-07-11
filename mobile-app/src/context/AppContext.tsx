@@ -1227,24 +1227,69 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const createComplaint = useCallback(async (data: Partial<Complaint>) => {
     try {
-      await apiClient.post("/complaints", {
-        complaintId: data.complaintId,
-        branchId: data.branchId || currentUser.branchId,
-        priority: data.priority,
-        assetId: data.assetId,
-        description: data.description,
-        attachments: data.attachmentUrls || [],
-        attachmentUrls: data.attachmentUrls,
-        vendorRemarks: data.vendorRemarks,
-        vendorName: (data as any).vendorName,
-        vendorEmail: (data as any).vendorEmail
+      const formData = new FormData();
+      formData.append("branchId", String(data.branchId || currentUser.branchId));
+      formData.append("priority", String(data.priority));
+      formData.append("assetId", String(data.assetId));
+      formData.append("description", String(data.description));
+      formData.append("vendorName", String((data as any).vendorName || ""));
+      formData.append("vendorEmail", String((data as any).vendorEmail || ""));
+
+      const localAttachments: string[] = [];
+      const remoteAttachments: string[] = [];
+
+      if (data.attachmentUrls && data.attachmentUrls.length > 0) {
+        for (const url of data.attachmentUrls) {
+          if (/^(file:|content:|ph:)/i.test(url) || !url.startsWith("http")) {
+            localAttachments.push(url);
+          } else {
+            remoteAttachments.push(url);
+          }
+        }
+      }
+
+      formData.append("attachments", JSON.stringify(remoteAttachments));
+
+      if (localAttachments.length > 0) {
+        for (let i = 0; i < localAttachments.length; i++) {
+          const uri = localAttachments[i];
+          const filename = `attachment_${i}.jpg`;
+          
+          if (Platform.OS === "web") {
+            try {
+              const response = await fetch(uri);
+              const blob = await response.blob();
+              formData.append("images", blob, filename);
+            } catch (err) {
+              console.error("Web fetch file blob failed:", err);
+              formData.append("images", {
+                uri,
+                name: filename,
+                type: "image/jpeg"
+              } as any);
+            }
+          } else {
+            formData.append("images", {
+              uri,
+              name: filename,
+              type: "image/jpeg"
+            } as any);
+          }
+        }
+      }
+
+      await apiClient.post("/complaints", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      addAuditEntry(`Issue "${data.complaintId}" raised by ${currentUser.name}`, "Zap", "#EF4444");
+
+      addAuditEntry(`Issue raised by ${currentUser.name}`, "Zap", "#EF4444");
       showToast("Complaint submitted");
       await refreshData();
     } catch (e: any) {
       console.error(e);
-      showToast("Failed to raise complaint");
+      showToast(e.response?.data?.message || "Failed to raise complaint");
     }
   }, [currentUser, addAuditEntry, showToast, refreshData]);
 

@@ -419,10 +419,11 @@ export const rmAnalytics = async (req: AuthenticatedRequest, res: Response) => {
     const completedTasks = filteredAnalytics.reduce((s, a) => s + a.completedTasks, 0);
     const regionMetrics = {
       taskCompletionRate: totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0,
+      totalTasks,
+      completedTasks,
       openComplaints: filteredAnalytics.reduce((s, a) => s + a.openComplaints, 0),
       criticalComplaints: filteredAnalytics.reduce((s, a) => s + a.criticalComplaints, 0),
       budgetBurnPct: filteredAnalytics.length > 0 ? Math.round((filteredAnalytics.reduce((s, a) => s + a.usedBudget, 0) / filteredAnalytics.reduce((s, a) => s + a.monthlyBudget, 0)) * 100) : 0,
-      avgSla: filteredAnalytics.length > 0 ? Math.round(filteredAnalytics.reduce((s, a) => s + a.sla, 0) / filteredAnalytics.length) : 0,
     };
 
     // 3. Generate mock 6-month historical trends
@@ -431,12 +432,11 @@ export const rmAnalytics = async (req: AuthenticatedRequest, res: Response) => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const trends = {
       labels: Array.from({ length: 6 }).map((_, i) => months[(currentMonth - 5 + i + 12) % 12]),
-      sla: [82, 85, 84, regionMetrics.avgSla - 2, regionMetrics.avgSla - 1, regionMetrics.avgSla || 90], // Slight variations
       tasks: [75, 78, 80, regionMetrics.taskCompletionRate - 3, regionMetrics.taskCompletionRate - 1, regionMetrics.taskCompletionRate || 85]
     };
 
-    // 4. Sort leaderboard (by SLA desc) and alerts (by Critical Alerts/Open Issues desc)
-    const leaderboard = [...filteredAnalytics].sort((a, b) => b.sla - a.sla);
+    // 4. Sort leaderboard (by completed tasks desc) and alerts (by Critical Alerts/Open Issues desc)
+    const leaderboard = [...filteredAnalytics].sort((a, b) => b.completedTasks - a.completedTasks);
     const alerts = [...filteredAnalytics].filter(a => a.openComplaints > 0 || a.criticalAlerts > 0).sort((a, b) => {
       if (b.criticalAlerts !== a.criticalAlerts) return b.criticalAlerts - a.criticalAlerts;
       return b.openComplaints - a.openComplaints;

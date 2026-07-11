@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Building, TrendingUp, Users, Clock, AlertCircle, TriangleAlert, ShieldCheck, DollarSign, ChevronRight } from "lucide-react-native";
 import { Badge } from "./Badge";
 import { ProgressBar } from "./ProgressBar";
-import { colors, fontSize, spacing, borderRadius } from "../../theme/theme";
+import { colors, fontSize, spacing, borderRadius, shadows } from "../../theme/theme";
 import { Branch } from "../../types/domain";
 
 interface Props {
@@ -19,7 +19,7 @@ export function BranchCard({ branch, onOverview, onDeepDive, onScheduleVisit, sh
   const healthy = branch.health >= 90;
 
   return (
-    <View style={{ backgroundColor: colors.card, borderRadius: borderRadius["6xl"], borderWidth: 1, borderColor: colors.border, padding: spacing["2xl"] }}>
+    <View style={{ backgroundColor: colors.card, borderRadius: borderRadius["6xl"], borderWidth: 1, borderColor: colors.border, padding: spacing["2xl"], ...shadows.card }}>
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: spacing.md }}>
         <View style={{ flex: 1 }}>
           <Text style={{ fontSize: fontSize.xs, fontWeight: "400", color: colors.textSecondary, textTransform: "uppercase", letterSpacing: 2 }}>{branch.code}</Text>
@@ -102,8 +102,8 @@ export function BranchCard({ branch, onOverview, onDeepDive, onScheduleVisit, sh
           </TouchableOpacity>
         ) : null}
         {onDeepDive ? (
-          <TouchableOpacity onPress={onDeepDive} style={{ backgroundColor: colors.text, borderRadius: borderRadius["2xl"], paddingHorizontal: spacing.xl, paddingVertical: spacing.md, flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
-            <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.white }}>Deep Dive</Text>
+          <TouchableOpacity onPress={onDeepDive} style={{ backgroundColor: colors.brand, borderRadius: borderRadius["2xl"], paddingHorizontal: spacing.xl, paddingVertical: spacing.md, flexDirection: "row", alignItems: "center", gap: spacing.sm, ...shadows.card }}>
+            <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.white }}>Deep Dive</Text>
             <ChevronRight size={14} color={colors.white} strokeWidth={2} />
           </TouchableOpacity>
         ) : null}

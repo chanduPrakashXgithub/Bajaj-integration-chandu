@@ -14,7 +14,8 @@ export function RmProfileScreen() {
   const { currentUser, branches, openAuditTrail, logout } = useApp();
   const [editVisible, setEditVisible] = useState(false);
   if (!currentUser) return null;
-  const initials = currentUser.name.split(" ").map((n) => n[0]).join("");
+  const initials = (currentUser.name || "").split(" ").map((n: any) => n?.[0] || "").join("").slice(0, 2).toUpperCase();
+  const skills = Array.isArray(currentUser.skills) ? currentUser.skills : [];
 
   const detailRows = [
     { label: "Phone", value: currentUser.phone, icon: Phone },
@@ -96,7 +97,7 @@ export function RmProfileScreen() {
           <Text style={{ fontSize: fontSize.lg, fontWeight: "400", color: colors.text }}>Skills & Expertise</Text>
         </View>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.sm }}>
-          {currentUser.skills.map((skill, i) => (
+          {skills.map((skill, i) => (
             <View key={i} style={{ backgroundColor: colors.brandLight, borderRadius: borderRadius.full, paddingHorizontal: spacing.xl, paddingVertical: spacing.sm }}>
               <Text style={{ fontSize: fontSize.sm, fontWeight: "400", color: colors.brand }}>{skill}</Text>
             </View>

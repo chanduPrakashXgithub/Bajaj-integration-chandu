@@ -93,9 +93,9 @@ export function LcProfileScreen() {
   const branch = getBranch(currentUser.branchId);
   const branchName = branch?.name || "—";
 
-  const initials = currentUser.name
+  const initials = (currentUser.name || "")
     .split(" ")
-    .map((n: string) => n[0])
+    .map((n: string) => n?.[0] || "")
     .join("")
     .slice(0, 2)
     .toUpperCase();

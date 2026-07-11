@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Modal, Platform, useWindowDimensions, KeyboardAvoidingView } from "react-native";
-import { Users, UserPlus, Building, ChevronDown, ChevronRight, Search, X, Check, Shield, Briefcase, UserCog, Save, AlertTriangle, Edit3, Trash2, ArrowRight, ChevronLeft } from "lucide-react-native";
+import { Users, UserPlus, Building, ChevronDown, ChevronRight, Search, X, Check, Shield, Briefcase, UserCog, Save, AlertTriangle, Pencil, Trash2, ArrowRight, ChevronLeft } from "lucide-react-native";
 import { ScreenWrapper } from "../../shared/layout/ScreenWrapper";
 import { SectionHeader } from "../../shared/components/SectionHeader";
 import { Card } from "../../shared/components/Card";
@@ -336,7 +336,7 @@ export function UserManagementScreen() {
         <View style={{ flexDirection: "row", gap: spacing.md, flexWrap: "wrap" }}>
           <TouchableOpacity onPress={() => openEditUserModal(am)}
             style={{ flex: 1, minWidth: 100, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm, paddingVertical: spacing.md, borderRadius: borderRadius.xl, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.white }}>
-            <Edit3 size={14} color={colors.textSecondary} /><Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.textSecondary }}>Edit</Text>
+            <Pencil size={14} color={colors.textSecondary} /><Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.textSecondary }}>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { openAddModal(); setAddRole("aa"); }}
             style={{ flex: 1, minWidth: 100, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm, paddingVertical: spacing.md, borderRadius: borderRadius.xl, backgroundColor: colors.brand }}>
@@ -371,7 +371,7 @@ export function UserManagementScreen() {
 
         <TouchableOpacity onPress={() => openEditBranchModal(aa)}
           style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm, paddingVertical: spacing.md, borderRadius: borderRadius.xl, borderWidth: 1, borderColor: colors.brand, backgroundColor: colors.brandLight }}>
-          <Edit3 size={14} color={colors.brand} /><Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.brand }}>Edit Branch Assignment</Text>
+          <Pencil size={14} color={colors.brand} /><Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.brand }}>Edit Branch Assignment</Text>
         </TouchableOpacity>
 
         <Card style={{ padding: spacing.lg }}>
@@ -438,7 +438,7 @@ export function UserManagementScreen() {
       <View style={{ flexDirection: "row", gap: spacing.md, flexWrap: "wrap" }}>
         <TouchableOpacity onPress={() => openEditUserModal(lc)}
           style={{ flex: 1, minWidth: 90, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm, paddingVertical: spacing.md, borderRadius: borderRadius.xl, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.white }}>
-          <Edit3 size={14} color={colors.textSecondary} /><Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.textSecondary }}>Edit</Text>
+          <Pencil size={14} color={colors.textSecondary} /><Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.textSecondary }}>Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDisableUser(lc)}
           style={{ flex: 1, minWidth: 90, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm, paddingVertical: spacing.md, borderRadius: borderRadius.xl, borderWidth: 1, borderColor: colors.error, backgroundColor: colors.white }}>
