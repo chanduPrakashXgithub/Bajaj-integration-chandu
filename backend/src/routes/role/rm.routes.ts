@@ -9,6 +9,7 @@ import {
   rmTasks,
   rmFinanceExport,
   rmUpdateUserStatus,
+  rmOperationalAlerts,
 } from "../../controllers/role/rm.controller";
 
 const router = Router();
@@ -39,5 +40,8 @@ router.get("/analytics", rmAnalytics);
 
 /** GET /api/rm/tasks — all tasks (RM scope) with lean fields */
 router.get("/tasks", rmTasks);
+
+/** GET /api/rm/operational-alerts — dynamic date-based exceptions */
+router.get("/operational-alerts", rmOperationalAlerts);
 
 export default router;

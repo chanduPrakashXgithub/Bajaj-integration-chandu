@@ -319,6 +319,10 @@ interface AppContextValue {
   openAuditTrail: () => void;
   addAuditEntry: (text: string, icon: string, color: string) => void;
   refreshData: () => Promise<void>;
+
+  operationalAlerts: any[];
+  operationalAlertsLoading: boolean;
+  getOperationalAlerts: (dateStr: string) => Promise<void>;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
@@ -336,6 +340,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [visits, setVisits] = useState<Visit[]>([]);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [attendanceLog, setAttendanceLog] = useState<AttendanceLog[]>([]);
+  const [operationalAlerts, setOperationalAlerts] = useState<any[]>([]);
+  const [operationalAlertsLoading, setOperationalAlertsLoading] = useState(false);
 
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -424,6 +430,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
     setAuditLog((prev) => [entry, ...prev].slice(0, 100));
   }, [state.role, currentUser]);
+
+  const getOperationalAlerts = useCallback(async (dateStr: string) => {
+    setOperationalAlertsLoading(true);
+    try {
+      const res = await apiClient.get(`/rm/operational-alerts?date=${dateStr}`);
+      setOperationalAlerts(res.data.alerts || []);
+    } catch (err) {
+      console.error("Failed to fetch operational alerts:", err);
+      showToast("Failed to load operational exceptions");
+    } finally {
+      setOperationalAlertsLoading(false);
+    }
+  }, [showToast]);
 
   // Main list refreshing method (lazy loads depending on current page)
   const refreshData = useCallback(async () => {
@@ -1697,6 +1716,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveSettings, showToast, openAuditTrail, addAuditEntry,
     updateBranchBudget, deleteUser, deleteAppliance, updateAppliance,
     refreshData,
+    operationalAlerts,
+    operationalAlertsLoading,
+    getOperationalAlerts,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

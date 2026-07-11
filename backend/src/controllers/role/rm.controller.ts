@@ -637,4 +637,184 @@ export const rmUpdateUserStatus = async (req: AuthenticatedRequest, res: Respons
   }
 };
 
+export const rmOperationalAlerts = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const userContext = req.user;
+    if (!userContext) return res.status(401).json({ message: "Unauthorized" });
+    if (userContext.role !== RoleId.rm) return res.status(403).json({ message: "Forbidden: RM only" });
+
+    const queryDateStr = (req.query.date as string) || new Date().toISOString().slice(0, 10);
+
+    const [branches, users, attendanceLogs, complaints] = await Promise.all([
+      prisma.branch.findMany({
+        select: { id: true, name: true, code: true, shiftWindow: true }
+      }),
+      prisma.user.findMany({
+        where: { role: { in: [RoleId.lc, RoleId.branchManager, RoleId.aa] } },
+        select: { id: true, name: true, role: true, branchId: true, shift: true }
+      }),
+      prisma.attendanceLog.findMany({
+        where: { date: queryDateStr },
+        include: { user: { select: { id: true, name: true, role: true, branchId: true } } }
+      }),
+      prisma.complaint.findMany({
+        where: {
+          createdAt: { lte: new Date(`${queryDateStr}T23:59:59.999Z`) },
+          status: { notIn: ["RESOLVED"] }
+        },
+        select: { id: true, complaintId: true, description: true, priority: true, status: true, branchId: true, createdAt: true }
+      })
+    ]);
+
+    const alerts: any[] = [];
+    const now = new Date();
+    const isToday = queryDateStr === now.toISOString().slice(0, 10);
+
+    const getShiftStartMinutes = (window: string): number => {
+      try {
+        const startPart = window.split("-")[0].trim();
+        const [h, m] = startPart.split(":").map(Number);
+        return h * 60 + m;
+      } catch {
+        return 7 * 60;
+      }
+    };
+
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    // ── 1. Branch Not Opened Yet ──
+    for (const branch of branches) {
+      const shiftStartMinutes = getShiftStartMinutes(branch.shiftWindow);
+      if (isToday && currentMinutes < shiftStartMinutes) {
+        continue;
+      }
+
+      const lcCheckins = attendanceLogs.filter(
+        (log) => log.user?.branchId === branch.id && log.user?.role === RoleId.lc
+      );
+
+      if (lcCheckins.length === 0) {
+        alerts.push({
+          id: `branch_not_opened_${branch.id}_${queryDateStr}`,
+          type: "branch_not_opened",
+          title: `Branch Not Opened Yet`,
+          detail: `Branch "${branch.name}" (${branch.code}) has not opened yet. No LC marked attendance for shift start (${branch.shiftWindow.split("-")[0].trim()}).`,
+          priority: "Critical",
+          branchId: branch.id,
+          branchName: branch.name,
+          time: queryDateStr
+        });
+      }
+    }
+
+    // ── 2. Missing Staff Attendance ──
+    for (const staff of users) {
+      const log = attendanceLogs.find((l) => String(l.userId) === String(staff.id));
+      const staffBranch = branches.find((b) => b.id === staff.branchId);
+      const branchName = staffBranch?.name || "Unknown Branch";
+      const shiftWindow = staff.shift || staffBranch?.shiftWindow || "09:00 - 18:00";
+      const shiftStartMinutes = getShiftStartMinutes(shiftWindow);
+
+      if (isToday && currentMinutes < shiftStartMinutes) {
+        continue;
+      }
+
+      if (!log) {
+        alerts.push({
+          id: `missing_attendance_${staff.id}_${queryDateStr}`,
+          type: "missing_attendance",
+          title: `Missing Attendance`,
+          detail: `Employee ${staff.name} (${staff.role.toUpperCase()}) at "${branchName}" did not check in for shift starting at ${shiftWindow.split("-")[0].trim()}.`,
+          priority: "High",
+          branchId: staff.branchId,
+          branchName,
+          entityId: staff.id,
+          time: queryDateStr
+        });
+      }
+    }
+
+    // ── 3. Unresolved Complaints (SLA Breach) ──
+    for (const cmp of complaints) {
+      const cmpBranch = branches.find((b) => b.id === cmp.branchId);
+      const branchName = cmpBranch?.name || "Unknown Branch";
+
+      const createdTime = new Date(cmp.createdAt).getTime();
+      const queryTime = new Date(`${queryDateStr}T23:59:59.999Z`).getTime();
+      const ageHours = Math.floor((queryTime - createdTime) / (1000 * 60 * 60));
+
+      if (ageHours >= 24) {
+        const priority = cmp.priority === "Critical" ? "Critical" : "High";
+        alerts.push({
+          id: `unresolved_complaint_${cmp.id}_${queryDateStr}`,
+          type: "unresolved_complaint",
+          title: `Unresolved Complaint Breach`,
+          detail: `Complaint ${cmp.complaintId} ("${cmp.description.substring(0, 40)}...") at "${branchName}" remains unresolved after ${Math.floor(ageHours / 24)} day(s) (Priority: ${cmp.priority}).`,
+          priority,
+          branchId: cmp.branchId,
+          branchName,
+          entityId: cmp.id,
+          time: new Date(cmp.createdAt).toLocaleDateString()
+        });
+      }
+    }
+
+    // ── 4. Attendance Deviations / Early Checkouts ──
+    for (const log of attendanceLogs) {
+      const logBranchId = log.user?.branchId;
+      if (!logBranchId) continue;
+      
+      const staffBranch = branches.find((b) => b.id === logBranchId);
+      const branchName = staffBranch?.name || "Unknown Branch";
+
+      if (log.location && log.location.toLowerCase().includes("deviation")) {
+        alerts.push({
+          id: `attendance_deviation_${log.id}_${queryDateStr}`,
+          type: "attendance_deviation",
+          title: `Attendance Geo-Deviation`,
+          detail: `${log.user?.name} checked in at "${branchName}" with geo-location deviation warning: "${log.location}".`,
+          priority: "Warning",
+          branchId: logBranchId,
+          branchName,
+          entityId: log.userId,
+          time: log.checkIn || queryDateStr
+        });
+      }
+
+      if (log.checkIn && log.checkOut) {
+        try {
+          const [inH, inM] = log.checkIn.split(":").map(Number);
+          const [outH, outM] = log.checkOut.split(":").map(Number);
+          const durationHrs = (outH * 60 + outM - (inH * 60 + inM)) / 60;
+
+          if (durationHrs > 0 && durationHrs < 5) {
+            alerts.push({
+              id: `attendance_halfday_${log.id}_${queryDateStr}`,
+              type: "attendance_deviation",
+              title: `Half-Day Warning`,
+              detail: `${log.user?.name} checked out early at "${branchName}" after working only ${durationHrs.toFixed(1)} hours (Less than 5-hour half-day threshold).`,
+              priority: "Warning",
+              branchId: logBranchId,
+              branchName,
+              entityId: log.userId,
+              time: log.checkOut
+            });
+          }
+        } catch (err) {
+          // ignore parsing error
+        }
+      }
+    }
+
+    return res.status(200).json({ alerts });
+  } catch (error: any) {
+    console.error("RM operational alerts error:", error);
+    return res.status(500).json({
+      message: "Server error generating operational exceptions",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined
+    });
+  }
+};
+
+
 
