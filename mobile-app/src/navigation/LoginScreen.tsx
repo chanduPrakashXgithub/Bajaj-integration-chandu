@@ -12,8 +12,9 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Mail, Lock, Eye, EyeOff, ShieldAlert, Building2, User } from "lucide-react-native";
+import { Mail, Lock, Eye, EyeOff, ShieldAlert, Building2, User, KeyRound } from "lucide-react-native";
 import { useApp } from "../context/AppContext";
+import { apiClient } from "../services/api/client";
 import { colors, spacing, borderRadius, fontSize, shadows } from "../theme/theme";
 
 export function LoginScreen() {
@@ -26,6 +27,18 @@ export function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const [isForgotMode, setIsForgotMode] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
+  const [resetEmailError, setResetEmailError] = useState("");
+  const [verificationCodeError, setVerificationCodeError] = useState("");
+  const [newPasswordError, setNewPasswordError] = useState("");
+  const [resetSuccessMessage, setResetSuccessMessage] = useState("");
+  const [resetErrorMessage, setResetErrorMessage] = useState("");
 
   const testUsers = [
     { label: "Regional Manager (RM)", email: "ravi@gmail.com", password: "ravi123", role: "RM" },
@@ -71,6 +84,68 @@ export function LoginScreen() {
     await login(email, password);
   };
 
+  const handleResetPassword = async () => {
+    let isValid = true;
+
+    setResetEmailError("");
+    setVerificationCodeError("");
+    setNewPasswordError("");
+    setResetSuccessMessage("");
+    setResetErrorMessage("");
+
+    if (!resetEmail) {
+      setResetEmailError("Email is required");
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(resetEmail)) {
+      setResetEmailError("Please enter a valid email");
+      isValid = false;
+    }
+
+    if (!verificationCode) {
+      setVerificationCodeError("Verification code is required");
+      isValid = false;
+    } else if (verificationCode.trim() !== "656565") {
+      setVerificationCodeError("Invalid code. Access code is 656565");
+      isValid = false;
+    }
+
+    if (!newPassword) {
+      setNewPasswordError("New password is required");
+      isValid = false;
+    } else if (newPassword.length < 5) {
+      setNewPasswordError("Password must be at least 5 characters");
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    setResetLoading(true);
+    try {
+      const response = await apiClient.post("/auth/reset-password", {
+        email: resetEmail.toLowerCase().trim(),
+        code: verificationCode.trim(),
+        newPassword: newPassword
+      });
+
+      setResetSuccessMessage(response.data.message || "Password reset successful!");
+      setTimeout(() => {
+        setIsForgotMode(false);
+        setEmail(resetEmail);
+        setPassword("");
+        setResetEmail("");
+        setVerificationCode("");
+        setNewPassword("");
+        setResetSuccessMessage("");
+      }, 2500);
+    } catch (error: any) {
+      console.error("Reset password failed: ", error);
+      const msg = error.response?.data?.message || "Failed to reset password. Please try again.";
+      setResetErrorMessage(msg);
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
   return (
     <View style={styles.root}>
       {/* Background gradients */}
@@ -109,107 +184,262 @@ export function LoginScreen() {
               <Text style={styles.appSubtitle}>Facilities, Attendance & Budget Control</Text>
             </View>
 
-            {/* Input Email */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Corporate Email</Text>
-              <View style={[styles.inputWrapper, emailError ? styles.wrapperError : null]}>
-                <Mail size={16} color={colors.slate400} style={styles.inputIcon} />
-                <TextInput
-                  value={email}
-                  onChangeText={(text) => {
-                    setEmail(text);
-                    if (emailError) setEmailError("");
-                  }}
-                  placeholder="name@gmail.com"
-                  placeholderTextColor={colors.slate400}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  style={styles.input}
-                />
-              </View>
-              {emailError ? (
-                <View style={styles.errorContainer}>
-                  <ShieldAlert size={12} color={colors.error} />
-                  <Text style={styles.errorText}>{emailError}</Text>
+            {!isForgotMode ? (
+              <>
+                {/* Input Email */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>Corporate Email</Text>
+                  <View style={[styles.inputWrapper, emailError ? styles.wrapperError : null]}>
+                    <Mail size={16} color={colors.slate400} style={styles.inputIcon} />
+                    <TextInput
+                      value={email}
+                      onChangeText={(text) => {
+                        setEmail(text);
+                        if (emailError) setEmailError("");
+                      }}
+                      placeholder="name@gmail.com"
+                      placeholderTextColor={colors.slate400}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      style={styles.input}
+                    />
+                  </View>
+                  {emailError ? (
+                    <View style={styles.errorContainer}>
+                      <ShieldAlert size={12} color={colors.error} />
+                      <Text style={styles.errorText}>{emailError}</Text>
+                    </View>
+                  ) : null}
                 </View>
-              ) : null}
-            </View>
 
-            {/* Input Password */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Security Password</Text>
-              <View style={[styles.inputWrapper, passwordError ? styles.wrapperError : null]}>
-                <Lock size={16} color={colors.slate400} style={styles.inputIcon} />
-                <TextInput
-                  value={password}
-                  onChangeText={(text) => {
-                    setPassword(text);
-                    if (passwordError) setPasswordError("");
-                  }}
-                  placeholder="•••••••••"
-                  placeholderTextColor={colors.slate400}
-                  secureTextEntry={!showPassword}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  style={styles.input}
-                />
+                {/* Input Password */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>Security Password</Text>
+                  <View style={[styles.inputWrapper, passwordError ? styles.wrapperError : null]}>
+                    <Lock size={16} color={colors.slate400} style={styles.inputIcon} />
+                    <TextInput
+                      value={password}
+                      onChangeText={(text) => {
+                        setPassword(text);
+                        if (passwordError) setPasswordError("");
+                      }}
+                      placeholder="•••••••••"
+                      placeholderTextColor={colors.slate400}
+                      secureTextEntry={!showPassword}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      style={styles.input}
+                    />
+                    <TouchableOpacity
+                      onPress={() => setShowPassword(!showPassword)}
+                      style={styles.passwordToggle}
+                      activeOpacity={0.7}
+                    >
+                      {showPassword ? (
+                        <EyeOff size={16} color={colors.slate500} />
+                      ) : (
+                        <Eye size={16} color={colors.slate500} />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                  {passwordError ? (
+                    <View style={styles.errorContainer}>
+                      <ShieldAlert size={12} color={colors.error} />
+                      <Text style={styles.errorText}>{passwordError}</Text>
+                    </View>
+                  ) : null}
+                </View>
+
+                {/* Forgot Password Link */}
                 <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                  style={styles.passwordToggle}
+                  onPress={() => {
+                    setIsForgotMode(true);
+                    setResetEmail(email);
+                    setResetErrorMessage("");
+                    setResetSuccessMessage("");
+                  }}
+                  style={styles.forgotPasswordContainer}
                   activeOpacity={0.7}
                 >
-                  {showPassword ? (
-                    <EyeOff size={16} color={colors.slate500} />
+                  <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+                </TouchableOpacity>
+
+                {/* Sign In Button */}
+                <TouchableOpacity
+                  onPress={handleSignIn}
+                  style={[styles.btnSignIn, loading && styles.btnDisabled]}
+                  activeOpacity={0.8}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <ActivityIndicator size="small" color={colors.white} />
                   ) : (
-                    <Eye size={16} color={colors.slate500} />
+                    <Text style={styles.btnSignInText}>Sign In to Console</Text>
                   )}
                 </TouchableOpacity>
-              </View>
-              {passwordError ? (
-                <View style={styles.errorContainer}>
-                  <ShieldAlert size={12} color={colors.error} />
-                  <Text style={styles.errorText}>{passwordError}</Text>
+
+                {/* Divider */}
+                <View style={styles.dividerContainer}>
+                  <View style={styles.dividerLine} />
+                  <Text style={styles.dividerText}>Testing Accounts</Text>
+                  <View style={styles.dividerLine} />
                 </View>
-              ) : null}
-            </View>
 
-            {/* Sign In Button */}
-            <TouchableOpacity
-              onPress={handleSignIn}
-              style={[styles.btnSignIn, loading && styles.btnDisabled]}
-              activeOpacity={0.8}
-              disabled={loading}
-            >
-              {loading ? (
-                <ActivityIndicator size="small" color={colors.white} />
-              ) : (
-                <Text style={styles.btnSignInText}>Sign In to Console</Text>
-              )}
-            </TouchableOpacity>
+                {/* Quick inject tags */}
+                <Text style={styles.quickLabel}>Tap below to quick-fill credentials:</Text>
+                <View style={styles.quickUsersGrid}>
+                  {testUsers.map((user) => (
+                    <TouchableOpacity
+                      key={user.email}
+                      onPress={() => handleQuickInject(user.email, user.password)}
+                      style={styles.quickUserPill}
+                      activeOpacity={0.7}
+                    >
+                      <User size={10} color={colors.brand} strokeWidth={2.5} />
+                      <Text style={styles.quickUserPillText}>{user.role}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </>
+            ) : (
+              <>
+                <Text style={styles.formSectionTitle}>Reset Security Password</Text>
+                <Text style={styles.formSectionSubtitle}>Enter your corporate email and verification code to reset your password.</Text>
 
-            {/* Divider */}
-            <View style={styles.dividerContainer}>
-              <View style={styles.dividerLine} />
-              <Text style={styles.dividerText}>Testing Accounts</Text>
-              <View style={styles.dividerLine} />
-            </View>
+                {resetSuccessMessage ? (
+                  <View style={styles.successContainer}>
+                    <Text style={styles.successText}>{resetSuccessMessage}</Text>
+                  </View>
+                ) : null}
 
-            {/* Quick inject tags */}
-            <Text style={styles.quickLabel}>Tap below to quick-fill credentials:</Text>
-            <View style={styles.quickUsersGrid}>
-              {testUsers.map((user) => (
+                {resetErrorMessage ? (
+                  <View style={styles.errorBanner}>
+                    <ShieldAlert size={16} color={colors.error} />
+                    <Text style={styles.errorBannerText}>{resetErrorMessage}</Text>
+                  </View>
+                ) : null}
+
+                {/* Reset Email Input */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>Corporate Email</Text>
+                  <View style={[styles.inputWrapper, resetEmailError ? styles.wrapperError : null]}>
+                    <Mail size={16} color={colors.slate400} style={styles.inputIcon} />
+                    <TextInput
+                      value={resetEmail}
+                      onChangeText={(text) => {
+                        setResetEmail(text);
+                        if (resetEmailError) setResetEmailError("");
+                      }}
+                      placeholder="name@gmail.com"
+                      placeholderTextColor={colors.slate400}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      style={styles.input}
+                    />
+                  </View>
+                  {resetEmailError ? (
+                    <View style={styles.errorContainer}>
+                      <ShieldAlert size={12} color={colors.error} />
+                      <Text style={styles.errorText}>{resetEmailError}</Text>
+                    </View>
+                  ) : null}
+                </View>
+
+                {/* Verification Code Input */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>Verification Code (656565)</Text>
+                  <View style={[styles.inputWrapper, verificationCodeError ? styles.wrapperError : null]}>
+                    <KeyRound size={16} color={colors.slate400} style={styles.inputIcon} />
+                    <TextInput
+                      value={verificationCode}
+                      onChangeText={(text) => {
+                        setVerificationCode(text);
+                        if (verificationCodeError) setVerificationCodeError("");
+                      }}
+                      placeholder="Enter verification code"
+                      placeholderTextColor={colors.slate400}
+                      keyboardType="number-pad"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      style={styles.input}
+                    />
+                  </View>
+                  {verificationCodeError ? (
+                    <View style={styles.errorContainer}>
+                      <ShieldAlert size={12} color={colors.error} />
+                      <Text style={styles.errorText}>{verificationCodeError}</Text>
+                    </View>
+                  ) : null}
+                </View>
+
+                {/* New Security Password Input */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>New Security Password</Text>
+                  <View style={[styles.inputWrapper, newPasswordError ? styles.wrapperError : null]}>
+                    <Lock size={16} color={colors.slate400} style={styles.inputIcon} />
+                    <TextInput
+                      value={newPassword}
+                      onChangeText={(text) => {
+                        setNewPassword(text);
+                        if (newPasswordError) setNewPasswordError("");
+                      }}
+                      placeholder="•••••••••"
+                      placeholderTextColor={colors.slate400}
+                      secureTextEntry={!showNewPassword}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      style={styles.input}
+                    />
+                    <TouchableOpacity
+                      onPress={() => setShowNewPassword(!showNewPassword)}
+                      style={styles.passwordToggle}
+                      activeOpacity={0.7}
+                    >
+                      {showNewPassword ? (
+                        <EyeOff size={16} color={colors.slate500} />
+                      ) : (
+                        <Eye size={16} color={colors.slate500} />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                  {newPasswordError ? (
+                    <View style={styles.errorContainer}>
+                      <ShieldAlert size={12} color={colors.error} />
+                      <Text style={styles.errorText}>{newPasswordError}</Text>
+                    </View>
+                  ) : null}
+                </View>
+
+                {/* Submit Reset Button */}
                 <TouchableOpacity
-                  key={user.email}
-                  onPress={() => handleQuickInject(user.email, user.password)}
-                  style={styles.quickUserPill}
+                  onPress={handleResetPassword}
+                  style={[styles.btnSignIn, resetLoading && styles.btnDisabled]}
+                  activeOpacity={0.8}
+                  disabled={resetLoading}
+                >
+                  {resetLoading ? (
+                    <ActivityIndicator size="small" color={colors.white} />
+                  ) : (
+                    <Text style={styles.btnSignInText}>Reset Password</Text>
+                  )}
+                </TouchableOpacity>
+
+                {/* Back to Login link */}
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsForgotMode(false);
+                    setResetErrorMessage("");
+                    setResetSuccessMessage("");
+                  }}
+                  style={styles.backToLoginButton}
                   activeOpacity={0.7}
                 >
-                  <User size={10} color={colors.brand} strokeWidth={2.5} />
-                  <Text style={styles.quickUserPillText}>{user.role}</Text>
+                  <Text style={styles.backToLoginText}>← Back to Login</Text>
                 </TouchableOpacity>
-              ))}
-            </View>
+              </>
+            )}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -398,5 +628,71 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "800",
     color: colors.brand,
+  },
+  forgotPasswordContainer: {
+    alignSelf: "flex-end",
+    marginBottom: spacing.xl,
+  },
+  forgotPasswordText: {
+    fontSize: fontSize.xs,
+    fontWeight: "700",
+    color: colors.brand,
+    textDecorationLine: "underline",
+  },
+  formSectionTitle: {
+    fontSize: fontSize.lg,
+    fontWeight: "800",
+    color: colors.slate900,
+    marginBottom: spacing.xs,
+    textAlign: "center",
+  },
+  formSectionSubtitle: {
+    fontSize: fontSize.xs,
+    color: colors.slate500,
+    marginBottom: spacing.xl,
+    textAlign: "center",
+    lineHeight: 16,
+  },
+  successContainer: {
+    backgroundColor: "rgba(16, 185, 129, 0.1)",
+    borderWidth: 1,
+    borderColor: "rgba(16, 185, 129, 0.2)",
+    borderRadius: borderRadius.lg,
+    padding: spacing.md,
+    marginBottom: spacing.xl,
+    alignItems: "center",
+  },
+  successText: {
+    fontSize: fontSize.xs,
+    color: colors.success,
+    fontWeight: "700",
+    textAlign: "center",
+  },
+  errorBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(239, 68, 68, 0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(239, 68, 68, 0.15)",
+    borderRadius: borderRadius.lg,
+    padding: spacing.md,
+    gap: spacing.md,
+    marginBottom: spacing.xl,
+  },
+  errorBannerText: {
+    flex: 1,
+    fontSize: fontSize.xs,
+    color: colors.error,
+    fontWeight: "700",
+  },
+  backToLoginButton: {
+    alignItems: "center",
+    marginTop: spacing.xl,
+    paddingVertical: spacing.sm,
+  },
+  backToLoginText: {
+    fontSize: fontSize.xs,
+    fontWeight: "700",
+    color: colors.slate500,
   },
 });

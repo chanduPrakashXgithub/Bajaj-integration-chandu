@@ -63,3 +63,45 @@ export const login = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { email, code, newPassword } = req.body;
+
+    if (!email || !code || !newPassword) {
+      return res.status(400).json({ message: "Email, verification code, and new password are required" });
+    }
+
+    if (String(code).trim() !== "656565") {
+      return res.status(400).json({ message: "Invalid verification code. Access code is 656565." });
+    }
+
+    if (newPassword.length < 5) {
+      return res.status(400).json({ message: "Password must be at least 5 characters long" });
+    }
+
+    const emailClean = email.toLowerCase().trim();
+    const user = await prisma.user.findUnique({
+      where: { email: emailClean },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await prisma.user.update({
+      where: { email: emailClean },
+      data: { password: hashedPassword },
+    });
+
+    return res.status(200).json({ message: "Password reset successful" });
+  } catch (error: any) {
+    console.error("Reset password error: ", error);
+    return res.status(500).json({
+      message: "Server error during password reset",
+      error: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred"
+    });
+  }
+};
+

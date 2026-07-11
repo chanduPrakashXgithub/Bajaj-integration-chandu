@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView, useWindowDimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Home, ListChecks, Wrench, MapPin, Bell, IdCard, BarChart3, AlertCircle, Building, LineChart, Stamp, Route, TriangleAlert, Wallet, ChartColumn, Users, Sliders, Circle } from "lucide-react-native";
+import { Home, ListChecks, Wrench, MapPin, Bell, IdCard, BarChart3, AlertCircle, Building, LineChart, Stamp, Route, TriangleAlert, Wallet, ChartColumn, Users, Circle } from "lucide-react-native";
 import { useApp } from "../context/AppContext";
 import { ROLES } from "../data/mockData";
 import { colors, fontSize } from "../theme/theme";
@@ -39,7 +39,6 @@ import { RmDashboardScreen } from "../roles/rm/RmDashboardScreen";
 import { RmAnalyticsScreen } from "../roles/rm/RmAnalyticsScreen";
 import { UserManagementScreen } from "../roles/rm/UserManagementScreen";
 import { RmUsersScreen } from "../roles/rm/RmUsersScreen";
-import { RmSettingsScreen } from "../roles/rm/RmSettingsScreen";
 import { RmNotificationsScreen } from "../roles/rm/RmNotificationsScreen";
 import { RmProfileScreen } from "../roles/rm/RmProfileScreen";
 import { RmAttendanceScreen } from "../roles/rm/RmAttendanceScreen";
@@ -85,11 +84,11 @@ registerScreen("rm", "finance", RmFinanceScreen);
 registerScreen("rm", "complaints", RmComplaintCommandCenter);
 registerScreen("rm", "analytics", RmAnalyticsScreen);
 registerScreen("rm", "users", UserManagementScreen);
-registerScreen("rm", "settings", RmSettingsScreen);
 registerScreen("rm", "attendance", RmAttendanceScreen);
 registerScreen("rm", "notifications", RmNotificationsScreen);
 registerScreen("rm", "profile", RmProfileScreen);
 registerScreen("rm", "branches", BranchManagerBranchesScreen);
+
 
 // AM mapping
 registerScreen("am", "dashboard", RmDashboardScreen);
@@ -100,7 +99,6 @@ registerScreen("am", "finance", RmFinanceScreen);
 registerScreen("am", "complaints", BranchManagerComplaintsScreen);
 registerScreen("am", "analytics", RmAnalyticsScreen);
 registerScreen("am", "users", RmUsersScreen);
-registerScreen("am", "settings", RmSettingsScreen);
 registerScreen("am", "attendance", RmAttendanceScreen);
 registerScreen("am", "notifications", RmNotificationsScreen);
 registerScreen("am", "profile", RmProfileScreen);
@@ -114,7 +112,6 @@ registerScreen("rrm", "finance", RmFinanceScreen);
 registerScreen("rrm", "complaints", RmComplaintCommandCenter);
 registerScreen("rrm", "analytics", RmAnalyticsScreen);
 registerScreen("rrm", "users", UserManagementScreen);
-registerScreen("rrm", "settings", RmSettingsScreen);
 registerScreen("rrm", "attendance", RmAttendanceScreen);
 registerScreen("rrm", "notifications", RmNotificationsScreen);
 registerScreen("rrm", "profile", RmProfileScreen);
@@ -126,7 +123,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Home, ListChecks, Wrench, MapPin, Bell, IdCard,
   BarChart3, AlertCircle, Building, LineChart, Stamp,
   Route, TriangleAlert, Wallet, ChartColumn,
-  Users, Sliders, Circle,
+  Users, Circle,
 };
 
 function GlassTabBar({ pages }: { pages: Array<{ id: string; label: string }> }) {
